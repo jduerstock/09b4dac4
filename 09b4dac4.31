@@ -2279,8 +2279,8 @@
 
 res_ffdf8e60:
 	.int	0x78000000,0x00000000
-	.int	0x001EF0E0
-	.int	0x001EF120
+	.int	res_ffdef0e0-ROMBase
+	.int	res_ffdef120-ROMBase
 	.int	0x6E647276
 	.short	0xAED6
 	.byte	0x58
