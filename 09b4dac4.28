@@ -2778,8 +2778,8 @@
 
 res_ffdcad90:
 	.int	0x78000000,0x00000000
-	.int	0x001BFAB0
-	.int	0x001BFAE0
+	.int	res_ffdbfab0-ROMBase
+	.int	res_ffdbfae0-ROMBase
 	.int	0x6E697474
 	.short	0x002B
 	.byte	0x58
