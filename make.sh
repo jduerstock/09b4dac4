@@ -1,4 +1,6 @@
 #!/bin/sh
+powerpc-linux-gnu-as -g --statistics -o USBHIDKeyboardModule.o USBHIDKeyboardModule.a || exit
+powerpc-linux-gnu-ld --stats --oformat=binary -Ttext=0xffe0b640 -e ffe0b640 -o USBHIDKeyboardModule.bin USBHIDKeyboardModule.o || exit
 powerpc-linux-gnu-as -g --statistics -o USBHIDMouseModule.o USBHIDMouseModule.a || exit
 powerpc-linux-gnu-ld --stats --oformat=binary -Ttext=0xffe0e520 -e ffe0e520 -o USBHIDMouseModule.bin USBHIDMouseModule.o || exit
 powerpc-linux-gnu-as -g --statistics -o USBCompositeDriver.o USBCompositeDriver.a || exit
