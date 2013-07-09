@@ -3038,11 +3038,12 @@ res_ffdcbd10:
 	.int	0x78000000,0x00000000
 	.int	res_ffdcad90-ROMBase
 	.int	res_ffdcadd0-ROMBase
-	.int	0x67636B6F
+	.ascii	"gcko"
 	.short	0x002B
 	.byte	0x58
 	.byte	0x04
-	.int	0x4D61696E,0x6B636B63
+	.ascii	"Main"
+	.int	0x6B636B63
 	.int	0x4B757274,0xC0A00000,0x00010B02,0x00000434
 
 res_ffdcbd40:
