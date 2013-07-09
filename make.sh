@@ -1,4 +1,6 @@
 #!/bin/sh
+powerpc-linux-gnu-as -g --statistics -o USBUnitTableStorageDriver.o USBUnitTableStorageDriver.a || exit
+powerpc-linux-gnu-ld --stats --oformat=binary -Ttext=0xffe12e10 -e 0xffe12e10 -o USBUnitTableStorageDriver USBUnitTableStorageDriver.o || exit
 powerpc-linux-gnu-as -g --statistics -o USBMassStorageVSDriver.o USBMassStorageVSDriver.a || exit
 powerpc-linux-gnu-ld --stats --oformat=binary -Ttext=0xffe26c00 -e 0xffe26c00 -o USBMassStorageVSDriver USBMassStorageVSDriver.o || exit
 powerpc-linux-gnu-as -g --statistics -o USBMassStorageClassDriver.o USBMassStorageClassDriver.a || exit
