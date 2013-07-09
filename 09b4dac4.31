@@ -2281,12 +2281,13 @@ res_ffdf8e60:
 	.int	0x78000000,0x00000000
 	.int	res_ffdef0e0-ROMBase
 	.int	res_ffdef120-ROMBase
-	.int	0x6E647276
+	.ascii	"ndrv"
 	.short	0xAED6
 	.byte	0x58
 	.byte	0x0B
-	.int	0x74727562,0x6C75652C
-	.int	0x75736263,0x6B636B63,0x6B636B63,0x6B636B63
+	.ascii	"trublue,usb"
+	.byte	0x63
+	.int	0x6B636B63,0x6B636B63,0x6B636B63
 	.int	0x4B757274,0xC0A00000,0x000093A0,0x00000454
 
 res_ffdf8ea0:
