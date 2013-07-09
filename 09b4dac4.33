@@ -233,7 +233,7 @@ res_ffe10dd0:
 	.int	0x4B757274,0xC0A00000,0x00001F74,0x00000474
 
 res_ffe10e10:
-	.include "USBCompositeDriver.a"
+	.incbin "USBCompositeDriver.bin"
 
 res_ffe12d80:
 	.int	0x78000000,0x00000000
@@ -269,4 +269,4 @@ res_ffe12de0:
 	.int	0x4B757274,0xC0A00000,0x000108D8,0x00000484
 
 res_ffe12e10:
-	.include "USBUnitTableStorageDriver.a"
+	.incbin "USBUnitTableStorageDriver.bin"

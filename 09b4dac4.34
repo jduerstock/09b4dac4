@@ -28,7 +28,7 @@ res_ffe26bc0:
 	.int	0x4B757274,0xC0A00000,0x00003E62,0x00000494
 
 res_ffe26c00:
-	.incbin "USBMassStorageClassDriver"
+	.incbin "USBMassStorageClassDriver.bin"
 
 res_ffe2aa60:
 	.int	0x78000000,0x00000000
@@ -44,7 +44,7 @@ res_ffe2aa60:
 	.int	0x4B757274,0xC0A00000,0x00003DB2,0x0000049C
 
 res_ffe2aab0:
-	.incbin	"USBMassStorageVSDriver"
+	.incbin	"USBMassStorageVSDriver.bin"
 
 res_ffe2e860:
 	.int	0x78000000,0x00000000
