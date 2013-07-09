@@ -3694,4 +3694,4 @@ res_ffe0e4e0:
 	.int	0x4B757274,0xC0A00000,0x000028AE,0x0000046C
 
 res_ffe0e520:
-	.include "USBHIDMouseModule.a"
+	.incbin "USBHIDMouseModule.bin"
