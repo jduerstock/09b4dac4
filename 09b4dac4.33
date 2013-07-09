@@ -741,17 +741,23 @@ res_ffe12d80:
 	.int	0x78000000,0x00000000
 	.int	res_ffe10dd0-ROMBase
 	.int	res_ffe10e10-ROMBase
-	.int	0x75736264
+	.ascii	"usbd"
 	.short	0xAED4
 	.byte	0x58
 	.byte	0x12
-	.int	0x55534243,0x6F6D706F
-	.int	0x73697465,0x44726976,0x65726B63,0x6B636B63
+	.ascii	"USBCompositeDriver"
+	.short	0x6B63
+	.int	0x6B636B63
 	.int	0x4B757274,0xC0A00000,0x0000001E,0x0000047C
 
 res_ffe12dc0:
-	.int	0x00026E64,0x72767573,0x62646E64,0x72767573
-	.int	0x62736B63,0x6B636B63,0x6B636B63,0x6B636B63
+	.short	0x0002
+	.ascii	"ndrv"
+	.ascii	"usbd"
+	.ascii	"ndrv"
+	.ascii	"usbs"
+	.short	0x6B63
+	.int	0x6B636B63,0x6B636B63,0x6B636B63
 
 res_ffe12de0:
 	.int	0x78000000,0x00000000
