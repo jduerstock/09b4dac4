@@ -905,13 +905,13 @@ res_ffe26bc0:
 	.int	0x6B636B63
 	.int	0x4B757274,0xC0A00000,0x00003E62,0x00000494
 
-res_ffe2bc00:
+res_ffe26c00:
 	.incbin "USBMassStorageClassDriver"
 
 res_ffe2aa60:
 	.int	0x78000000,0x00000000
 	.int	res_ffe26bc0-ROMBase
-	.int	res_ffe2bc00-ROMBase
+	.int	res_ffe26c00-ROMBase
 	.ascii	"usbd"
 	.short	0xAED3
 	.byte	0x58
