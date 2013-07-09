@@ -1,4 +1,6 @@
 #!/bin/sh
+powerpc-linux-gnu-as -g -o gcko.002b.o gcko.002b.a || exit
+powerpc-linux-gnu-ld --oformat=binary -Ttext=0xffdcadd0 -e 0xffdcadd0 -o gcko.002b.bin gcko.002b.o || exit
 powerpc-linux-gnu-as -g -o USBServicesLib.o USBServicesLib.a || exit
 powerpc-linux-gnu-ld --oformat=binary -Ttext=0xffdcbd40 -e 0xffdcbd40 -o USBServicesLib.bin USBServicesLib.o || exit
 powerpc-linux-gnu-as -g -o USBFamilyExpertLib.o USBFamilyExpertLib.a || exit
