@@ -1,4 +1,6 @@
 #!/bin/sh
+powerpc-linux-gnu-as -g --statistics -o USBHubDriver0.o USBHubDriver0.a || exit
+powerpc-linux-gnu-ld --stats --oformat=binary -Ttext=0xffdf8ea0 -e ffdf8ea0 -o USBHubDriver0.bin USBHubDriver0.o || exit
 powerpc-linux-gnu-as -g --statistics -o USBHubDriver1.o USBHubDriver1.a || exit
 powerpc-linux-gnu-ld --stats --oformat=binary -Ttext=0xffe02280 -e ffe02280 -o USBHubDriver1.bin USBHubDriver1.o || exit
 powerpc-linux-gnu-as -g --statistics -o USBHIDKeyboardModule.o USBHIDKeyboardModule.a || exit

@@ -2290,4 +2290,4 @@ res_ffdf8e60:
 	.int	0x4B757274,0xC0A00000,0x000093A0,0x00000454
 
 res_ffdf8ea0:
-	.include "USBHubDriver0.a"
+	.incbin "USBHubDriver0.bin"
