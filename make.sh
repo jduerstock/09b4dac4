@@ -1,4 +1,6 @@
 #!/bin/sh
+powerpc-linux-gnu-as -g -o USBFamilyExpertLib.o USBFamilyExpertLib.a || exit
+powerpc-linux-gnu-ld --oformat=binary -Ttext=0xffddc880 -e 0xffddc880 -o USBFamilyExpertLib.bin USBFamilyExpertLib.o || exit
 powerpc-linux-gnu-as -g -o USBManagerLib.o USBManagerLib.a || exit
 powerpc-linux-gnu-ld --oformat=binary -Ttext=0xffdee730 -e 0xffdee730 -o USBManagerLib.bin USBManagerLib.o || exit
 powerpc-linux-gnu-as -g -o trublue.usb.o trublue.usb.a || exit
