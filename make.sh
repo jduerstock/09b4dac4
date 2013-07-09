@@ -1,4 +1,6 @@
 #!/bin/sh
+powerpc-linux-gnu-as -g -o USBServicesLib.o USBServicesLib.a || exit
+powerpc-linux-gnu-ld --oformat=binary -Ttext=0xffdcbd40 -e 0xffdcbd40 -o USBServicesLib.bin USBServicesLib.o || exit
 powerpc-linux-gnu-as -g -o USBFamilyExpertLib.o USBFamilyExpertLib.a || exit
 powerpc-linux-gnu-ld --oformat=binary -Ttext=0xffddc880 -e 0xffddc880 -o USBFamilyExpertLib.bin USBFamilyExpertLib.o || exit
 powerpc-linux-gnu-as -g -o USBManagerLib.o USBManagerLib.a || exit

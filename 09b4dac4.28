@@ -3046,4 +3046,4 @@ res_ffdcbd10:
 	.int	0x4B757274,0xC0A00000,0x00010B02,0x00000434
 
 res_ffdcbd40:
-	.include "USBServicesLib.a"
+	.incbin "USBServicesLib.bin"
