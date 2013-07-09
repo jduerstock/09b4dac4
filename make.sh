@@ -1,4 +1,6 @@
 #!/bin/sh
+powerpc-linux-gnu-as -g -o trublue.usb.o trublue.usb.a || exit
+powerpc-linux-gnu-ld --oformat=binary -Ttext=0xffdef120 -e 0xffdef120 -o trublue.usb.bin trublue.usb.o || exit
 powerpc-linux-gnu-as -g -o USBHubDriver0.o USBHubDriver0.a || exit
 powerpc-linux-gnu-ld --oformat=binary -Ttext=0xffdf8ea0 -e 0xffdf8ea0 -o USBHubDriver0.bin USBHubDriver0.o || exit
 powerpc-linux-gnu-as -g -o USBHubDriver1.o USBHubDriver1.a || exit
