@@ -2964,8 +2964,8 @@
 
 res_ffd5b930:
 	.int	0x78000000,0x00000000
-	.int	0x00118750
-	.int	0x00118790
+	.int	res_ffd18750-ROMBase
+	.int	res_ffd18790-ROMBase
 	.int	0x6E6C6962
 	.short	0x0005
 	.byte	0x58
