@@ -110,8 +110,8 @@
 
 res_ffcf06d0:
 	.int	0x78000000,0x00000000
-	.int	0x000EFD40
-	.int	0x000EFD80
+	.int	res_ffcefd40-ROMBase
+	.int	res_ffcefd80-ROMBase
 	.ascii	"DRVR"
 	.short	0xAB29
 	.byte	0x58
