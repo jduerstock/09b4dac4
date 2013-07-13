@@ -21,6 +21,8 @@
 	lwz	%r30,2(%r3)
 	cmpwi	%r30,0
 	beq	.L84
+
+.L30:
 	lha	%r3,6(%r30)
 	addi	%r4,%r31,0x0c
 	addi	%r5,%r31,0x0a
@@ -50,10 +52,15 @@
 	b	.Lb0
 	
 .L94:
-	.int	0x83C1005A,0x93DF002C,0x48000014
+	lwz	%r30,0x5a(%sp)
+	stw	%r30,0x2c(%r31)
+	b	.Lb0
 
 .La0:
-	.int	0x83DE0000,0x2C1E0000,0x4082FF88,0x4BFFFFD8
+	lwz	%r30,0(%r30)
+	cmpwi	%r30,0
+	bne	.L30
+	b	.L84
 
 .Lb0:
 	.int	0x382100D0,0x80010008,0x7C0803A6,0xBB61FFEC
