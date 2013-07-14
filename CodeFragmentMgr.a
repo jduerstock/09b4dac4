@@ -198,15 +198,34 @@ sub_188:
 	b	.L290
 
 .L254:
-	.int	0x819A0000,0x2C1C0000,0x93E10038
-	.int	0x38AC001C,0x93E1003C,0x40820018,0x38610038
-	.int	0x38800000,0x38C00000,0x4BFFFE4D,0x48000014
-	.int	0x38610038,0x7F86E378,0x38800001,0x4BFFFE39
+	lwz	%r12,0(%r26)
+	cmpwi	%r28,0
+	stw	%r31,0x38(%sp)
+	addi	%r5,%r12,0x1c
+	stw	%r31,0x3c(%sp)
+	bne	.L280
+	addi	%r3,%sp,0x38
+	li	%r4,0
+	li	%r6,0
+
+.L278:
+	bl	sub_c4
+	b	.L290
+
+.L280:
+	addi	%r3,%sp,0x38
+	mr	%r6,%r28
+	li	%r4,1
+	bl	sub_c4
 
 .L290:
-	.int	0x7FE3FB78,0x38210060,0x80010008,0x7C0803A6
-	.int	0xBB41FFE8
+	mr	%r3,%r31
+	addi	%sp,%sp,0x60
+	lwz	%r0,8(%sp)
+	mtlr	%r0
+	lmw	%r26,-0x18(%sp)
 	blr
+
 	.int	0x81630030,0x5484063E
 	.int	0x81830000,0x7CE70734,0x816B0000,0x7C0C5800
 	.int	0x4182014C,0x812C002C,0x7C092800,0x40800020
