@@ -1,4 +1,6 @@
 #!/bin/sh
+powerpc-linux-gnu-as -g -o MixedMode.o MixedMode.a || exit
+powerpc-linux-gnu-ld --oformat=binary -Ttext=0xffd12840 -e 0xffd12840 -o MixedMode.bin MixedMode.o || exit
 powerpc-linux-gnu-as -g -o InterfaceLib.o InterfaceLib.a || exit
 powerpc-linux-gnu-ld --oformat=binary -Ttext=0xffd18790 -e 0xffd18790 -o InterfaceLib.bin InterfaceLib.o || exit
 powerpc-linux-gnu-as -g -o CodeFragmentMgr.o CodeFragmentMgr.a || exit

@@ -13,7 +13,7 @@ res_ffd12800:
 	.int	0x4B757274,0xC0A00000,0x0000538A,0x0000037C
 
 res_ffd12840:
-	.include "MixedMode.a"
+	.incbin "MixedMode.bin"
 
 res_ffd17bc0:
 	.int	0x78000000,0x00000000
