@@ -263,16 +263,40 @@ sub_2a8:
 	cmplw	cr6,%r12,%r11
 	beq	cr6,.L40c
 	lwz	%r9,0x2c(%r12)
-	.int	0x7C092800,0x40820010,0x894C0008,0x7C0A2000
-	.int	0x4180FFDC
+	cmpw	%r9,%r5
+	bne	.L334
+	lbz	%r10,8(%r12)
+	cmpw	%r10,%r4
+	blt	.L30c
 
 .L334:
-	.int	0x419A00D8,0x812C002C,0x7C092800
-	.int	0x40820050,0x894C0008,0x7C0A2000,0x40820044
-	.int	0x812C0030,0x7C093000,0x40800038,0x7D836378
-	.int	0x818C0000,0x7F0C5840,0x419A00A4,0x814C002C
-	.int	0x7C0A2800,0x4082001C,0x892C0008,0x7C092000
-	.int	0x40820010,0x814C0030,0x7C0A3000,0x4180FFD0
+	beq	cr6,.L40c
+	lwz	%r9,0x2c(%r12)
+	cmpw	%r9,%r5
+	bne	.L390
+	lbz	%r10,8(%r12)
+	cmpw	%r10,%r4
+	bne	.L390
+	lwz	%r9,0x30(%r12)
+	cmpw	%r9,%r6
+	bge	.L390
+
+.L35c:
+	mr	%r3,%r12
+	lwz	%r12,0(%r12)
+	cmplw	cr6,%r12,%r11
+	beq	cr6,.L40c
+	lwz	%r10,0x2c(%r12)
+	cmpw	%r10,%r5
+	bne	.L390
+	lbz	%r9,8(%r12)
+	cmpw	%r9,%r4
+	bne	.L390
+	lwz	%r10,0x30(%r12)
+	cmpw	%r10,%r6
+	blt	.L35c
+
+.L390:
 	.int	0x419A007C,0x812C002C,0x7C092800,0x40820070
 	.int	0x894C0008,0x7C0A2000,0x40820064,0x812C0030
 	.int	0x7C093000,0x40820058,0x894C0009,0x7D4A0774
