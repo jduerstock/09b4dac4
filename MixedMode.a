@@ -161,23 +161,81 @@
 	blr
 
 .DisposeRoutineDescriptor:
-	.int	0x28030000,0x4D820020,0x7C0802A6,0x90010008
-	.int	0x9421FFC0,0xA0830000,0x38A0AAFE,0x3CA50001
-	.int	0x7C042800,0x4082000C,0x48003CBD,0x80410014
-	.int	0x38210040,0x80010008,0x7C0803A6,0x4E800020
-	.int	0x7C0802A6,0xBF81FFF0,0x90010008,0x9421FFB0
-	.int	0x7C7C1B78,0x38600034,0x7CBE2B78,0x7C9D2378
-	.int	0x48003C6D,0x80410014,0x7C7F1B78,0x281F0000
-	.int	0x41820088,0x93DF000C,0x3880AAFE,0x939F0014
-	.int	0x3C840001,0xB09F0000,0x38E00000,0x90FF0004
-	.int	0x38C00000,0x98DF0003,0x39200000,0x98DF0008
-	.int	0x39400000,0x98DF0009,0x38A00007,0x98BF0002
-	.int	0x39000001,0xB11F000A,0x39600001,0x993F0010
-	.int	0x38800034,0x993F0011,0xB15F0012,0x90FF0018
-	.int	0x90FF001C,0x993F0024,0x997F0025,0xB15F0026
-	.int	0x90FF002C,0x93DF0020,0x93BF0028,0x90FF0030
-	.int	0x48003BAD,0x80410014,0x7FE3FB78,0x38210050
-	.int	0x80010008,0x7C0803A6,0xBB81FFF0,0x4E800020
+	cmplwi	%r3,0
+	beqlr
+	mflr	%r0
+	stw	%r0,8(%sp)
+	stwu	%sp,-0x40(%sp)
+	lhz	%r4,0(%r3)
+	li	%r5,-0x5502		/* aafe */
+	addis	%r5,%r5,1
+	cmpw	%r4,%r5
+	bne	.L240
+	bl	j_DisposePtr
+	lwz	%rtoc,0x14(%sp)
+
+.L240:
+	addi	%sp,%sp,0x40
+	lwz	%r0,8(%sp)
+	mtlr	%r0
+	blr
+
+.NewFatRoutineDescriptor:
+	mflr	%r0
+	stmw	%r28,-0x10(%sp)
+	stw	%r0,8(%sp)
+	stwu	%sp,-0x50(%sp)
+	mr	%r28,%r3
+	li	%r3,0x34
+	mr	%r30,%r5
+	mr	%r29,%r4
+	bl	j_NewPtr
+	lwz	%rtoc,0x14(%sp)
+	mr	%r31,%r3
+	cmplwi	%r31,0
+	beq	.L308
+	stw	%r30,0xc(%r31)
+	li	%r4,-0x5502		/* aafe */
+	stw	%r28,0x14(%r31)
+	addis	%r4,%r4,1
+	sth	%r4,0(%r31)
+	li	%r7,0
+	stw	%r7,4(%r31)
+	li	%r6,0
+	stb	%r6,3(%r31)
+	li	%r9,0
+	stb	%r6,8(%r31)
+	li	%r10,0
+	stb	%r6,9(%r31)
+	li	%r5,7
+	stb	%r5,2(%r31)
+	li	%r8,1
+	sth	%r8,0xa(%r31)
+	li	%r11,1
+	stb	%r9,0x10(%r31)
+	li	%r4,0x34
+	stb	%r9,0x11(%r31)
+	sth	%r10,0x12(%r31)
+	stw	%r7,0x18(%r31)
+	stw	%r7,0x1c(%r31)
+	stb	%r9,0x24(%r31)
+	stb	%r11,0x25(%r31)
+	sth	%r10,0x26(%r31)
+	stw	%r7,0x2c(%r31)
+	stw	%r30,0x20(%r31)
+	stw	%r29,0x28(%r31)
+	stw	%r7,0x30(%r31)
+	bl	j_FlushEmulatorCacheRange
+	lwz	%rtoc,0x14(%sp)
+
+.L308:
+	mr	%r3,%r31
+	addi	%sp,%sp,0x50
+	lwz	%r0,8(%sp)
+	mtlr	%r0
+	lmw	%r28,-0x10(%sp)
+	blr
+
 	.int	0x899E0002,0x280C0007,0x41A2000C,0x7FC4F378
 	.int	0x48003B2C,0x7C3C0B78,0x833C0000,0x3B9C0004
 	.int	0xA19D0006,0x7D803120,0x835D0000,0x575B073E
@@ -1144,7 +1202,10 @@ j_CallUniversalProc:
 j_NewPtr:
 	.int	0x8182FF20
 	.int	0x90410014,0x800C0000,0x804C0004,0x7C0903A6
-	.int	0x4E800420,0x8182FF30,0x90410014,0x800C0000
+	.int	0x4E800420
+
+j_DisposePtr:
+	.int	0x8182FF30,0x90410014,0x800C0000
 	.int	0x804C0004,0x7C0903A6,0x4E800420,0x8182FF1C
 	.int	0x90410014,0x800C0000,0x804C0004,0x7C0903A6
 	.int	0x4E800420,0x8182FF18,0x90410014,0x800C0000
