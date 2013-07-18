@@ -1,4 +1,6 @@
 #!/bin/sh
+powerpc-linux-gnu-as -g -o PrivateInterfaceLib.o PrivateInterfaceLib.a || exit
+powerpc-linux-gnu-ld --oformat=binary -Ttext=0xffd5b970 -e 0xffd5b970 -o PrivateInterfaceLib.bin PrivateInterfaceLib.o || exit
 powerpc-linux-gnu-as -g -o MixedMode.o MixedMode.a || exit
 powerpc-linux-gnu-ld --oformat=binary -Ttext=0xffd12840 -e 0xffd12840 -o MixedMode.bin MixedMode.o || exit
 powerpc-linux-gnu-as -g -o InterfaceLib.o InterfaceLib.a || exit
