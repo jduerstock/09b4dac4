@@ -4080,29 +4080,30 @@
 	.int	0x02000134,0x0200013E,0x02000149,0x0200016A
 	.int	0x00010000,0x0000000B,0x00000000,0x64014A15
 	.int	0x42648003,0x46654400,0x8FFB0D84,0x8FFF8467
-	.int	0x40084472,0x69766572,0x53657276,0x69636573
-	.int	0x4C696200,0x44757261,0x74696F6E,0x546F4162
-	.int	0x736F6C75,0x74650050,0x42517565,0x7565496E
-	.int	0x69740050,0x42446571,0x75657565,0x46697273
-	.int	0x74004361,0x6E63656C,0x54696D65,0x72005042
-	.int	0x51756575,0x65437265,0x61746500,0x506F6F6C
-	.int	0x416C6C6F,0x63617465,0x52657369,0x64656E74
-	.int	0x00504251,0x75657565,0x44656C65,0x74650050
-	.int	0x42446571,0x75657565,0x00537973,0x44656275
-	.int	0x67537472,0x00504245,0x6E717565,0x75654C61
-	.int	0x73740041,0x64644162,0x736F6C75,0x7465546F
-	.int	0x4162736F,0x6C757465,0x0043616C,0x6C536563
-	.int	0x6F6E6461,0x7279496E,0x74657272,0x75707448
-	.int	0x616E646C,0x65723200,0x55705469,0x6D650043
-	.int	0x6F6D7061,0x7265416E,0x64537761,0x70004465
-	.int	0x6372656D,0x656E7441,0x746F6D69,0x63380053
-	.int	0x6574496E,0x74657272,0x75707454,0x696D6572
-	.int	0x00437572,0x72656E74,0x45786563,0x7574696F
-	.int	0x6E4C6576,0x656C0050,0x6F6F6C44,0x65616C6C
-	.int	0x6F636174,0x65004164,0x6441746F,0x6D696300
-	.int	0x50537472,0x546F4353,0x74720042,0x6C6F636B
-	.int	0x4D6F7665,0x44617461,0x00555342,0x46616D69
-	.int	0x6C794578,0x70657274,0x4C696200
+	.short	0x4008
+	.string	"DriverServicesLib"
+	.string	"DurationToAbsolute"
+	.string	"PBQueueInit"
+	.string	"PBDequeueFirst"
+	.string	"CancelTimer"
+	.string	"PBQueueCreate"
+	.string	"PoolAllocateResident"
+	.string	"PBQueueDelete"
+	.string	"PBDequeue"
+	.string	"SysDebugStr"
+	.string	"PBEnqueueLast"
+	.string	"AddAbsoluteToAbsolute"
+	.string	"CallSecondaryInterruptHandler2"
+	.string	"UpTime"
+	.string	"CompareAndSwap"
+	.string	"DecrementAtomic8"
+	.string	"SetInterruptTimer"
+	.string	"CurrentExecutionLevel"
+	.string	"PoolDeallocate"
+	.string	"AddAtomic"
+	.string	"PStrToCStr"
+	.string	"BlockMoveData"
+	.string	"USBFamilyExpertLib"
 	.string	"USBGetOptions"
 	.ascii	"USBHubConfigurePipeZero"
 	.ascii	"USBHubAddDevice"
