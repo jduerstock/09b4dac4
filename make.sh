@@ -39,6 +39,8 @@ powerpc-linux-gnu-as -g -o USBMassStorageClassDriver.o USBMassStorageClassDriver
 powerpc-linux-gnu-ld --oformat=binary -Ttext=0xffe2aab0 -e 0xffe2aab0 -o USBMassStorageClassDriver.bin USBMassStorageClassDriver.o || exit
 powerpc-linux-gnu-as -g -o drvr.BlueBoxShared.o drvr.BlueBoxShared.a || exit
 powerpc-linux-gnu-ld --oformat=binary -Ttext=0xffcdd530 -e 0xffcdd530 -o drvr.BlueBoxShared.bin drvr.BlueBoxShared.o || exit
+powerpc-linux-gnu-as -g -o DriverServicesLib.o DriverServicesLib.a || exit
+powerpc-linux-gnu-ld --oformat=binary -Ttext=0xffda9fa0 -e 0xffda9fa0 -o DriverServicesLib.bin DriverServicesLib.o || exit
 powerpc-linux-gnu-as -g --statistics -o 09b4dac4.o 09b4dac4.a || exit
 powerpc-linux-gnu-ld --stats --oformat=binary -Ttext=0xffc00000 -e 0xffc00000 -o bork 09b4dac4.o || exit
 sha1sum bork 09b4dac4.bin

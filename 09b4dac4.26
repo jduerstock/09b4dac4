@@ -1593,4 +1593,4 @@ res_ffda9f60:
 	.int	0x4B757274,0xC0A00000,0x00007E50,0x000003E4
 
 res_ffda9fa0:
-	.include "DriverServicesLib.a"
+	.incbin	"DriverServicesLib.bin"
