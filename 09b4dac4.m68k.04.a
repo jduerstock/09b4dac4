@@ -21,3 +21,56 @@ sub_ffc4e9f6:
 	moveal %a1@(24),%a1
 	jmp %a1@
 
+.Lffc4ea26:
+	moveal	%a3@(66),%a1
+	moveal	%a1@,%a1
+	moveal	%a1@(28),%a1
+	jsr	%a1@
+	moveq	#0,%d0
+	movew	%d1,%d0
+	movew	%d0,%d1
+	rts
+
+.Lffc4ea3a:
+	moveal	%a3@(66),%a1
+	moveal	%a1@,%a1
+	moveal	%a1@(12),%a1
+	jmp	%a1@
+
+.Lffc4ea46:
+	moveal	%a3@(66),%a1
+	moveal	%a1@,%a1
+	moveal	%a1@(4),%a1
+	jmp	%a1@
+
+.Lffc4ea52:
+	movel	%a0,%sp@-
+	movew	%d0,%sp@-
+	movew	%d1,%sp@-
+	.short	0xa885
+	rts
+
+.Lffc4ea5c:
+	.int	0x610015d4	/* bsrw	sub_ffc50032 */
+	.int	0x610001b0	/* bsrw	sub_ffc4ec12 */
+	.int	0x6100113e	/* bsrw	sub_ffc4fba4 */
+	clrw	%sp@-
+	moveq	#11,%d0
+	.short	0xa854
+	tstw	%sp@
+	beqs	.Lffc4ea78
+	clrb	%sp@-
+	moveq	#10,%d0
+	.short	0xa854
+
+.Lffc4ea78:
+	.int	0x61000184	/* bsrw	0xffc4ebfe */
+	.int	0x63000104	/* blsw 0xffc4eb82 */
+	.int	0x610010c0	/* bsrw	0xffc4fb42 */
+	tstb	0xba5
+	bges	.Lffc4ea96
+	movew	#-32766,%a3@(18)
+	movew	#32766,%a3@(22)
+
+.Lffc4ea96:
+	movew	%d4,%d6
