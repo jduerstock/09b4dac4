@@ -1,0 +1,23 @@
+
+	rts
+
+sub_ffc4e9f6:
+	moveal	0x2b6,%a1
+	cmpib	#1,%a1@(44)
+	bnes	.Lffc4ea1a
+	moveal	%a3@(66),%a1
+	moveal	%a1@,%a1
+	moveal	%a1@(8),%a1
+	.short	0x487a,0x141c		/* pea	%pc@(0xffc4fe2a) */
+	cmpal	%sp@+,%a1
+	beqs	.Lffc4ea1a
+	movew	%d1,%d0
+	clrw	%d1
+	jmp	%a1@
+
+.Lffc4ea1a:
+	moveal %a3@(66),%a1
+	moveal %a1@,%a1
+	moveal %a1@(24),%a1
+	jmp %a1@
+

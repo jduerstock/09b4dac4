@@ -43,6 +43,8 @@ powerpc-linux-gnu-as -g -o DriverServicesLib.o DriverServicesLib.a || exit
 powerpc-linux-gnu-ld --oformat=binary -Ttext=0xffda9fa0 -e 0xffda9fa0 -o DriverServicesLib.bin DriverServicesLib.o || exit
 powerpc-linux-gnu-as -g -o StdCLib.o StdCLib.a || exit
 powerpc-linux-gnu-ld --oformat=binary -Ttext=0xffd91270 -e 0xffd91270 -o StdCLib.bin StdCLib.o || exit
+m68k-unknown-linux-as -g -o 09b4dac4.m68k.04.o 09b4dac4.m68k.04.a || exit
+m68k-unknown-linux-ld --oformat=binary -Ttext=0xffc4e9f4 -e 0xffc4e9f4 -o 09b4dac4.m68k.04.bin 09b4dac4.m68k.04.o || exit
 powerpc-linux-gnu-as -g --statistics -o 09b4dac4.o 09b4dac4.a || exit
 powerpc-linux-gnu-ld --stats --oformat=binary -Ttext=0xffc00000 -e 0xffc00000 -o bork 09b4dac4.o || exit
 sha1sum bork 09b4dac4.bin
