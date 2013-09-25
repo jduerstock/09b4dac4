@@ -74,7 +74,7 @@ sub_ffc4ea46:
 
 .Lffc4ea96:
 	movew	%d4,%d6
-	.int	0x610000fc	/* bsrw sub_ffc4eb96 */
+	bsrw	sub_ffc4eb96
 	movew	%fp@(-2),%sp@-
 	movew	%a3@(16),%sp@-
 	movew	%a3@(26),%d0
@@ -185,3 +185,8 @@ sub_ffc4ea46:
 	moveal	%a5@,%a0
 	moveal	%a0@,%a0
 	rts
+
+sub_ffc4eb96:
+	moveal	0x2b6,%a0
+	moveal	%a0@(144),%a0
+	jmp	%a0@
