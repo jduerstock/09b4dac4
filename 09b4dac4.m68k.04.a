@@ -21,7 +21,7 @@ sub_ffc4e9f6:
 	moveal	%a1@(24),%a1
 	jmp	%a1@
 
-.Lffc4ea26:
+sub_ffc4ea26:
 	moveal	%a3@(66),%a1
 	moveal	%a1@,%a1
 	moveal	%a1@(28),%a1
@@ -64,7 +64,7 @@ sub_ffc4ea46:
 	.short	0xa854
 
 .Lffc4ea78:
-	.int	0x61000184	/* bsrw	sub_ffc4ebfe */
+	bsrw	sub_ffc4ebfe
 	blsw	.Lffc4eb82
 	.int	0x610010c0	/* bsrw	sub_ffc4fb42 */
 	tstb	0xba5
@@ -88,7 +88,7 @@ sub_ffc4ea46:
 	clrw	%d0
 	movew	%d4,%d1
 	subw	%d3,%d1
-	.short	0x6184		/* bsrs	sub_ffc4ea46 */
+	bsrs	sub_ffc4ea46
 	braw	.Lffc4eb72
 
 .Lffc4eac6:
@@ -156,7 +156,7 @@ sub_ffc4ea46:
 	movew	%d4,%d1
 	subw	%d0,%d1
 	clrw	%d0
-	.int	0x6100fef2	/* bsrw	sub_ffc4ea46 */
+	bsrw	sub_ffc4ea46
 	moveal	%a3@(74),%a1
 	moveal	%a1@,%a1
 	movel	%a1,%d1
@@ -220,7 +220,7 @@ sub_ffc4eba0:
 	moveal	%a0@,%a0
 	movew	%d3,%d1
 	moveq	#1,%d0
-	.int	0x6100fe44	/* bsrw	sub_ffc4ea26 */
+	bsrw	sub_ffc4ea26
 	tstw	%d0
 	beqs	.Lffc4ebea
 	subqw	#1,%d0
@@ -233,4 +233,15 @@ sub_ffc4eba0:
 	.short	0xa8a3
 	movew	%sp@+,%a3@(18)
 	.int	0x610008de	/* bsrw	sub_ffc4f4d8 */
+	rts
+
+sub_ffc4ebfe:
+	movew	%d5,%d4
+	cmpw	%a2@(2),%d4
+	bcss	.Lffc4ec0a
+	movew	%a2@(2),%d4
+
+.Lffc4ec0a:
+	.int	0x610012cc     	/* bsrw	0xffc4fed8 */
+	cmpw	%d3,%d5
 	rts
