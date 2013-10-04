@@ -1,4 +1,9 @@
 
+	moveal	%a0@,%a0
+	jmp	%a0@
+
+sub_ffc4e9f0:
+	cmpib	#13,%d0
 	rts
 
 sub_ffc4e9f6:
@@ -180,6 +185,8 @@ sub_ffc4ea46:
 	moveq	#10,%d0
 	.short	0xa854
 	.int	0x61000950	/* bsrw sub_ffc4f4d8 */
+
+.Lffc4eb8a:
 	moveml	%sp@+,%d2-%d7/%a2-%a4
 	unlk	%fp
 	moveal	%a5@,%a0
@@ -245,3 +252,148 @@ sub_ffc4ebfe:
 	.int	0x610012cc     	/* bsrw	0xffc4fed8 */
 	cmpw	%d3,%d5
 	rts
+
+ffc4ec12:
+      	moveal	%sp@+,%a0
+	moveml	%d2-%d7/%a2-%a4,%sp@-
+	movel	%a0,%sp@-
+	cmpw	%d3,%d4
+	bccs	.Lffc4ec20
+	exg	%d4,%d3
+
+.Lffc4ec20:
+	cmpw	%a3@(60),%d4
+	bcss	.Lffc4ec2a
+	movew	%a3@(60),%d4
+
+.Lffc4ec2a:
+	lea	%a3@(96),%a2
+	.int	0xc8ba1a9e	/* andl	%pc@(0xffc506ce),%d4 */
+	movew	%d4,%d5
+	.int	0xc6ba1a98	/* andl	%pc@(0xffc506ce),%d3 */
+	beqs	.Lffc4ec3e
+	movew	%d3,%d0
+	bsrs	sub_ffc4ec40
+
+.Lffc4ec3e:
+	rts
+
+sub_ffc4ec40:
+	cmpw	%a2@(2),%d0
+	blss	.Lffc4ec4a
+	addqw	#2,%a2
+	bras	sub_ffc4ec40
+
+.Lffc4ec4a:
+	bnes	.Lffc4ec4e
+	addqw	#2,%a2
+
+.Lffc4ec4e:
+	rts
+
+sub_ffc4ec50:
+	movel	0xa70,%sp@-
+	rts
+
+sub_ffc4ec54:
+	linkw	%fp,#-58
+	tstw	%d7
+	.int	0x6700fbec      /* 	beqw	sub_ffc4e84a */
+	.int	0x6e00088c      /*	bgtw	sub_ffc4f4ee */
+	cmpiw	#-1,%d7
+	.int	0x6700fdf2      /*	beqw	sub_ffc4ea5c */
+	.short	0x61a4          /*	bsrs	sub_ffc4ec12 */
+	tstw	%d3
+	beqs	.Lffc4ec9a
+	cmpw	%a2@,%d3
+	bnes	.Lffc4ec9a
+	movew	%a3@(60),%d0
+	beqs	.Lffc4ec9a
+	cmpw	%d0,%d3
+	bcss	.Lffc4ec92
+	moveal	%a3@(62),%a0
+	moveal	%a0@,%a0
+	moveb	%a0@(-1,%d3:w),%d0
+	.int 	0x6100fd5a      	/* bsrw	sub_ffc4e9e6 */
+	beqs	.Lffc4ec9a
+	bras	.Lffc4ec98
+
+.Lffc4ec92:	
+	tstb	%a3@(71)
+	bnes	.Lffc4ec9a
+
+.Lffc4ec98:	
+	subqw	#2,%a2
+
+.Lffc4ec9a:	
+	.int	0x61000f08      	/* bsrw	sub_ffc4fba4 */
+	tstw	%a3@(80)
+	bmis	.Lffc4ecb0
+	tstb	0xba5
+	bmis	.Lffc4ecb0
+	tstb	0xbac
+	beqs	.Lffc4ecbe
+
+.Lffc4ecb0:	
+	.int	0x610000b2      	/* bsrw	sub_ffc4ed64 */
+	movew	%a3@(18),%d0
+	movew	%d0,%fp@(-2)
+	bras	.Lffc4ecca
+
+.Lffc4ecbe:	
+	bsrw	sub_ffc4ebfe
+	movew	%fp@(-2),%d0
+	movew	%d0,%a3@(22)
+
+.Lffc4ecca:	
+	subqw	#1,%d0
+	movew	%d0,%a3@(18)
+	movew	%a3@(32),%d0
+	cmpw	%a3@(34),%d0
+	bnew	.Lffc4ed60
+	tstb	0xbac
+	bnes	.Lffc4ed22
+	movew	%a3@(14),%d0
+	cmpw	%a3@(6),%d0
+	blts	.Lffc4ed60
+	movew	%a3@(14),%d0
+	cmpw	%a3@(18),%d0
+	bgts	.Lffc4ed60
+	movew	%d0,%a3@(22)
+	subqw	#1,%d0
+	movew	%d0,%a3@(18)
+	moveal	0x2b6,%a0
+	tstb	%a0@(46)
+	beqs	.Lffc4ed60
+	lea	%a0@(48),%a0
+	addqw	#1,%d0
+	cmpw	%a0@(2),%d0
+	bgts	.Lffc4ed60
+	movew	%d0,%a0@(6)
+	subqw	#1,%d0
+	movew	%d0,%a0@(2)
+	bras	.Lffc4ed60
+
+.Lffc4ed22:	
+	movew	%a3@(10),%d0
+	cmpw	%a3@(2),%d0
+	bgts	.Lffc4ed60
+	movew	%a3@(10),%d0
+	cmpw	%a3@(22),%d0
+	blts	.Lffc4ed60
+	movew	%d0,%a3@(18)
+	addqw	#1,%d0
+	movew	%d0,%a3@(22)
+	moveal	0x2b6,%a0
+	tstb	%a0@(46)
+	beqs	.Lffc4ed60
+	lea	%a0@(48),%a0
+	subqw	#1,%d0
+	cmpw	%a0@(6),%d0
+	blts	.Lffc4ed60
+	movew	%d0,%a0@(2)
+	addqw	#1,%d0
+	movew	%d0,%a0@(6)
+
+.Lffc4ed60:	
+	braw	.Lffc4eb8a
