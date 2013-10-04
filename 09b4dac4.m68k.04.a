@@ -457,7 +457,7 @@ sub_ffc4ed6e:
 
 .Lffc4edee:
 	movew	%d2,%sp@-
-	.int	0x610001aa	/* bsrw	sub_ffc4ef9c */
+	bsrw	sub_ffc4ef9c
 	movew	%sp@+,%d2
 	tstb	%fp@(-6)
 	bnes	.Lffc4ee68
@@ -589,7 +589,56 @@ sub_ffc4ed6e:
 .Lffc4ef3a:
 	movew	%a0@(4),%a3@(20)
 	movew	%a0@(4),%a0@
+
 .Lffc4ef44:
 	.int	0x61000592	/* bsrw	sub_ffc4f4d8 */
 	unlk	%fp
 	rts
+
+sub_ffc4ef4c:
+	moveal	0x2b6,%a1
+	moveal	%a1@(152),%a1
+	jmp	%a1@
+
+sub_ffc4ef56:
+	movel	%a0,%sp@-
+	moveal	%a3@(62),%a1
+	moveal	%a1@,%a1
+	addaw	%a0@,%a1
+	exg	%a1,%a0
+	moveq	#0,%d4
+	movew	%a2@,%d0
+	cmpw	%a1@,%d0
+	blss	.Lffc4ef76
+	subw	%a1@,%d0
+	addaw	%d0,%a0
+	movew	%d0,%d4
+	movew	%d3,%d1
+	subw	%a2@,%d1
+	bras	.Lffc4ef7a
+
+.Lffc4ef76:
+	movew	%d3,%d1
+	subw	%a1@,%d1
+
+.Lffc4ef7a:
+	movel	%a0,%sp@-
+	moveal	%a1,%a0
+	.int	0x61002a56	/* bsrw	sub_ffc519d6 */
+	moveal	%sp@+,%a0
+	cmpw	%a2@(2),%d0
+	blss	.Lffc4ef8e
+	movew	%a2@(2),%d0
+
+.Lffc4ef8e:
+	subw	%a1@,%d0
+	subw	%d4,%d0
+	swap	%d2
+	.int	0x6100fa60	/* bsrw sub_ffc4e9f6 */
+	moveal	%sp@+,%a0
+	rts
+
+sub_ffc4ef9c:
+	moveal	0x2b6,%a1
+	moveal	%a1@(156),%a1
+	jmp	%a1@
