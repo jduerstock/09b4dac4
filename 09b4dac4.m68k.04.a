@@ -962,3 +962,32 @@ sub_ffc4f1ae:
 .Lffc4f2ba:
 	addql	#2,%sp
 	rts
+
+sub_ffc4f2be:
+	st	%fp@(-6)
+	.short	0x6160		/* bsrs	sub_ffc4f324 */
+	bnes	.Lffc4f2ce
+	tstb	%fp@(-70)
+	bnes	.Lffc4f2da
+	bras	.Lffc4f2e8
+
+.Lffc4f2ce:
+	tstb	%fp@(-70)
+	beqs	.Lffc4f2da
+	tstb	0xbac
+	bnes	.Lffc4f2e8
+
+.Lffc4f2da:	
+	.int	0x610005fe	/* bsrw	sub_ffc4f8da */
+	addw	%d0,%d5
+	addw	%d5,%a3@(18)
+	addw	%d5,%a3@(22)
+
+.Lffc4f2e8:
+	rts
+
+sub_ffc4f2ea:
+	moveml	%d0/%d2/%a0-%a1,%sp@-
+	moveal	0x2b6,%a0
+	moveal	%a0@(168),%a0
+	jmp	%a0@
