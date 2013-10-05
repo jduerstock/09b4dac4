@@ -737,7 +737,7 @@ sub_ffc4efa6:
 	bras	.Lffc4f07c
 
 .Lffc4f078:
-	.int	0x6100012a	/* bsrw	sub_ffc4f1a4 */
+	bsrw	sub_ffc4f1a4
 
 .Lffc4f07c:
 	moveml	%sp@+,%a0
@@ -848,4 +848,117 @@ ffc4f0da:
 	addw	%d5,%a3@(22)
 
 .Lffc4f1a2:
+	rts
+
+sub_ffc4f1a4:
+	moveal	0x2b6,%a1
+	moveal	%a1@(164),%a1
+	jmp	%a1@
+
+sub_ffc4f1ae:
+	st	%fp@(-6)
+	movew	#-1,%d2
+	swap	%d2
+	clrw	%d2
+	moveal	%a0,%a1
+	movew	%d5,%sp@-
+	movew	%d3,%d0
+	subw	%a1@,%d0
+	movew	%a2@,%d1
+	cmpw	%a1@,%d1
+	blss	.Lffc4f1d6
+	subw	%a1@,%d1
+	subw	%d1,%d0
+	bnes	.Lffc4f1d6
+	sf	%fp@(-6)
+	st	%fp@(-73)
+
+.Lffc4f1d6:
+	movew	%d0,%d1
+	.int	0x610008da	/* bsrw	sub_ffc4fab4 */
+	tstb	0xbac
+	beqs	.Lffc4f1fa
+	.int	0x61000140	/* bsrw	sub_ffc4f324 */
+	cmpb	0xbac,%d1
+	beqs	.Lffc4f1fc
+	cmpw	%d5,%d6
+	beqs	.Lffc4f1fc
+	tstw	%d5
+	beqs	.Lffc4f1f6
+	exg	%d5,%d6
+
+.Lffc4f1f6:
+	addw	%sp@,%d6
+	bras	.Lffc4f20e
+
+.Lffc4f1fa:
+	exg	%d5,%d6
+
+.Lffc4f1fc:
+	addw	%sp@,%d5
+	addw	%d5,%a3@(18)
+	addw	%d5,%a3@(22)
+	addw	%sp@,%d6
+	cmpw	%d5,%d6
+	beqw	.Lffc4f2ba
+
+.Lffc4f20e:
+	movew	%a3@(20),%d2
+	addw	%a3@(16),%d2
+	asrw	#1,%d2
+	movew	%d2,%a3@(20)
+	moveal	0x2b6,%a0
+	st	%a0@(46)
+	andiw	#-256,%a0@(46)
+	lea	%a0@(48),%a0
+	movew	%a3@(20),%a0@+
+	addw	%fp@(-64),%d6
+	movew	%d6,%a0@
+	subqw	#1,%a0@+
+	movew	%fp@(-62),%a0@+
+	movew	%d6,%a0@
+	clrl	%sp@-
+	movew	#30,%sp@-
+	movel	#-2080243704,%sp@-
+	.short	0xa8b5
+	movel	%sp@+,%d5
+	andil	#1073741824,%d5
+	bnew	.Lffc4f2ba
+	clrl	%sp@-
+	tstb	%a3@(56)
+	bnes	.Lffc4f26e
+	moveal	%a3@(66),%a0
+	moveal	%a0@,%a0
+	moveb	%a0@(22),%d5
+	bras	.Lffc4f286
+
+.Lffc4f26e:
+	movew	#22,%sp@-
+	movel	#-2080243704,%sp@-
+	.short	0xa8b5
+	movel	%sp@,%d5
+	moveal	%a3@(66),%a0
+	moveal	%a0@,%a0
+	moveb	%d5,%a0@(22)
+
+.Lffc4f286:
+	movew	%d5,%sp@-
+	movew	#6,%sp@-
+	movel	#-2080112628,%sp@-
+	.short	0xa8b5
+	movel	%sp@+,%d0
+	moveal	0x2b6,%a0
+	lea	%a0@(48),%a0
+	cmpb	0xbac,%d0
+	beqs	.Lffc4f2b0
+	movew	%a3@(16),%a0@
+	movew	%a3@(16),%a3@(20)
+	bras	.Lffc4f2ba
+
+.Lffc4f2b0:
+	movew	%a0@(4),%a3@(20)
+	movew	%a0@(4),%a0@
+
+.Lffc4f2ba:
+	addql	#2,%sp
 	rts
