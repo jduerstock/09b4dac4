@@ -184,7 +184,7 @@ sub_ffc4ea5c:
 .Lffc4eb82:	
 	moveq	#10,%d0
 	.short	0xa854
-	.int	0x61000950	/* bsrw sub_ffc4f4d8 */
+	bsrw	sub_ffc4f4d8
 
 .Lffc4eb8a:
 	moveml	%sp@+,%d2-%d7/%a2-%a4
@@ -239,7 +239,7 @@ sub_ffc4eba0:
 	pea	%a3@(16)
 	.short	0xa8a3
 	movew	%sp@+,%a3@(18)
-	.int	0x610008de	/* bsrw	sub_ffc4f4d8 */
+	bsrw	sub_ffc4f4d8
 	rts
 
 sub_ffc4ebfe:
@@ -591,7 +591,7 @@ sub_ffc4ed6e:
 	movew	%a0@(4),%a0@
 
 .Lffc4ef44:
-	.int	0x61000592	/* bsrw	sub_ffc4f4d8 */
+	bsrw	sub_ffc4f4d8
 	unlk	%fp
 	rts
 
