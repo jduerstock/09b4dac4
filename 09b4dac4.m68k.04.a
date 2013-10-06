@@ -1181,3 +1181,30 @@ sub_ffc4f462:
 
 sub_ffc4f4a8:
 	linkw	%fp,#0
+	moveml	%d0-%d1/%a1/%a3,%sp@-
+	moveal	%fp@(8),%a0
+	moveal	%a0@+,%a1
+	moveal	%a0@,%a3
+	movew	%fp@(12),%d0
+	lslw	#2,%d0
+	moveal	%a1,%a0
+	addaw	%d0,%a0
+	bsrw	sub_ffc4f324
+	moveb	%d1,%fp@(14)
+	moveml	%sp@+,%d0-%d1/%a1/%a3
+	unlk	%fp
+	moveal	%sp@+,%a0
+	addql	#6,%sp
+	jmp	%a0@
+	rts
+
+sub_ffc4f4d8:
+	moveal	0x2b6,%a0
+	tstb	%a0@(56)
+	beqs	.Lffc4f4ec
+	sf	%a0@(56)
+	moveal	%fp@(-36),%a0
+	.short	0xa023
+
+.Lffc4f4ec:
+	rts
