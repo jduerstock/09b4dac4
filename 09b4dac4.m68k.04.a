@@ -1014,3 +1014,24 @@ sub_ffc4f324:
 	moveal	0x2b6,%a1
 	moveal	%a1@(172),%a1
 	jmp	%a1@
+
+sub_ffc4f32e:
+	moveml	%d0/%a0,%sp@-
+	tstw	%a3@(80)
+	bpls	.Lffc4f348
+	movew	%a0@(2),%d0
+	.int	0x61002c70	/* bsrw	0xffc51fae */
+	clrw	%d1
+	moveb	%a0@(9),%d1
+	bras	.Lffc4f34c
+
+.Lffc4f348:
+	moveb	%a3@(77),%d1
+
+.Lffc4f34c:
+	beqs	.Lffc4f350
+	st	%d1
+
+.Lffc4f350:
+	moveml	%sp@+,%d0/%a0
+	rts
