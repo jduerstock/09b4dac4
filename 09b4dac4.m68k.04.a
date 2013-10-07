@@ -1592,3 +1592,43 @@ sub_ffc4f8da:
 	moveal	0x2b6,%a1
 	moveal	%a1@(200),%a1
 	jmp	%a1@
+
+sub_ffc4f8e4:
+	moveml	%d2/%a0,%sp@-
+	movel	%a4,%sp@-
+	moveal	%a0,%a1
+	moveal	%a3@(62),%a0
+	moveal	%a0@,%a0
+	addaw	%a1@,%a0
+	moveal	%a0,%a4
+	moveal	%a1,%a0
+	moveq	#0,%d1
+	movew	%a2@,%d0
+	cmpw	%a0@,%d0
+	blss	.Lffc4f906
+	subw	%a0@,%d0
+	addaw	%d0,%a4
+	movew	%d0,%d1
+
+.Lffc4f906:
+	.int	0x610020ce     	/* bsrw	sub_ffc519d6 */
+	cmpw	%a2@(2),%d0
+	blss	.Lffc4f914
+	movew	%a2@(2),%d0
+
+.Lffc4f914:
+	subw	%a0@,%d0
+	subw	%d1,%d0
+	tstw	%a3@(80)
+	bpls	.Lffc4f92a
+	moveml	%d0-%d1,%sp@-
+	.int	0x61002a7c     	/* bsrw	sub_ffc523a0 */
+	moveml	%sp@+,%d0-%d1
+
+.Lffc4f92a:
+	moveal	%a4,%a0
+	moveq	#0,%d1
+	moveal	%sp@+,%a4
+	bsrw	sub_ffc4ea26
+	moveml	%sp@+,%d2/%a0
+	rts
