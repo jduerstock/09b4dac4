@@ -1632,3 +1632,22 @@ sub_ffc4f8e4:
 	bsrw	sub_ffc4ea26
 	moveml	%sp@+,%d2/%a0
 	rts
+
+sub_ffc4f93a:
+	moveml	%d0/%d2/%a0,%sp@-
+	movew	%fp@(-64),%a3@(18)
+	movew	%fp@(-98),%d0
+	addw	%d0,%a3@(18)
+	movew	%fp@(-60),%a3@(22)
+	movew	%fp@(-100),%d0
+	addw	%d0,%a3@(22)
+	movel	%a3@(86),%d0
+	.int	0x61000772	/* bsrw	sub_ffc500d2 */
+	sf	%fp@(-92)
+	moveml	%sp@+,%d0/%d2/%a0
+	rts
+
+sub_ffc4f96c:
+	moveal	0x2b6,%a1
+	moveal	%a1@(204),%a1
+	jmp	%a1@
