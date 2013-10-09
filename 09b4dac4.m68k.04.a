@@ -1,4 +1,60 @@
 
+sub_ffc4e7ba:
+	movel	0x798,%sp@-
+	rts
+
+sub_ffc4e7c0:
+	linkw	%fp,#-18
+	movel	%a0,%fp@(-8)
+	movew	%d1,%fp@(-10)
+	subqw	#2,%sp
+	movel	%a0,%sp@-
+	andil	#65535,%d0
+	movel	%d0,%sp@-
+	swap	%d2
+	clrw	%d2
+	movel	%d2,%sp@-
+	movew	%d1,%fp@(-14)
+	swap	%d1
+	clrw	%d1
+	movel	%d1,%sp@-
+	pea	%fp@(-2)
+	pea	%fp@(-18)
+	clrw	%sp@-
+	movel	#65537,%d0
+	movel	%d0,%sp@-
+	movel	%d0,%sp@-
+	movel	#-2111700946,%sp@-
+	.short	0xa8b5
+	movew	%sp@+,%d1
+	movew	%fp@(-14),%d0
+	moveq	#0,%d2
+	tstw	%fp@(-18)
+	bmis	.Lffc4e816
+	subw	%fp@(-18),%d0
+
+.Lffc4e816:
+	bset	#16,%d2
+	moveb	%fp@(-2),%d2
+	bnes	.Lffc4e846
+	moveml	%d0/%d2-%d3/%d6,%sp@-
+	moveal	%fp@(-8),%a0
+	moveal	%a3@(62),%a1
+	moveal	%a1@,%a1
+	subal	%a1,%a0
+	movew	%a0,%sp@-
+	movew	%d1,%d6
+	addw	%a0,%d6
+	movew	#-1,%d3
+	.int	0x61003210	/* bsrw	sub_ffc51a4c */
+	movew	%d6,%d1
+	subw	%sp@+,%d1
+	moveml	%sp@+,%d0/%d2-%d3/%d6
+
+.Lffc4e846:
+	unlk	%fp
+	rts
+
 sub_ffc4e84a:	
 	bsrw	sub_ffc4ec12
 	movew	%a2@,%d3
@@ -69,6 +125,7 @@ sub_ffc4e84a:
 	cmpw	%d3,%d1
 	bccs	.Lffc4e8fe
 	movew	%d3,%d1
+
 .Lffc4e8fe:
 	movew	%d1,%d7
 	cmpw	%d0,%d6
@@ -91,7 +148,7 @@ sub_ffc4e84a:
 	moveal	%a3@(66),%a0
 	moveal	%a0@,%a0
 	moveal	%a0@(12),%a0
-	.int	0x487afe8a	/* pea	%pc@(0xffc4e7ba) */
+	pea	%pc@(sub_ffc4e7ba)
 	cmpal	%sp@+,%a0
 	beqs	.Lffc4e93c
 	swap	%d0
