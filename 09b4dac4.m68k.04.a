@@ -547,7 +547,7 @@ sub_ffc4ea46:
 	rts
 
 sub_ffc4ea5c:
-	.int	0x610015d4	/* bsrw	sub_ffc50032 */
+	bsrw	sub_ffc50032
 	bsrw	sub_ffc4ec12
 	bsrw	sub_ffc4fba4
 	clrw	%sp@-
@@ -1704,7 +1704,7 @@ sub_ffc4f4ee:
 	moveal	0x2b6,%a0
 	cmpib	#1,%a0@(44)
 	beqw	.Lffc4f5dc
-	.int	0x61000b34	/* bsrw	sub_ffc50032 */
+	bsrw	sub_ffc50032
 	bsrw	sub_ffc4ec12
 	bsrw	sub_ffc4fba4
 	movel	%a4,%sp@-
@@ -1794,7 +1794,7 @@ ffc4f5d8:
 	braw	.Lffc4eb8a
 
 .Lffc4f5dc:
-	.int	0x61000a54	/* bsrw	sub_ffc50032 */
+	bsrw	sub_ffc50032
 	bsrw	sub_ffc4ec12
 	bsrw	sub_ffc4fba4
 	bsrw	sub_ffc4ebfe
