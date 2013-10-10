@@ -2952,3 +2952,45 @@ sub_ffc4ff28:
 	bsrw	sub_ffc4f4d8
 	moveml	%sp@+,%d3/%d5-%d6
 	rts
+
+sub_ffc50032:
+	lea	%a3@(8),%a0
+	movew	%a0@,%d0
+	bsrs	sub_ffc50080
+	bges	.Lffc5007c
+	addw	%d0,%d0
+	blts	.Lffc50054
+	cmpw	%a3@(0x60,%d0:w),%d3
+	bccs	.Lffc5004a
+	movew	%a3@(0x60,%d0:w),%d3
+
+.Lffc5004a:
+	cmpw	%a3@(0x60,%d0:w),%d4
+	bccs	.Lffc50054
+	movew	%a3@(0x60,%d0:w),%d4
+
+.Lffc50054:
+	movew	%a0@(4),%d0
+	subqw	#1,%d0
+	bsrs	sub_ffc50080
+	addqw	#1,%d0
+	cmpw	%a3@(94),%d0
+	bhis	.Lffc5007a
+	addw	%d0,%d0
+	cmpw	%a3@(0x60,%d0:w),%d3
+	bcss	.Lffc50070
+	movew	%a3@(0x60,%d0:w),%d3
+
+.Lffc50070:
+	cmpw	%a3@(0x60,%d0:w),%d4
+	bcss	.Lffc5007a
+	movew	%a3@(0x60,%d0:w),%d4
+.Lffc5007a:
+	rts
+
+.Lffc5007c:
+	movew	%d3,%d4
+	rts
+
+sub_ffc50080:
+	moveml	%d2/%d6-%a0,%sp@-
