@@ -2994,3 +2994,45 @@ sub_ffc50032:
 
 sub_ffc50080:
 	moveml	%d2/%d6-%a0,%sp@-
+	subw	%a3@,%d0
+	extl	%d0
+	movew	%a3@(94),%d7
+	beqs	.Lffc500ca
+	tstl	%d0
+	blts	.Lffc500ca
+	movew	%a3@(24),%d1
+	tstw	%a3@(80)
+	bpls	.Lffc500a0
+	tstw	%d1
+	bmis	.Lffc500a4
+
+.Lffc500a0:
+	divsw	%d1,%d0
+	bras	.Lffc500ca
+
+.Lffc500a4:
+	moveal	%a3@(74),%a0
+	moveal	%a0@,%a0
+	moveal	%a0@(8),%a0
+	moveal	%a0@,%a0
+	moveq	#0,%d1
+	movew	%d7,%d2
+
+.Lffc500b4:
+	movew	%a0@,%d6
+	andiw	#32767,%d6
+	addw	%d6,%d1
+	addqw	#4,%a0
+	cmpw	%d1,%d0
+	blts	.Lffc500c6
+	subqw	#1,%d2
+	bnes	.Lffc500b4
+
+.Lffc500c6:
+	movew	%d7,%d0
+	subw	%d2,%d0
+
+.Lffc500ca:
+	cmpw	%d7,%d0
+	moveml	%sp@+,%d2/%d6-%a0
+	rts
