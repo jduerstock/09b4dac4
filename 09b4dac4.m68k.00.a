@@ -1,4 +1,84 @@
 
+sub_ffc0fc50:
+	linkw	%fp,#-4
+	moveml	%a2-%a4,%sp@-
+	moveal	%fp@(8),%a3
+	moveal	%a3@(76),%a4
+	bras	.Lffc0fc8e
+
+.Lffc0fc62:
+	moveal	%a4@,%a2
+	movel	%a4@(8),%d0
+	cmpl	%fp@(16),%d0
+	bnes	.Lffc0fc8c
+	subql	#1,%a4@(44)
+	tstl	%a4@(44)
+	bgts	.Lffc0fc8c
+	moveq	#0,%d0
+	movel	%d0,%sp@-
+	movel	%a4,%sp@-
+	movel	%fp@(12),%sp@-
+	movel	%a3,%sp@-
+	.int	0x4eba177a	/* jsr	%pc@(sub_ffc11400) */
+	lea	%sp@(16),%sp
+
+.Lffc0fc8c:
+	moveal	%a2,%a4
+
+.Lffc0fc8e:
+	movel	%a4,%d0
+	bnes	.Lffc0fc62
+	movel	%fp@(16),%sp@-
+	movel	%a3,%sp@-
+	.int	0x4ebaf956	/* jsr	%pc@(sub_ffc0f5f0) */
+	addqw	#8,%sp
+	moveml	%fp@(-16),%a2-%a4
+	unlk	%fp
+	rts
+
+	.align	16
+
+sub_ffc0fcb0:
+	linkw	%fp,#0
+	movel	%a3,%sp@-
+	moveal	%fp@(12),%a3
+	moveal	%fp@(16),%a1
+	movel	%fp@(8),%d1
+	subql	#1,%a1@(16)
+	cmpal	%a3@(40),%a1
+	bnes	.Lffc0fcd2
+	moveq	#0,%d0
+	movel	%d0,%a3@(40)
+
+.Lffc0fcd2:
+	cmpl	%a1@(20),%d1
+	bnes	.Lffc0fce0
+	moveq	#-1,%d0
+	movel	%d0,%a1@(20)
+	bras	.Lffc0fcfa
+
+.Lffc0fce0:
+	cmpl	%a1@(20),%d1
+	bges	.Lffc0fcfa
+	subql	#1,%a1@(20)
+	bras	.Lffc0fcfa
+
+.Lffc0fcec:
+	movel	%d1,%d0
+	addql	#1,%d0
+	movel	%a1@(0x20,%d0:l:4),%a1@(0x20,%d1:l:4)
+	movel	%d1,%d0
+	addql	#1,%d1
+
+.Lffc0fcfa:
+	cmpl	%a1@(16),%d1
+	blts	.Lffc0fcec
+	moveal	%fp@(-4),%a3
+	unlk	%fp
+	rts
+
+	.align	16
+
 sub_ffc0fd10:
 	linkw	%fp,#-2
 	moveml	%d3-%d7/%a2-%a4,%sp@-
