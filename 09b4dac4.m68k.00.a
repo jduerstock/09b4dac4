@@ -1,3 +1,29 @@
+sub_ffc0fb70:
+	linkw	%fp,#0
+	moveml	%d7/%a3-%a4,%sp@-
+	movel	%fp@(16),%d7
+	.int	0x4eba2bb2	/* jsr	%pc@(sub_ffc12730) */
+	moveal	%d0,%a3
+	moveal	%a3@(44),%a4
+	bras	.Lffc0fb9e
+
+.Lffc0fb88:
+	moveal	%fp@(8),%a0
+	movel	%a0@(8),%sp@-
+	movel	%fp@(12),%sp@-
+	movel	%d7,%sp@-
+	moveal	%a4@(8),%a0
+	jsr	%a0@
+	moveal	%a4@,%a4
+
+.Lffc0fb9e:
+	movel	%a4,%d0
+	bnes	.Lffc0fb88
+	moveml	%fp@(-12),%d7/%a3-%a4
+	unlk	%fp
+	rts
+
+	.align	16
 
 sub_ffc0fbb0:
 	linkw	%fp,#0
