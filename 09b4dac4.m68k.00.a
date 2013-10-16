@@ -1,3 +1,40 @@
+
+str_ffc0f7a0:
+	.byte	0x2e
+	.ascii	"FindContextListEntry: PowerPC CFM has control."
+	.byte	0x00
+
+sub_ffc0f7d0:
+	linkw	%fp,#0
+	moveml	%a3-%a4,%sp@-
+	moveal	%fp@(8),%a3
+	moveal	%a3@(76),%a4
+	bras	.Lffc0f7ee
+
+.Lffc0f7e2:
+	movel	%a4@(36),%d0
+	cmpl	%fp@(12),%d0
+	beqs	.Lffc0f7f2
+	moveal	%a4@,%a4
+
+.Lffc0f7ee:
+	movel	%a4,%d0
+	bnes	.Lffc0f7e2
+
+.Lffc0f7f2:
+	movel	%a4,%d0
+	bnes	.Lffc0f7fe
+	moveal	%fp@(16),%a0
+	movew	#-2801,%a0@
+
+.Lffc0f7fe:
+	movel	%a4,%d0
+	moveml	%fp@(-8),%a3-%a4
+	unlk	%fp
+	rts
+
+	.align	16
+
 sub_ffc0f810:
 	linkw	%fp,#0
 	moveml	%a3-%a4,%sp@-
