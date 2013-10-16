@@ -1,3 +1,34 @@
+sub_ffc0f810:
+	linkw	%fp,#0
+	moveml	%a3-%a4,%sp@-
+	moveal	%fp@(8),%a3
+	moveal	%a3@(84),%a4
+	bras	.Lffc0f82e
+
+.Lffc0f822:
+	movel	%a4@(8),%d0
+	cmpl	%fp@(12),%d0
+	beqs	.Lffc0f832
+	moveal	%a4@,%a4
+
+.Lffc0f82e:
+	movel	%a4,%d0
+	bnes	.Lffc0f822
+
+.Lffc0f832:
+	movel	%a4,%d0
+	bnes	.Lffc0f83e
+	moveal	%fp@(16),%a0
+	movew	#-2801,%a0@
+
+.Lffc0f83e:
+	movel	%a4,%d0
+	moveml	%fp@(-8),%a3-%a4
+	unlk	%fp
+	rts
+
+	.align	16
+
 sub_ffc0f850:
 	linkw	%fp,#0
 	moveml	%a3-%a4,%sp@-
