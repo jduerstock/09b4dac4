@@ -1,3 +1,10 @@
+	bsrw	sub_ffc5010a
+	moveal	%a2@+,%a0
+	.int	0x610037b4	/* bsrw	sub_ffc51cb8 */
+	tstb	%a3@(36)
+	beqs	sub_ffc4e510
+	.int	0x600037d2	/* braw	0xffc51ce0 */
+
 sub_ffc4e510:
 	linkw	%fp,#-28
 	movew	%a3@(32),%d0
@@ -51,7 +58,7 @@ sub_ffc4e57a:
 	braw	sub_ffc4ec50
 
 .Lffc4e58c:
-	.int	0x61001b7c	/* bsrw	sub_ffc5010a */
+	bsrw	sub_ffc5010a
 	.int	0x6100fdf0	/* bsrw	sub_ffc4e382 */
 	movel	%fp@(14),%a3@(28)
 	bsrw	sub_ffc4e792
@@ -3103,7 +3110,7 @@ sub_ffc500f6:
 	movel	%a0,%sp@-
 	bras	.Lffc50136
 
-.Lffc5010a:
+sub_ffc5010a:
 	moveq	#0,%d0
 	moveal	%sp@+,%a0
 	linkw	%fp,#-24
