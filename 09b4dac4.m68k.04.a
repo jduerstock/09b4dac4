@@ -1,3 +1,37 @@
+sub_ffc4e510:
+	linkw	%fp,#-28
+	movew	%a3@(32),%d0
+	cmpw	%a3@(34),%d0
+	bnes	.Lffc4e53c
+	moveal	%a3@(66),%a0
+	moveal	%a0@,%a0
+	movel	%a0@(16),%d0
+	btst	#2,%d0
+	beqs	.Lffc4e53c
+	tstb	%a3@(56)
+	beqs	.Lffc4e538
+	.int	0x610028a6	/* bsrw	sub_ffc50ddc */
+
+.Lffc4e538:
+	st	%a3@(56)
+
+.Lffc4e53c:
+	.int	0x61002974	/* bsrw	sub_ffc50eb2 */
+	moveal	%a3@(66),%a0
+	moveal	%a0@,%a0
+	movel	%a0@(16),%d0
+	btst	#2,%d0
+	beqs	.Lffc4e566
+	st	%a3@(36)
+	.int	0x61002872	/* bsrw	sub_ffc50dc8 */
+	bsrs	sub_ffc4e57a
+	sf	%a3@(36)
+	sf	%fp@(-27)
+	.int	0x61002982	/* bsrw	sub_ffc50ee6 */
+
+.Lffc4e566:
+	unlk	%fp
+	.int	0x60003776	/* braw	.Lffc51ce0 */
 
 sub_ffc4e56c:
 	movew	%d6,%d0

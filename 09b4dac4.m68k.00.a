@@ -1,3 +1,81 @@
+sub_ffc0f620:
+	linkw	%fp,#0
+	moveml	%a3-%a4,%sp@-
+	moveal	%fp@(8),%a4
+	.int	0x4eba3102	/* jsr	%pc@(sub_ffc12730) */
+	moveal	%d0,%a3
+	pea	%a4@(48)
+	.int	0x4eba2268	/* jsr	%pc@(sub_ffc118a0) */
+	pea	%a3@(36)
+	movel	%a4,%sp@-
+	jsr	%pc@(sub_ffc0f8e0)
+	tstl	%a4@(108)
+	lea	%sp@(12),%sp
+	beqs	.Lffc0f658
+	movel	%a4@(108),%sp@-
+	.int	0x4eba36ac	/* jsr	%pc@(sub_ffc12d00) */
+	addqw	#4,%sp
+
+.Lffc0f658:
+	movel	%a4,%sp@-
+	.int	0x4eba36a4	/* jsr	%pc@(sub_ffc12d00) */
+	addqw	#4,%sp
+	moveml	%fp@(-8),%a3-%a4
+	unlk	%fp
+	rts
+
+	.align	16
+
+sub_ffc0f670:
+	linkw	%fp,#-4
+	moveml	%d7/%a4,%sp@-
+	.int	0x4eba30b6	/* jsr	%pc@(sub_ffc12730) */
+	moveal	%d0,%a4
+	movel	%a4,%d0
+	bnes	.Lffc0f6d0
+	movel	#644,%d0
+	.short	0xa71e
+	moveal	%a0,%a4
+	movel	%a4,%d0
+	bnes	.Lffc0f694
+	moveq	#0,%d0
+	bras	.Lffc0f6d2
+
+.Lffc0f694:
+	movel	#18120705,%a4@(8)
+	movel	%a4,%sp@-
+	.int	0x4eba30c0	/* jsr	%pc@(sub_ffc12760) */
+	pea	0x6000
+	.int	0x4eba3388	/* jsr	%pc@(sub_ffc12a30) */
+	movew	%d0,%d7
+	addqw	#8,%sp
+	beqs	.Lffc0f6b4
+	moveq	#0,%d0
+	bras	.Lffc0f6d2
+
+.Lffc0f6b4:
+	subql	#2,%sp
+	pea	%fp@(-4)
+	subql	#4,%sp
+	movel	0x2a6,%sp@
+	moveq	#0,%d0
+	movel	%d0,%sp@-
+	moveq	#0,%d1
+	movew	%d1,%sp@-
+	movel	%d0,%sp@-
+	.int	0x4ebaf194	/* jsr	%pc@(sub_ffc0e860) */
+	movew	%sp@+,%d7
+
+.Lffc0f6d0:
+	movel	%a4,%d0
+
+.Lffc0f6d2:
+	moveml	%fp@(-12),%d7/%a4
+	unlk	%fp
+	rts
+
+	.align	16
+
 sub_ffc0f6e0:
 	linkw	%fp,#-4
 	moveml	%a3-%a4,%sp@-
@@ -7,7 +85,7 @@ sub_ffc0f6e0:
 	clrw	%a0@
 	movel	%a3,%d0
 	bnes	.Lffc0f710
-	.int	0x4ebaff76	/* jsr	%pc@(sub_ffc0f670) */
+	jsr	%pc@(sub_ffc0f670)
 	moveal	%d0,%a3
 	movel	%a3,%d0
 	bnes	.Lffc0f710
@@ -31,7 +109,7 @@ sub_ffc0f6e0:
 	bnes	.Lffc0f772
 	moveb	#1,%a3@(12)
 	subql	#2,%sp
-	.int	0x487a2036	/* pea	%pc@(0xffc11770) */
+	.int	0x487a2036	/* pea	%pc@(sub_ffc11770) */
 	moveq	#1,%d0
 	moveb	%d0,%sp@-
 	.int	0x4ebafc8e	/* jsr	%pc@(sub_ffc0f3d0) */
@@ -787,7 +865,7 @@ sub_ffc0fd10:
 	movel	%a2,%sp@-
 	movel	%a3,%sp@-
 	movel	%d6,%sp@-
-	.int	0x4ebafe7a	/* jsr	%pc@(sub_ffc0fcb0) */
+	jsr	%pc@(sub_ffc0fcb0)
 	movel	%d6,%d0
 	subql	#1,%d6
 	lea	%sp@(12),%sp
