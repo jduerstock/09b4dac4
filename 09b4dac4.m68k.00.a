@@ -69,16 +69,111 @@ sub_ffc08032:
 	moveml	%sp@+,%d1-%d3/%a0-%a1
 	rts
 
-	.int	0x61000082,0x60061410,0x616810C2,0x51C8FFF8
-	.int	0x70006000,0x00863400,0x4840B440,0x660A4840
-	.int	0x610A6A02,0x44804E75,0x70014E75,0x61567800
-	.int	0x34004840,0xB4406728,0x62087801,0x3002B844
-	.int	0x601E78FF,0xB8446018,0x74001418,0x6124D442
-	.int	0x36332000,0x74001419,0x6118D442,0xB6732000
-	.int	0x56C8FFE6,0x67086204,0x70FF6004,0x78012004
-	.int	0x60284A41,0x6A04143B,0x20284A01,0x6B041432
-	.int	0x20004E75,0x241F48E7,0x383045FA,0x011447FA
-	.int	0x0210ED59,0xE2197400,0x4E754CDF,0x0C184E75
+sub_ffc08060:
+	bsrw	sub_ffc080e4
+	bras	.Lffc0806c
+
+.Lffc08066:
+	moveb	%a0@,%d2
+	bsrs	sub_ffc080d2
+	moveb	%d2,%a0@+
+
+.Lffc0806c:
+	dbf	%d0,.Lffc08066
+	moveq	#0,%d0
+	braw	.Lffc080fa
+
+sub_ffc08076:
+	movew	%d0,%d2
+	swap	%d0
+	cmpw	%d0,%d2
+	bnes	.Lffc08088
+	swap	%d0
+	bsrs	sub_ffc0808c
+	bpls	.Lffc08086
+	negl	%d0
+
+.Lffc08086:
+	rts
+
+.Lffc08088:
+	moveq	#1,%d0
+	rts
+
+sub_ffc0808c:
+	bsrs	sub_ffc080e4
+	moveq	#0,%d4
+	movew	%d0,%d2
+	swap	%d0
+	cmpw	%d0,%d2
+	beqs	.Lffc080c0
+	bhis	.Lffc080a2
+	moveq	#1,%d4
+	movew	%d2,%d0
+	cmpw	%d4,%d4
+	bras	.Lffc080c0
+
+.Lffc080a2:
+	moveq	#-1,%d4
+	cmpw	%d4,%d4
+	bras	.Lffc080c0
+
+.Lffc080a8:
+	moveq	#0,%d2
+	moveb	%a0@+,%d2
+	bsrs	sub_ffc080d2
+	addw	%d2,%d2
+	movew	%a3@(%d2:w),%d3
+	moveq	#0,%d2
+	moveb	%a1@+,%d2
+	bsrs	sub_ffc080d2
+	addw	%d2,%d2
+	cmpw	%a3@(%d2:w),%d3
+
+.Lffc080c0:
+	dbne	%d0,.Lffc080a8
+	beqs	.Lffc080ce
+	bhis	.Lffc080cc
+	moveq	#-1,%d0
+	bras	.Lffc080d0
+
+.Lffc080cc:
+	moveq	#1,%d4
+
+.Lffc080ce:
+	movel	%d4,%d0
+
+.Lffc080d0:
+	bras	.Lffc080fa
+
+sub_ffc080d2:
+	tstw	%d1
+	bpls	.Lffc080da
+	moveb	%pc@(byte_ffc08100,%d2:w),%d2
+
+.Lffc080da:
+	tstb	%d1
+	bmis	.Lffc080e2
+	moveb	%a2@(%d2:w),%d2
+
+.Lffc080e2:
+	rts
+
+sub_ffc080e4:
+	movel	%sp@+,%d2
+	moveml	%d2-%d4/%a2-%a3,%sp@-
+	lea	%pc@(byte_ffc08200),%a2
+	lea	%pc@(byte_ffc08300),%a3
+	rolw	#6,%d1
+	rorb	#1,%d1
+	moveq	#0,%d2
+	rts
+
+.Lffc080fa:
+	moveml	%sp@+,%d3-%d4/%a2-%a3
+	rts
+
+byte_ffc08100:
 	.int	0x00010203,0x04050607,0x08090A0B,0x0C0D0E0F
 	.int	0x10111213,0x14151617,0x18191A1B,0x1C1D1E1F
 	.int	0x20212223,0x24252627,0x28292A2B,0x2C2D2E2F
@@ -95,6 +190,8 @@ sub_ffc08032:
 	.int	0xD0D1D2D3,0xD4D5D6D7,0x79D9DADB,0xDCDDDEDF
 	.int	0xE0E1E2E3,0xE4E5E6E7,0xE8E9EAEB,0xECEDEEEF
 	.int	0xF0F1F2F3,0xF4F5F6F7,0xF8F9FAFB,0xFCFDFEFF
+
+byte_ffc08200:
 	.int	0x00010203,0x04050607,0x08090A0B,0x0C0D0E0F
 	.int	0x10111213,0x14151617,0x18191A1B,0x1C1D1E1F
 	.int	0x20212223,0x24252627,0x28292A2B,0x2C2D2E2F
@@ -111,6 +208,8 @@ sub_ffc08032:
 	.int	0xD0D1D2D3,0xD4D5D6D7,0xD8D9DADB,0xDCDDDEDF
 	.int	0xE0E1E2E3,0xE4E5E6E7,0xE8E9EAEB,0xECEDEEEF
 	.int	0xF0F1F2F3,0xF4F5F6F7,0xF8F9FAFB,0xFCFDFEFF
+
+byte_ffc08300:
 	.int	0x00000100,0x02000300,0x04000500,0x06000700
 	.int	0x08000900,0x0A000B00,0x0C000D00,0x0E000F00
 	.int	0x10001100,0x12001300,0x14001500,0x16001700
