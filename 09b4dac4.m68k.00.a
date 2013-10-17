@@ -244,20 +244,90 @@ byte_ffc08300:
 	.int	0xF800F900,0xFA00FB00,0xFC00FD00,0xFE00FF00
 
 sub_ffc08500:
-	.int	0x2F081038,0x02080200,0x000711C0,0x02602049
-	.int	0x203C0010,0x0010A051,0x41E90010,0x203C0004
-	.int	0x0008A051,0x205F4E75,0x42676100,0x012E43F8
-	.int	0x01F861CC,0x610000E0,0x70000C11,0x00A86724
-	.int	0x3EBCFFA8,0x720441FA,0x007E22D8,0x51C9FFFC
-	.int	0x61000128,0x41F801F8,0x10BC00A8,0x203C0001
-	.int	0x0010A052,0x41F801E4,0x203C0004,0x000CA051
-	.int	0x223C4E75,0x4D63B290,0x673E3EBC,0xFFA87220
-	.int	0x70044840,0x30014290,0xA0525801,0x0C010008
-	.int	0x66EE41FA,0x004643FA,0x007E93C8,0x20094840
-	.int	0x00400076,0xA05241F8,0x01E420BC,0x4E754D63
-	.int	0x203C0004,0x000CA052,0x301F6606,0x08F80005
-	.int	0x0B2248C0,0x4E757700,0x0000CC0A,0xCC0A0000
-	.int	0x00000002,0x63001B88,0x20CC0001,0x00000000
+	movel	%a0,%sp@-
+	moveb	0x208,%d0
+	andib	#7,%d0
+	moveb	%d0,0x260
+	moveal	%a1,%a0
+	movel	#1048592,%d0
+	.short	0xa051
+	lea	%a1@(16),%a0
+	movel	#262152,%d0
+	.short	0xa051
+	moveal	%sp@+,%a0
+	rts
+
+sub_ffc08528:
+	clrw	%sp@-
+	bsrw	sub_ffc0865a
+	lea	0x1f8,%a1
+	bsrs	sub_ffc08500
+	bsrw	sub_ffc08616
+	moveq	#0,%d0
+	.int	0x0c1100a8	/* cmpib	#-88,%a1@ */
+	beqs	.Lffc08564
+	movew	#-88,%sp@
+	moveq	#4,%d1
+	lea	%pc@(byte_ffc085c6),%a0
+
+.Lffc0854a:
+	movel	%a0@+,%a1@+
+	dbf	%d1,.Lffc0854a
+	bsrw	sub_ffc0867a
+	lea	0x1f8,%a0
+	.int	0x10bc00a8	/* 	moveb	#-88,%a0@ */
+	movel	#65552,%d0
+	.short	0xa052
+
+.Lffc08564:
+	lea	0x1e4,%a0
+	movel	#262156,%d0
+	.short	0xa051
+	movel	#1316310371,%d1
+	cmpl	%a0@,%d1
+	beqs	.Lffc085b8
+	movew	#-88,%sp@
+	moveq	#32,%d1
+
+.Lffc08580:
+	moveq	#4,%d0
+	swap	%d0
+	movew	%d1,%d0
+	clrl	%a0@
+	.short	0xa052
+	addqb	#4,%d1
+	cmpib	#8,%d1
+	bnes	.Lffc08580
+	lea	%pc@(byte_ffc085da),%a0
+	lea	%pc@(sub_ffc08616),%a1
+	subal	%a0,%a1
+	movel	%a1,%d0
+	swap	%d0
+	oriw	#118,%d0
+	.short	0xa052
+	lea	0x1e4,%a0
+	movel	#1316310371,%a0@
+	movel	#262156,%d0
+	.short	0xa052
+
+.Lffc085b8:
+	movew	%sp@+,%d0
+	bnes	.Lffc085c2
+	bset	#5,0xb22
+
+.Lffc085c2:
+	extl	%d0
+	rts
+
+byte_ffc085c6:
+	.short	0x7700
+	.int	0x0000CC0A,0xCC0A0000
+	.int	0x00000002,0x63001B88
+	.short	0x20CC
+
+byte_ffc085da:
+	.short	0001
+	.int	0x00000000
 	.int	0x00000000,0x00000000,0x00000000,0x00002500
 	.int	0x00000000,0x00000000,0x00000000,0x00000000
 	.int	0x00000000,0x00000000,0x00000000,0x00000000
