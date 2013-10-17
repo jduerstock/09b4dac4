@@ -265,17 +265,48 @@ sub_ffc08500:
 	.short	0x0070
 
 sub_ffc08616:
-	.short	0x48E7
-	.int	0x6CB070AB,0x20780DD8
-	.int	0xD1E80044,0x2228001C,0x670AD1C1,0x4E9021F8
-	.int	0x01E4020C,0x4CDF0D36,0x4A404E75
+	moveml	%d1-%d2/%d4-%d5/%a0/%a2-%a3,%sp@-
+	moveq	#-85,%d0
+	moveal	0xdd8,%a0
+	addal	%a0@(68),%a0
+	movel	%a0@(28),%d1
+	beqs	.Lffc08634
+	addal	%d1,%a0
+	jsr	%a0@
+	movel	0x1e4,0x20c
+
+.Lffc08634:
+	moveml	%sp@+,%d1-%d2/%d4-%d5/%a0/%a2-%a3
+	tstw	%d0
+	rts
 
 sub_ffc0863c:
-	.int	0x48E77C80
-	.int	0x70AA2078,0x0DD8D1E8,0x00442228,0x00206704
-	.int	0xD1C14E90,0x4CDF013E,0x4E7548E7,0x00262278
-	.int	0x0DD82049,0xD1E80044,0x22106708,0x4DFA0006
-	.int	0xD1C14ED0,0x4CDF6400
+	moveml	%d1-%d5/%a0,%sp@-
+	moveq	#-86,%d0
+	moveal	0xdd8,%a0
+	addal	%a0@(68),%a0
+	movel	%a0@(32),%d1
+	beqs	.Lffc08654
+	addal	%d1,%a0
+	jsr	%a0@
+
+.Lffc08654:
+	moveml	%sp@+,%d1-%d5/%a0
+	rts
+
+sub_ffc0865a:
+	moveml	%a2/%a5-%fp,%sp@-
+	moveal	0xdd8,%a1
+	moveal	%a1,%a0
+	addal	%a0@(68),%a0
+	movel	%a0@,%d1
+	beqs	.Lffc08674
+	lea	%pc@(.Lffc08674),%fp
+	addal	%d1,%a0
+	jmp	%a0@
+
+.Lffc08674:
+	moveml	%sp@+,%a2/%a5-%fp
 	rts
 
 sub_ffc0867a:
