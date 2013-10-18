@@ -1,4 +1,84 @@
 
+sub_ffc07f40:
+	movew	%sr,%sp@-
+	addqw	#2,%a1
+	oriw	#1792,%sr
+	clrl	%a0@
+	tstl	%a1@+
+	bnes	.Lffc07f54
+	movel	%a0,%a1@
+	movel	%a0,%a1@-
+	bras	.Lffc07f60
+
+.Lffc07f54:
+	movel	%a2,%sp@-
+	moveal	%a1@,%a2
+	movel	%a0,%a2@
+	movel	%a0,%a1@
+	moveal	%sp@+,%a2
+	subqw	#4,%a1
+
+.Lffc07f60:
+	subqw	#2,%a1
+	movew	%sp@+,%sr
+	rts
+
+	.align	16
+
+sub_ffc07f70:
+	movew	%sr,%sp@-
+	moveml	%a2-%a3,%sp@-
+	oriw	#1792,%sr
+	moveal	%a1@(2),%a2
+	moveal	%a2,%a3
+
+.Lffc07f80:
+	cmpal	%a3,%a0
+	beqs	.Lffc07f92
+	moveal	%a3,%a2
+	moveal	%a2@,%a3
+	cmpal	%a1@(6),%a2
+	bnes	.Lffc07f80
+	moveq	#-1,%d0
+	bras	.Lffc07fa2
+
+.Lffc07f92:
+	cmpal	%a2,%a3
+	bnes	.Lffc07faa
+	movel	%a2@,%a1@(2)
+	bnes	.Lffc07fa0
+	clrl	%a1@(6)
+
+.Lffc07fa0:
+	moveq	#0,%d0
+
+.Lffc07fa2:
+	moveml	%sp@+,%a2-%a3
+	movew	%sp@+,%sr
+	rts
+
+.Lffc07faa:
+	movel	%a3@,%a2@
+	cmpal	%a1@(6),%a3
+	bnes	.Lffc07fa0
+	movel	%a2,%a1@(6)
+	bras	.Lffc07fa0
+
+	.align	16
+
+sub_ffc07fc0:
+	clrw	%a1@+
+	clrl	%a1@+
+	clrl	%a1@
+	subqw	#6,%a1
+	rts
+
+sub_ffc07fca:
+	.int	0x2f3081e2,0x201000c4	/* movel @(0x2010)@(0xc4),%sp@- */
+	rts
+
+	.align	16
+
 sub_ffc07fe0:
 	rts
 
@@ -512,13 +592,58 @@ sub_ffc086b0:
 
 	.align	16
 
-	.int	0x43F80162,0x2211670A,0x2241B3C8,0x66F67000
-	.int	0x4E7543F8,0x01600C68,0x00010004,0x66403228
-	.int	0x000A6732,0x4A68000C,0x672C40E7,0x007C0700
-	.int	0x2029000A,0x48407400,0x340084C1,0x48423002
-	.int	0x484080C1,0x48409068,0x000C4440,0x6A02D041
-	.int	0xD168000A,0x46DF4EBA,0xF7287000,0x4E7570FE
-	.int	0x4E750C68,0x00010004,0x66F42F09,0x43F80160
+sub_ffc087c0:
+	lea	0x162,%a1
+
+.Lffc087c4:
+	movel	%a1@,%d1
+	beqs	.Lffc087d2
+	moveal	%d1,%a1
+	cmpal	%a0,%a1
+	bnes	.Lffc087c4
+	moveq	#0,%d0
+	rts
+
+.Lffc087d2:
+	lea	0x160,%a1
+	cmpiw	#1,%a0@(4)
+	bnes	.Lffc0881e
+	movew	%a0@(10),%d1
+	beqs	.Lffc08816
+	tstw	%a0@(12)
+	beqs	.Lffc08816
+	movew	%sr,%sp@-
+	oriw	#1792,%sr
+	movel	%a1@(10),%d0
+	swap	%d0
+	moveq	#0,%d2
+	movew	%d0,%d2
+	divuw	%d1,%d2
+	swap	%d2
+	movew	%d2,%d0
+	swap	%d0
+	divuw	%d1,%d0
+	swap	%d0
+	subw	%a0@(12),%d0
+	negw	%d0
+	bpls	.Lffc08810
+	addw	%d1,%d0
+
+.Lffc08810:
+	addw	%d0,%a0@(10)
+	movew	%sp@+,%sr
+
+.Lffc08816:
+	jsr	%pc@(sub_ffc07f40)
+	moveq	#0,%d0
+	rts
+
+.Lffc0881e:
+	moveq	#-2,%d0
+	rts
+
+	.short	0x0C68
+	.int	0x00010004,0x66F42F09,0x43F80160
 	.int	0x4EBAF73E,0x225F4E75,0x2049203C,0xFFFFBF0E
 	.int	0x22780568,0x4E916008,0x137C0002,0x1A004E71
 	.int	0x52B8016A,0x08F80006,0x016066DA,0x027CF8FF
