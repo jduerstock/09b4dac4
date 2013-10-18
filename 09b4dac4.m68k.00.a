@@ -355,7 +355,7 @@ sub_ffc08528:
 	dbf	%d1,.Lffc0854a
 	bsrw	sub_ffc0867a
 	lea	0x1f8,%a0
-	.int	0x10bc00a8	/* 	moveb	#-88,%a0@ */
+	.int	0x10bc00a8	/* moveb	#-88,%a0@ */
 	movel	#65552,%d0
 	.short	0xa052
 
@@ -495,6 +495,7 @@ sub_ffc086b0:
 .Lffc086d8:
 	asrw	#1,%d0
 	subqw	#1,%d0
+
 .Lffc086dc:
 	clrw	%a0@+
 	dbf	%d0,.Lffc086dc
@@ -642,20 +643,99 @@ sub_ffc087c0:
 	moveq	#-2,%d0
 	rts
 
-	.short	0x0C68
-	.int	0x00010004,0x66F42F09,0x43F80160
-	.int	0x4EBAF73E,0x225F4E75,0x2049203C,0xFFFFBF0E
-	.int	0x22780568,0x4E916008,0x137C0002,0x1A004E71
-	.int	0x52B8016A,0x08F80006,0x016066DA,0x027CF8FF
-	.int	0x20380110,0x6714BFC0,0x640421CF,0x01102278
-	.int	0x02AABFD1,0x6404701C,0xA9C943F8,0x016041E9
-	.int	0x00022010,0x67222040,0x5368000A,0x66F42F08
-	.int	0x2F092268,0x00064E91,0x225F205F,0x4A68000A
-	.int	0x66E04EBA,0xF6CC60DA,0x08910006,0x4E754880
-	.int	0x0C40000E,0x62082270,0x05A50D04,0x4E752270
-	.int	0x81E202B6,0x02602209,0x671E2211,0x671A48E7
-	.int	0xA08091C8,0x2241223C,0x76626C20,0x4E912248
-	.int	0x4CDF0105,0x220966D4,0x584F303C,0xFEAF4E75
+.Lffc08822:
+	cmpiw	#1,%a0@(4)
+	bnes	.Lffc0881e
+	movel	%a1,%sp@-
+	lea	0x160,%a1
+	jsr	%pc@(sub_ffc07f70)
+	moveal	%sp@+,%a1
+
+.Lffc08836:
+	rts
+
+sub_ffc08838:
+	moveal	%a1,%a0
+	movel	#-16626,%d0
+	moveal	0x568,%a1
+	jsr	%a1@
+	bras	.Lffc08850
+.Lffc08848:
+	moveb	#2,%a1@(6656)
+	nop
+
+.Lffc08850:
+	addql	#1,0x16a
+	bset	#6,0x160
+	bnes	.Lffc08836
+	andiw	#-1793,%sr
+	movel	0x110,%d0
+	beqs	.Lffc0887a
+	cmpal	%d0,%sp
+	bccs	.Lffc0886e
+	movel	%sp,0x110
+
+.Lffc0886e:
+	moveal	0x2aa,%a1
+	cmpal	%a1@,%sp
+	bccs	.Lffc0887a
+	moveq	#28,%d0
+	.short	0xa9c9
+
+.Lffc0887a:
+	lea	0x160,%a1
+	lea	%a1@(2),%a0
+.Lffc08882:
+	movel	%a0@,%d0
+	beqs	.Lffc088a8
+	moveal	%d0,%a0
+	subqw	#1,%a0@(10)
+	bnes	.Lffc08882
+	movel	%a0,%sp@-
+	movel	%a1,%sp@-
+	moveal	%a0@(6),%a1
+	jsr	%a1@
+	moveal	%sp@+,%a1
+	moveal	%sp@+,%a0
+	tstw	%a0@(10)
+	bnes	.Lffc08882
+	jsr	%pc@(sub_ffc07f70)
+	bras	.Lffc08882
+
+.Lffc088a8:
+	bclr	#6,%a1@
+	rts
+
+sub_ffc088ae:
+	extw	%d0
+	cmpiw	#14,%d0
+	bhis	.Lffc088be
+	moveal	@(0xd04)@(%d0:w:4),%a1
+
+.Lffc088bc:
+	rts
+
+.Lffc088be:	
+	.int	0x227081e2,0x02b60260 	/* moveal @(0x2b6)@(0x260),%a1 */
+	movel	%a1,%d1
+	beqs	.Lffc088e8
+	movel	%a1@,%d1
+	beqs	.Lffc088e8
+	moveml	%d0/%d2/%a0,%sp@-
+	subal	%a0,%a0
+	moveal	%d1,%a1
+	movel	#1986161696,%d1
+	jsr	%a1@
+	moveal	%a0,%a1
+	moveml	%sp@+,%d0/%d2/%a0
+	movel	%a1,%d1
+	bnes	.Lffc088bc
+
+.Lffc088e8:
+	addqw	#4,%sp
+	movew	#-337,%d0
+	rts
+
 	.int	0x61BC6000,0xFEE261B6,0x0C680001,0x00046600
 	.int	0xFF1E4EFA,0xF66C61A6,0x21C90D10,0x70004E75
 	.int	0x619C52A9,0x000AB3F8,0x0D10660E,0x203808EE
