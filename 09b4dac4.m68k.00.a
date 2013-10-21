@@ -2213,14 +2213,25 @@ sub_ffc088f0:
 	.int	0x63667001,0x3F00A9A0,0x285F4A2E,0x000F6712
 	.int	0x2054224B,0x20D920D9,0x20D920D9,0x2F0CA9AA
 	.int	0x600C2054,0x224B22D8,0x22D822D8,0x22D83F07
-	.int	0xA99A3F06,0xA9984CEE,0x18C0FF94,0x4E5E4E75
-	.int	0x1A446562,0x75676765,0x72204E75,0x6220436F
-	.int	0x6E666967,0x75726174,0x696F6E00,0x18446562
-	.int	0x75676765,0x72204E75,0x62205072,0x65666572
-	.int	0x656E6365,0x73000000,0x00000000,0x00000000
-	.int	0x4E560000,0x2F07558F,0x2F3C636E,0x666E2F2E
+	.int	0xA99A3F06,0xA9984CEE,0x18C0FF94
+	unlk	%fp
+	rts
+	.byte	0x1a
+	.ascii	"Debugger Nub Configuration"
+	.byte	0x00
+	.byte	0x18
+	.ascii	"Debugger Nub Preferences"
+
+	.align	16
+
+	linkw	%fp,#0
+	.int	0x2F07558F,0x2F3C636E,0x666E2F2E
 	.int	0x0008303C,0x0404ABF1,0x3E1F3007,0x2E2EFFFC
-	.int	0x4E5E4E75,0x00000000,0x00000000,0x00000000
+	unlk	%fp
+	rts
+
+	.align	16
+
 	.int	0x4E560000,0x2F0C286E,0x000C4214,0x70012F00
 	.int	0x2F0C4EBA,0xFDFC302E,0x000A286E
 	.short	0xFFFC
@@ -2241,9 +2252,18 @@ sub_ffc088f0:
 	.int	0xFFE3486E,0xFFE4486E,0xFFEC4EBA,0x0E343E1F
 	.int	0x660C2F2E,0xFFEC4EBA,0xFEF8584F,0x6012486E
 	.int	0xFFF048C7,0x2F074EBA,0xFF18504F,0x60023007
-	.int	0x4CEE1080,0xFFDA4E5E,0x4E750D6C,0x6C4E7562
-	.int	0x436F6E66,0x6967466E,0x0000126C,0x6C4E7562
-	.int	0x53746172,0x74757043,0x6F6E6669,0x67000000
+	.int	0x4CEE1080
+	.short	0xFFDA
+	unlk	%fp
+	rts
+	.byte	0x0D
+	.ascii	"llNubConfigFn"
+	.short	0x0000
+	.byte	0x12
+	.ascii	"llNubStartupConfig"
+
+	.align	16
+
 	.int	0x4E56FFF2,0x48E70118,0x266E0008,0x7005FE04
 	.int	0x2848558F,0x70012F00,0x2F0B487A,0x0082486E
 	.int	0xFFF3486E,0xFFF4486E,0xFFF84EBA,0x0DB43E1F
@@ -2255,9 +2275,12 @@ sub_ffc088f0:
 	rts
 	.byte	0x19
 	.ascii	"SystemExceptionDispatcher"
-	.int	0x0000184C
-	.int	0x6F774C65,0x76656C45,0x78636570,0x74696F6E
-	.int	0x48616E64,0x6C657200,0x00000000,0x00000000
+	.short	0x0000
+	.byte	0x18
+	.ascii	"LowLevelExceptionHandler"
+
+	.align	16
+
 	.int	0x4E56FFFC,0x2F03203C,0x73797361,0x41EEFFFC
 	.int	0x2248A1AD,0x22887002,0xB0AEFFFC,0x57C34403
 	.int	0x1003262E
@@ -3134,7 +3157,7 @@ sub_ffc0f970:
 	bnes	.Lffc0fa2c
 	movel	%a2,%sp@-
 	movel	%a4,%sp@-
-	.int	0x4ebafbfc	/* jsr	%pc@(sub_ffc0f5f0) */
+	jsr	%pc@(sub_ffc0f5f0)
 	moveal	%fp@(-6),%a0
 	moveal	%fp@(12),%a1
 	movel	%a0@(36),%a1@
@@ -3638,7 +3661,7 @@ sub_ffc0fe70:
 .Lffc0fe90:
 	pea	%a3@(84)
 	movel	%a4,%sp@-
-	.int	0x4ebafa48	/* jsr	%pc@(sub_ffc0f8e0) */
+	jsr	%pc@(sub_ffc0f8e0)
 	movel	%a4@(8),%sp@-
 	movel	%a3,%sp@-
 	.int	0x4ebaf74e	/* jsr	%pc@(sub_ffc0f5f0) */
