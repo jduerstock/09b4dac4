@@ -1517,10 +1517,17 @@ sub_ffc088f0:
 	unlk	%fp
 	rts
 
-	link	%fp,#0
-	.int	0x2F0C286E,0x0008200C,0x6704204C
-	.int	0xA01F286E
-	.short	0xFFFC
+sub_ffc0b220:
+	linkw	%fp,#0
+	movel	%a4,%sp@-
+	moveal	%fp@(8),%a4
+	movel	%a4,%d0
+	beqs	.Lffc0b232
+	moveal	%a4,%a0
+	.short	0xa01f
+
+.Lffc0b232:
+	moveal	%fp@(-4),%a4
 	unlk	%fp
 	rts
 
@@ -1538,27 +1545,101 @@ sub_ffc088f0:
 	.align	16
 
 	.int	0x60FF000B,0xE11E0000,0x00000000,0x00000000
-	.int	0x4E56FFFC,0x48E71118,0x700C2F00,0x486EFFFC
-	.int	0x203C0002,0x0009FE22,0x70002640,0x206EFFFC
-	.int	0x28680004,0x7600504F,0x600AB9EE,0x00086708
-	.int	0x264C2854,0xB68C66F2,0x200C6732,0x70002F00
-	.int	0x2F2C0008,0x203C0002,0x0001FE22,0x3E00504F
-	.int	0x67027E8F,0x200B660A,0x206EFFFC,0x21540004
-	.int	0x60022694,0x2F0C4EBA,0xFF18584F,0x60027E8F
-	.int	0x30074CEE,0x1888FFEC
+
+sub_ffc0b2a0:
+	link	%fp,#-4
+	moveml	%d3/%d7/%a3-%a4,%sp@-
+	moveq	#12,%d0
+	movel	%d0,%sp@-
+	pea	%fp@(-4)
+	movel	#131081,%d0
+	.short	0xfe22
+	moveq	#0,%d0
+	moveal	%d0,%a3
+	moveal	%fp@(-4),%a0
+	moveal	%a0@(4),%a4
+	moveq	#0,%d3
+	addqw	#8,%sp
+	bras	.Lffc0b2d4
+
+.Lffc0b2ca:
+	cmpal	%fp@(8),%a4
+	beqs	.Lffc0b2d8
+	moveal	%a4,%a3
+	moveal	%a4@,%a4
+
+.Lffc0b2d4:
+	cmpl	%a4,%d3
+	bnes	.Lffc0b2ca
+
+.Lffc0b2d8:
+	movel	%a4,%d0
+	beqs	.Lffc0b30e
+	moveq	#0,%d0
+	movel	%d0,%sp@-
+	movel	%a4@(8),%sp@-
+	movel	#131073,%d0
+	.short	0xfe22
+	movew	%d0,%d7
+	addqw	#8,%sp
+	beqs	.Lffc0b2f4
+	moveq	#-113,%d7
+
+.Lffc0b2f4:
+	movel	%a3,%d0
+	bnes	.Lffc0b302
+	moveal	%fp@(-4),%a0
+	movel	%a4@,%a0@(4)
+	bras	.Lffc0b304
+.Lffc0b302:
+	movel	%a4@,%a3@
+
+.Lffc0b304:
+	movel	%a4,%sp@-
+	jsr	%pc@(sub_ffc0b220)
+	addqw	#4,%sp
+	bras	.Lffc0b310
+
+.Lffc0b30e:
+	moveq	#-113,%d7
+
+.Lffc0b310:
+	movew	%d7,%d0
+	moveml	%fp@(-20),%d3/%d7/%a3-%a4
 	unlk	%fp
 	rts
 
 	.align	16
 
 sub_ffc0b320:
-	.int	0x4E56FFFC,0x2F0C700C,0x2F00486E,0xFFFC203C
-	.int	0x00020009,0xFE22206E,0xFFFC2868,0x0004504F
-	.int	0x60104A6C,0x00226608,0x2F0C4EBA,0xFF54584F
-	.int	0x2854200C,0x66EC286E
-	.short	0xFFF8
+	linkw	%fp,#-4
+	movel	%a4,%sp@-
+	moveq	#12,%d0
+	movel	%d0,%sp@-
+	pea	%fp@(-4)
+	movel	#131081,%d0
+	.short	0xfe22
+	moveal	%fp@(-4),%a0
+	moveal	%a0@(4),%a4
+	addqw	#8,%sp
+	bras	.Lffc0b352
+
+.Lffc0b342:
+	tstw	%a4@(34)
+	bnes	.Lffc0b350
+	movel	%a4,%sp@-
+	jsr	%pc@(sub_ffc0b2a0)
+	addqw	#4,%sp
+
+.Lffc0b350:
+	moveal	%a4@,%a4
+
+.Lffc0b352:
+	movel	%a4,%d0
+	bnes	.Lffc0b342
+	moveal	%fp@(-8),%a4
 	unlk	%fp
-	rts	
+	rts
 
 	.align	16
 
