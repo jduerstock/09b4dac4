@@ -1333,15 +1333,56 @@ sub_ffc088f0:
 	.int	0x600C082A,0x0006012B,0x660A0881,0x00047005
 	.int	0x6100018E,0x4E75514F,0x6118660E,0x203C7368
 	.int	0x75746100,0x008E504F,0x4E753F3C,0x0001A895
-	.int	0x60FE4E56,0xFFC448E7,0x60E0303C,0xA89FA746
-	.int	0x2248303C,0xA88FA746,0xB3C857C0,0x49C0665A
-	.int	0x41EE0008,0x42984298,0x554F486E,0x00083F3C
-	.int	0x0038A88F,0x301F6642,0x45EEFFC4,0x703C2480
-	.int	0x42AA0004,0x42AA0038,0x554F486E,0x00082F0A
-	.int	0x3F3C003A,0xA88F301F,0x66CE0CAA,0x464E4452
-	.int	0x001066C4,0x242A0014,0x0C824D41,0x43536708
-	.int	0x0C826D66,0x647266B0,0x70004CDF
-	.short	0x0706
+	.short	0x60FE
+
+sub_ffc0a8e2:
+	linkw	%fp,#-60
+	moveml	%d1-%d2/%a0-%a2,%sp@-
+	movew	#-22369,%d0
+	.short	0xa746
+	moveal	%a0,%a1
+	movew	#-22385,%d0
+	.short	0xa746
+	cmpal	%a0,%a1
+	seq	%d0
+	extbl	%d0
+	bnes	.Lffc0a95a
+	lea	%fp@(8),%a0
+	clrl	%a0@+
+	clrl	%a0@+
+
+.Lffc0a908:
+	subqw	#2,%sp
+	pea	%fp@(8)
+	movew	#56,%sp@-
+	.short	0xa88f
+	movew	%sp@+,%d0
+	bnes	.Lffc0a95a
+	lea	%fp@(-60),%a2
+	moveq	#60,%d0
+	movel	%d0,%a2@
+	clrl	%a2@(4)
+	clrl	%a2@(56)
+	subqw	#2,%sp
+	pea	%fp@(8)
+	movel	%a2,%sp@-
+	movew	#58,%sp@-
+	.short	0xa88f
+	movew	%sp@+,%d0
+	bnes	.Lffc0a908
+	cmpil	#1179534418,%a2@(16)
+	bnes	.Lffc0a908
+	movel	%a2@(20),%d2
+	cmpil	#1296122707,%d2
+	beqs	.Lffc0a958
+	cmpil	#1835426930,%d2
+	bnes	.Lffc0a908
+
+.Lffc0a958:
+	moveq	#0,%d0
+
+.Lffc0a95a:
+	moveml	%sp@+,%d1-%d2/%a0-%a2
 	unlk	%fp
 	rts
 
