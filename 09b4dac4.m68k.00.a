@@ -1345,19 +1345,73 @@ sub_ffc088f0:
 	unlk	%fp
 	rts
 
-	.short	0x4E56
-	.int	0xFFAC48E7,0x78E02800,0x554F486E
-	.int	0xFFF870FF,0x2F003F3C,0x0039A88F,0x703C2D40
-	.int	0xFFBC42AE,0xFFC042AE,0xFFD442AE,0xFFF4486E
-	.int	0xFFF8486E,0xFFBC3F3C,0x003AA88F,0x544F202E
-	.int	0xFFD40280,0x00020000,0x671E554F,0x486E0008
-	.int	0x3F3C003B,0xA88F7632,0x3F3CFFFF,0x486EFFAC
-	.int	0xA97151CB,0xFFF4544F,0x263C666E,0x6472203C
-	.int	0x666E6472,0xA1AD2008,0x08000003,0x6606263C
-	.int	0x464E4452,0x45EEFFBC,0x426242A2,0x25042503
-	.int	0x353C0017,0x554F3F3C,0x0040A88F,0x2F0A486E
-	.int	0x000842A7,0x42A742A7,0x2F3C0000,0x80003F3C
-	.int	0x0034A88F,0x3F3C0041,0xA88F301F,0x4CDF071E
+sub_ffc0a962:
+	linkw	%fp,#-84
+	moveml	%d1-%d4/%a0-%a2,%sp@-
+	movel	%d0,%d4
+	subqw	#2,%sp
+	pea	%fp@(-8)
+	moveq	#-1,%d0
+	movel	%d0,%sp@-
+	movew	#57,%sp@-
+	.short	0xa88f
+	moveq	#60,%d0
+	movel	%d0,%fp@(-68)
+	clrl	%fp@(-64)
+	clrl	%fp@(-44)
+	clrl	%fp@(-12)
+	pea	%fp@(-8)
+	pea	%fp@(-68)
+	movew	#58,%sp@-
+	.short	0xa88f
+	addqw	#2,%sp
+	movel	%fp@(-44),%d0
+	andil	#131072,%d0
+	beqs	.Lffc0a9c8
+	subqw	#2,%sp
+	pea	%fp@(8)
+	movew	#59,%sp@-
+	.short	0xa88f
+	moveq	#50,%d3
+
+.Lffc0a9b8:
+	movew	#-1,%sp@-
+	pea	%fp@(-84)
+	.short	0xa971
+	dbf	%d3,.Lffc0a9b8
+	addqw	#2,%sp
+
+.Lffc0a9c8:
+	movel	#1718510706,%d3
+	movel	#1718510706,%d0
+	.short	0xa1ad
+	movel	%a0,%d0
+	btst	#3,%d0
+	bnes	.Lffc0a9e4
+	movel	#1179534418,%d3
+
+.Lffc0a9e4:
+	lea	%fp@(-68),%a2
+	clrw	%a2@-
+	clrl	%a2@-
+	movel	%d4,%a2@-
+	movel	%d3,%a2@-
+	movew	#23,%a2@-
+	subqw	#2,%sp
+	movew	#64,%sp@-
+	.short	0xa88f
+	movel	%a2,%sp@-
+	pea	%fp@(8)
+	clrl	%sp@-
+	clrl	%sp@-
+	clrl	%sp@-
+	movel	#32768,%sp@-
+	movew	#52,%sp@-
+	.short	0xa88f
+	movew	#65,%sp@-
+	.short	0xa88f
+	movew	%sp@+,%d0
+	moveml	%sp@+,%d1-%d4/%a0-%a2
 	unlk	%fp
 	rts
 
