@@ -117,6 +117,8 @@ sub_ffc500f6:
 
 sub_ffc5010a:
 	moveq	#0,%d0
+
+sub_ffc5010c:
 	moveal	%sp@+,%a0
 	linkw	%fp,#-24
 	moveml	%d2-%d7/%a2-%a4,%sp@-
@@ -212,4 +214,117 @@ sub_ffc5010a:
 
 .Lffc50204:
 	moveal	%sp@+,%a0
+	rts
+
+sub_ffc50208:
+	moveq	#1,%d0
+	bsrw	sub_ffc5010c
+	jmp	%a0@
+
+sub_ffc50210:
+	lea	%a3@(32),%a2
+	movel	%a2@,%d0
+	cmpw	%a2@,%d0
+	bccs	.Lffc5021e
+	swap	%d0
+	movel	%d0,%a2@
+
+.Lffc5021e:
+	rts
+
+sub_ffc50220:
+	bsrw	sub_ffc5010a
+	bsrs	sub_ffc50210
+	subw	%a2@,%d0
+	movew	%d0,0xab0
+	moveal	%a3@(62),%a0
+	moveal	%a0@,%a0
+	moveq	#0,%d0
+	movew	%a2@,%d0
+	addal	%d0,%a0
+	moveal	0xab4,%a1
+	movew	0xab0,%d0
+	.short	0xa9e2
+	tstw	%a3@(80)
+	bpls	.Lffc50276
+	subqw	#4,%sp
+	.short	0xa9fc
+	addql	#4,%sp
+	bsrs	sub_ffc50210
+	bsrs	sub_ffc5027a
+	moveal	%a3@(62),%a0
+	moveal	%a0@,%a0
+	moveq	#0,%d0
+	lea	%a3@(32),%a2
+	movew	%a2@,%d0
+	addaw	%d0,%a0
+	subqw	#4,%sp
+	movew	0xab0,%d0
+	movel	%d0,%sp@-
+	movel	#1413830740,%sp@-
+	movel	%a0,%sp@-
+	.short	0xa9fe
+	addql	#4,%sp
+
+.Lffc50276:
+	.int	0x6000dfc2	/* braw	.Lffc4e23a */
+
+sub_ffc5027a:
+	moveml	%d0/%d2-%d5/%a2/%a5,%sp@-
+	movew	%d0,%d1
+	swap	%d0
+	cmpw	%d0,%d1
+	beqs	.Lffc502a0
+	bsrs	sub_ffc502a6
+	moveal	%a4,%a0
+	.short	0xa029
+	subql	#4,%sp
+	movel	%d4,%sp@-
+	movel	#1937013100,%sp@-
+	movel	%a4@,%sp@-
+	.short	0xa9fe
+	addql	#4,%sp
+	moveal	%a4,%a0
+	.short	0xa023
+
+.Lffc502a0:
+	moveml	%sp@+,%d0/%d2-%d5/%a2/%a5
+	rts
+
+sub_ffc502a6:
+	movew	%d0,%d5
+	.int	0x61001c90	/* bsrw	sub_ffc51f3a */
+	.int	0x61001cda	/* bsrw	sub_ffc51f88 */
+	movew	%d0,%d2
+	muluw	#20,%d0
+	addql	#2,%d0
+	movel	%d0,%d4
+	.int	0x6100e21a	/* bsrw	sub_ffc4e4d6 */
+	moveal	%a0,%a4
+	moveal	%a0@,%a0
+	movew	%d2,%a0@
+	lea	%a0@(2),%a1
+	movew	%d5,%d0
+	.int	0x61001c6e	/* bsrw	sub_ffc51f3a */
+	moveal	%a0,%a2
+
+.Lffc502d0:
+	addql	#4,%a1
+	movew	%a2@(2),%d0
+	.int	0x61001cd6	/* bsrw	sub_ffc51fae */
+	addql	#2,%a0
+	moveq	#16,%d0
+	.short	0xa22e
+	moveq	#0,%d0
+	movew	%a2@,%d0
+	subw	%d5,%d0
+	bccs	.Lffc502ea
+	moveq	#0,%d0
+
+.Lffc502ea:
+	movel	%d0,%a1@-
+	addaw	#20,%a1
+	addql	#4,%a2
+	subqw	#1,%d2
+	bnes	.Lffc502d0
 	rts
