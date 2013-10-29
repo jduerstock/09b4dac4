@@ -193,7 +193,7 @@ sub_ffc5010c:
 	subw	%d1,%a3@(32)
 
 .Lffc501dc:
-	.short	0x6132	/* bsrs	sub_ffc50210 */
+	bsrs	sub_ffc50210
 	tstl	%d3
 	beqs	.Lffc501ea
 	moveal	%d3,%a0
@@ -210,7 +210,7 @@ sub_ffc5010c:
 	movel	%a0@(16),%d0
 	btst	#1,%d0
 	beqs	.Lffc50204
-	.int	0x610014a4	/* bsrw	sub_ffc516a6 */
+	bsrw	sub_ffc516a6
 
 .Lffc50204:
 	moveal	%sp@+,%a0
@@ -293,7 +293,7 @@ sub_ffc5027a:
 
 sub_ffc502a6:
 	movew	%d0,%d5
-	.int	0x61001c90	/* bsrw	sub_ffc51f3a */
+	bsrw	sub_ffc51f3a
 	.int	0x61001cda	/* bsrw	sub_ffc51f88 */
 	movew	%d0,%d2
 	muluw	#20,%d0
@@ -305,13 +305,13 @@ sub_ffc502a6:
 	movew	%d2,%a0@
 	lea	%a0@(2),%a1
 	movew	%d5,%d0
-	.int	0x61001c6e	/* bsrw	sub_ffc51f3a */
+	bsrw	sub_ffc51f3a
 	moveal	%a0,%a2
 
 .Lffc502d0:
 	addql	#4,%a1
 	movew	%a2@(2),%d0
-	.int	0x61001cd6	/* bsrw	sub_ffc51fae */
+	bsrw	sub_ffc51fae
 	addql	#2,%a0
 	moveq	#16,%d0
 	.short	0xa22e
@@ -646,7 +646,12 @@ sub_ffc502a6:
 	.int	0x004E2050,0x70003029,0x00560C40,0x00326608
 	.int	0x61244AA9,0x004E67BE,0x11AA0001,0x08005269
 	.int	0x00564E75,0xA722660C,0xA0296602,0x4E752F00
-	.int	0xA023201F,0xA9C92078,0x02B62068,0x00DC4ED0
+	.int	0xA023201F
+	.short	0xA9C9
+
+sub_ffc516a6:
+	.short	0x2078
+	.int	0x02B62068,0x00DC4ED0
 	.int	0x48E7FF60,0x76002478,0x02B645EA,0x00563412
 	.int	0x6700009E,0x53422278,0x02B62269,0x004E2251
 	.int	0x48E72040,0x4A6B0050,0x6A14302B,0x00206702
@@ -798,9 +803,20 @@ sub_ffc51f3a:
 	.int	0x60DE3003,0x4A406702,0x53407200,0x3200E589
 	.int	0xD1C14CDF,0x001E4E75,0x2F08226B,0x004A2251
 	.int	0x70003011,0x43E90014,0xE588D3C0,0x70005888
-	.int	0x5240B3C8,0x6704B250,0x62F4205F,0x4E75C0FC
-	.int	0x0012206B,0x004A2050,0x20680004,0x2050D1C0
-	.int	0x4E75226B,0x004A2251,0x32119240,0x63085888
+	.int	0x5240B3C8,0x6704B250,0x62F4205F
+	rts
+
+sub_ffc51fae:
+	muluw	#18,%d0
+	moveal	%a3@(74),%a0
+	moveal	%a0@,%a0
+	moveal	%a0@(4),%a0
+	moveal	%a0@,%a0
+	addal	%d0,%a0
+	rts
+
+	.short	0x226B
+	.int	0x004A2251,0x32119240,0x63085888
 	.int	0xDB505341,0x66F84E75,0x302B0020,0xB06B0022
 	.int	0x660000FA,0x226B004A,0x22512269,0x00102251
 	.int	0x22690004,0x2F092251,0x4A516706,0x43E90002
@@ -864,4 +880,10 @@ sub_ffc51f3a:
 	.int	0x004630E9,0x004A4850,0xAA197014,0x6000BEA4
 
 sub_ffc523a0:
-	.int	0x2F083028,0x00026100,0xFC06226B,0x00523368
+	movel	%a0,%sp@-
+	movew	%a0@(2),%d0
+	bsrw	sub_ffc51fae
+	moveal	%a3@(82),%a1
+	movew	%a0@(6),%a1@(68)
+	movew	%a0@(8),%a1@(70)
+	bclr	#7,%a1@(71)
