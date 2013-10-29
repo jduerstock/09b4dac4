@@ -303,7 +303,7 @@ sub_ffc4e21a:
 
 	bsrw	sub_ffc5010a
 	moveal	%a2@+,%a0
-	.int	0x610037b4	/* bsrw	sub_ffc51cb8 */
+	bsrw	sub_ffc51cb8
 	tstb	%a3@(36)
 	beqs	sub_ffc4e510
 	.int	0x600037d2	/* braw	sub_ffc51ce0 */
