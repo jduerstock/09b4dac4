@@ -1,4 +1,126 @@
-/* ffc4e000 */
+sub_ffc4ded6:
+	linkw	%fp,#0
+	moveml	%d2-%d7/%a2-%a4,%sp@-
+	tstw	%fp@(8)
+	bnes	.Lffc4deea
+	movew	0xbac,%fp@(8)
+.Lffc4deea:
+	moveal	%fp@(18),%a0
+	movel	%fp@(14),%d0
+	bltw	.Lffc4e01e
+	beqs	.Lffc4df04
+
+.Lffc4def8:
+	cmpib	#13,%a0@+
+	beqw	.Lffc4e020
+	subql	#1,%d0
+	bnes	.Lffc4def8
+
+.Lffc4df04:
+	subqw	#2,%sp
+	movel	%fp@(18),%sp@-
+	clrw	%sp@-
+	movew	%fp@(16),%sp@-
+	.short	0xa886
+	movew	%sp@+,%d3
+	moveal	%fp@(10),%a0
+	movew	%a0@(6),%d0
+	subw	%a0@(2),%d0
+	subqw	#2,%d0
+	cmpw	%d3,%d0
+	blew	.Lffc4e020
+	movel	%a0,%sp@-
+	.short	0xa8a3
+	subqw	#8,%sp
+	movel	%sp,%sp@-
+	.short	0xa88b
+	subqw	#2,%sp
+	movel	#-2113929216,%sp@-
+	.short	0xa8b5
+	movew	%sp@+,%d4
+	beqw	.Lffc4dfc0
+	subqw	#4,%sp
+	movew	%d4,%sp@-
+	moveal	%a5@,%a3
+	moveal	%a3@,%a3
+	movew	%a3@(68),%d5
+	cmpiw	#0,%d5
+	beqs	.Lffc4df8c
+	cmpiw	#1,%d5
+	beqs	.Lffc4df92
+	subqw	#4,%sp
+	movew	%d4,%sp@-
+	movew	#12,%sp@-
+	movel	#-2080112628,%sp@-
+	.short	0xa8b5
+	movel	%sp@+,%d0
+	cmpw	%d5,%d0
+	beqs	.Lffc4df8c
+	subqw	#4,%sp
+	movew	%d4,%sp@-
+	movew	#14,%sp@-
+	movel	#-2080112628,%sp@-
+	.short	0xa8b5
+	movel	%sp@+,%d0
+	cmpw	%d5,%d0
+	beqs	.Lffc4df92
+	movew	#-285,%sp@-
+	bras	.Lffc4df96
+
+.Lffc4df8c:
+	movew	#-281,%sp@-
+	bras	.Lffc4df96
+
+.Lffc4df92:
+	movew	#-283,%sp@-
+
+.Lffc4df96:
+	movel	#-2080112628,%sp@-
+	.short	0xa8b5
+	movel	%sp@+,%d0
+	tstw	%d0
+	beqs	.Lffc4dfc0
+	movew	%d0,%a3@(68)
+	subqw	#8,%sp
+	movel	%sp,%sp@-
+	.short	0xa88b
+	movew	%d5,%a3@(68)
+	movew	%sp@,%d0
+	cmpw	%sp@(8),%d0
+	bgts	.Lffc4dfbe
+	movew	%d0,%sp@(8)
+
+.Lffc4dfbe:
+	addqw	#8,%sp
+
+.Lffc4dfc0:
+	movew	%sp@+,%d0
+	addqw	#6,%sp
+	moveal	%fp@(10),%a0
+	movel	%a0@,%sp@-
+	addw	%d0,%sp@
+	addqw	#1,%sp@(2)
+	.short	0xa893
+	tstw	%fp@(8)
+	beqs	.Lffc4dffe
+	cmpiw	#-2,%fp@(8)
+	beqs	.Lffc4dffe
+	moveal	%fp@(10),%a0
+	movew	%a0@(6),%d0
+	subw	%a0@(2),%d0
+	subw	%d3,%d0
+	subqw	#1,%d0
+	tstw	%fp@(8)
+	bmis	.Lffc4dff8
+	asrw	#1,%d0
+
+.Lffc4dff8:
+	movew	%d0,%sp@-
+	clrw	%sp@-
+	.short	0xa894
+
+.Lffc4dffe:
+	clrw	%sp@-
 	moveq	#11,%d0
 	.short	0xa854
 	tstw	%sp@
@@ -14,6 +136,8 @@
 	.short	0xa885
 	moveq	#10,%d0
 	.short	0xa854
+
+.Lffc4e01e:
 	bras	.Lffc4e054
 
 .Lffc4e020:
