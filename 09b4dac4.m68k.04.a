@@ -1,3 +1,4 @@
+
 sub_ffc4ded6:
 	linkw	%fp,#0
 	moveml	%d2-%d7/%a2-%a4,%sp@-
@@ -207,11 +208,21 @@ sub_ffc4e08e:
 	rts
 
 sub_ffc4e0b6:
-	.short	0x48E7
-	.int	0x8080206B,0x003EA02A
-	.int	0x4CDF0101,0xA0246610,0x48E78080,0x206B003E
-	.int	0xA0294CDF,0x01014E75,0x303C0019
-	.short	0xA9C9
+	moveml	%d0/%a0,%sp@-
+	moveal	%a3@(62),%a0
+	.short	0xa02a
+	moveml	%sp@+,%d0/%a0
+	.short	0xa024
+	bnes	.Lffc4e0d8
+	moveml	%d0/%a0,%sp@-
+	moveal	%a3@(62),%a0
+	.short	0xa029
+	moveml	%sp@+,%d0/%a0
+	rts
+
+.Lffc4e0d8:
+	movew	#25,%d0
+	.short	0xa9c9
 
 sub_ffc4e0de:
 	.short	0x30BC
