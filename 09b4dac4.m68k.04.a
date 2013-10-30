@@ -329,7 +329,7 @@ sub_ffc4e510:
 	beqs	.Lffc4e53c
 	tstb	%a3@(56)
 	beqs	.Lffc4e538
-	.int	0x610028a6	/* bsrw	sub_ffc50ddc */
+	bsrw	sub_ffc50ddc
 
 .Lffc4e538:
 	st	%a3@(56)
