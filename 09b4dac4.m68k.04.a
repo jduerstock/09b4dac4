@@ -356,16 +356,48 @@ sub_ffc4e21a:
 	movel	%sp@+,%a3@(32)
 	rts
 
-	.int	0x61001ED4,0x61E07004,0x286E0008
-	.int	0x6004286E,0x000A2654,0x3800206B,0x003E102E
-	.int	0xFFF4A06A,0x2F2EFFF6,0x2F17A879,0xA8D9204C
-	.int	0x102EFFFE,0xA06A486E,0xFFE8AA14,0x2654206B
-	.int	0x0052316E,0xFFEE004A,0x316EFFF0,0x0046316E
-	.int	0xFFF20044,0x2F2EFFFA,0xA8733004
+/* sub_ffc4e234: */
+	bsrw	sub_ffc5010a
+	bsrs	sub_ffc4e21a
+	moveq	#4,%d0
+	moveal	%fp@(8),%a4
+	bras	.Lffc4e246
+
+.Lffc4e242:
+	moveal	%fp@(10),%a4
+
+.Lffc4e246:
+	moveal	%a4@,%a3
+	movew	%d0,%d4
+	moveal	%a3@(62),%a0
+	moveb	%fp@(-12),%d0
+	.short	0xa06a
+	movel	%fp@(-10),%sp@-
+	movel	%sp@,%sp@-
+	.short	0xa879
+	.short	0xa8d9
+	moveal	%a4,%a0
+	moveb	%fp@(-2),%d0
+	.short	0xa06a
+	pea	%fp@(-24)
+	.short	0xaa14
+	moveal	%a4@,%a3
+	moveal	%a3@(82),%a0
+	movew	%fp@(-18),%a0@(74)
+	movew	%fp@(-16),%a0@(70)
+	movew	%fp@(-14),%a0@(68)
+	movel	%fp@(-6),%sp@-
+	.short	0xa873
+	movew	%d4,%d0
 
 .Lffc4e28c:
-	.int	0x4CDF1CFC
-	.int	0x4E5E205F,0xDEC04ED0,0x61001E70,0x610000E4
+	moveml	%sp@+,%d2-%d7/%a2-%a4
+	unlk	%fp
+	moveal	%sp@+,%a0
+	addaw	%d0,%sp
+	jmp	%a0@
+
+	.int	0x61001E70,0x610000E4
 	.int	0x61002B26,0x610002D4,0x376E000E,0x0022376E
 	.int	0x00120020,0x61001F08,0x4A6B0050,0x6A28302B
 	.int	0x00206702,0x53403600,0x61003C70,0x610040D2
