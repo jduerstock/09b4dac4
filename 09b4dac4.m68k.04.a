@@ -5,6 +5,7 @@ sub_ffc4ded6:
 	tstw	%fp@(8)
 	bnes	.Lffc4deea
 	movew	0xbac,%fp@(8)
+
 .Lffc4deea:
 	moveal	%fp@(18),%a0
 	movel	%fp@(14),%d0
@@ -255,21 +256,96 @@ sub_ffc4e0de:
 	rts
 
 sub_ffc4e144:
-	.int	0x2F08514F,0x2F0FA88B,0x4A6B0050
-	.int	0x6B0000BA,0x2F03554F,0x2F3C8200,0x0000A8B5
-	.int	0x361F6700,0x00A6594F,0x3F030C6B,0x0000004A
-	.int	0x673E0C6B,0x0001004A,0x673C594F,0x3F033F3C
-	.int	0x000C2F3C,0x8404000C,0xA8B5201F,0xB06B004A
-	.int	0x671E594F,0x3F033F3C,0x000E2F3C,0x8404000C
-	.int	0xA8B5201F,0xB06B004A,0x670C3F3C,0xFEE3600A
-	.int	0x3F3CFEE7,0x60043F3C,0xFEE52F3C,0x8404000C
-	.int	0xA8B5201F,0x4A406742,0x261F206B,0x00523140
-	.int	0x0044514F,0x2F0FA88B,0x206B0052,0x316B004A
-	.int	0x0044301F,0xB06F0006,0x6E043F40,0x0006301F
-	.int	0xB06F0006,0x6E043F40,0x0006544F,0x301FB06F
-	.int	0x00066E04,0x3F400006,0x6002261F,0x301F3200
-	.int	0xD25F544F,0xD25F205F
-	.short	0x4E75
+	movel	%a0,%sp@-
+	subqw	#8,%sp
+	movel	%sp,%sp@-
+	.short	0xa88b
+	tstw	%a3@(80)
+	bmiw	.Lffc4e20c
+	movel	%d3,%sp@-
+	subqw	#2,%sp
+	movel	#-2113929216,%sp@-
+	.short	0xa8b5
+	movew	%sp@+,%d3
+	beqw	.Lffc4e20a
+	subqw	#4,%sp
+	movew	%d3,%sp@-
+	cmpiw	#0,%a3@(74)
+	beqs	.Lffc4e1b0
+	cmpiw	#1,%a3@(74)
+	beqs	.Lffc4e1b6
+	subqw	#4,%sp
+	movew	%d3,%sp@-
+	movew	#12,%sp@-
+	movel	#-2080112628,%sp@-
+	.short	0xa8b5
+	movel	%sp@+,%d0
+	cmpw	%a3@(74),%d0
+	beqs	.Lffc4e1b0
+	subqw	#4,%sp
+	movew	%d3,%sp@-
+	movew	#14,%sp@-
+	movel	#-2080112628,%sp@-
+	.short	0xa8b5
+	movel	%sp@+,%d0
+	cmpw	%a3@(74),%d0
+	beqs	.Lffc4e1b6
+	movew	#-285,%sp@-
+	bras	.Lffc4e1ba
+
+.Lffc4e1b0:
+	movew	#-281,%sp@-
+	bras	.Lffc4e1ba
+
+.Lffc4e1b6:
+	movew	#-283,%sp@-
+
+.Lffc4e1ba:
+	movel	#-2080112628,%sp@-
+	.short	0xa8b5
+	movel	%sp@+,%d0
+	tstw	%d0
+	beqs	.Lffc4e20a
+	movel	%sp@+,%d3
+	moveal	%a3@(82),%a0
+	movew	%d0,%a0@(68)
+	subqw	#8,%sp
+	movel	%sp,%sp@-
+	.short	0xa88b
+	moveal	%a3@(82),%a0
+	movew	%a3@(74),%a0@(68)
+	movew	%sp@+,%d0
+	cmpw	%sp@(6),%d0
+	bgts	.Lffc4e1ee
+	movew	%d0,%sp@(6)
+
+.Lffc4e1ee:
+	movew	%sp@+,%d0
+	cmpw	%sp@(6),%d0
+	bgts	.Lffc4e1fa
+	movew	%d0,%sp@(6)
+
+.Lffc4e1fa:
+	addqw	#2,%sp
+	movew	%sp@+,%d0
+	cmpw	%sp@(6),%d0
+	bgts	.Lffc4e208
+	movew	%d0,%sp@(6)
+
+.Lffc4e208:
+	bras	.Lffc4e20c
+
+.Lffc4e20a:
+	movel	%sp@+,%d3
+
+.Lffc4e20c:
+	movew	%sp@+,%d0
+	movew	%d0,%d1
+	addw	%sp@+,%d1
+	addqw	#2,%sp
+	addw	%sp@+,%d1
+	moveal	%sp@+,%a0
+	rts
 
 sub_ffc4e21a:
 	.short	0x2F2B
