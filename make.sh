@@ -51,6 +51,8 @@ $M68KAS -g -o 09b4dac4.m68k.00.o 09b4dac4.m68k.00.a || exit
 $M68KLD --oformat=binary -Ttext=0xffc0ffc0 -e 0xffc0ffc0 -o 09b4dac4.m68k.00.bin 09b4dac4.m68k.00.o || exit
 $M68KAS -g -o 09b4dac4.m68k.04.o 09b4dac4.m68k.04.a || exit
 $M68KLD --oformat=binary -Ttext=0xffc4e9f4 -e 0xffc4e9f4 -o 09b4dac4.m68k.04.bin 09b4dac4.m68k.04.o || exit
+$M68KAS -g -o 09b4dac4.m68k.o 09b4dac4.m68k.a || exit
+$M68KLD --oformat=binary -Ttext=0xffc00000 -e 0xffc00000 -o 09b4dac4.m68k.bin 09b4dac4.m68k.o || exit
 $PPCAS -g --statistics -o 09b4dac4.o 09b4dac4.a || exit
 $PPCLD --stats --oformat=binary -Ttext=0xffc00000 -e 0xffc00000 -o bork 09b4dac4.o || exit
 sha1sum -c bork.sha1

@@ -56,4 +56,5 @@ res_ffe2e860:
 	.byte	0x16
 	.ascii	"USBMassStorageVSDriver"
 	.short	0x6B63
+
 	.fill	1500,4,0x6b636b63
