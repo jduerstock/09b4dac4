@@ -47,8 +47,8 @@ $PPCAS -g -o DriverServicesLib.o DriverServicesLib.a || exit
 $PPCLD --oformat=binary -Ttext=0xffda9fa0 -e 0xffda9fa0 -o DriverServicesLib.bin DriverServicesLib.o || exit
 $PPCAS -g -o StdCLib.o StdCLib.a || exit
 $PPCLD --oformat=binary -Ttext=0xffd91270 -e 0xffd91270 -o StdCLib.bin StdCLib.o || exit
-$M68KAS -g -o 09b4dac4.m68k.00.o 09b4dac4.m68k.00.a || exit
-$M68KLD --oformat=binary -Ttext=0xffc0ffc0 -e 0xffc0ffc0 -o 09b4dac4.m68k.00.bin 09b4dac4.m68k.00.o || exit
+#$M68KAS -g -o 09b4dac4.m68k.00.o 09b4dac4.m68k.00.a || exit
+#$M68KLD --oformat=binary -Ttext=0xffc0ffc0 -e 0xffc0ffc0 -o 09b4dac4.m68k.00.bin 09b4dac4.m68k.00.o || exit
 $M68KAS -g -o 09b4dac4.m68k.04.o 09b4dac4.m68k.04.a || exit
 $M68KLD --oformat=binary -Ttext=0xffc4e9f4 -e 0xffc4e9f4 -o 09b4dac4.m68k.04.bin 09b4dac4.m68k.04.o || exit
 $M68KAS -g -o 09b4dac4.m68k.o 09b4dac4.m68k.a || exit
