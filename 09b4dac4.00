@@ -950,9 +950,15 @@ off_ffc038d0:
 	.int	sub_ffc07470
 	.int	sub_ffc06d18
 	.int	sub_ffc06fa6
+	.int	sub_ffc0acaa
+	.int	sub_ffc0acaa
+	.int	sub_ffc0acaa
+	.int	sub_ffc0acaa
+	.int	sub_ffc0acaa
+	.int	sub_ffc0acaa
+	.int	sub_ffc907d0
+	.int	sub_ffc8395e
 	.int	sub_ffc0acaa,sub_ffc0acaa
-	.int	sub_ffc0acaa,sub_ffc0acaa,sub_ffc0acaa,sub_ffc0acaa
-	.int	0xFFC907D0,0xFFC8395E,sub_ffc0acaa,sub_ffc0acaa
 	.int	sub_ffc0acaa,sub_ffc0acaa,sub_ffc0acaa,sub_ffc0acaa
 	.int	sub_ffc0acaa,sub_ffc0acaa,sub_ffc0acaa,sub_ffc0acaa
 	.int	sub_ffc0acaa,sub_ffc0acaa,sub_ffc0acaa,sub_ffc0acaa
