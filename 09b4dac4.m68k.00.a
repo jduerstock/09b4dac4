@@ -73,7 +73,7 @@ sub_ffc07fc0:
 	subqw	#6,%a1
 	rts
 
-sub_ffc07fca:
+__v__INITQUEUE:
 	.int	0x2f3081e2,0x201000c4	/* movel @(0x2010)@(0xc4),%sp@- */
 	rts
 
@@ -743,10 +743,16 @@ sub_ffc088f0:
 	bsrs	sub_ffc088ae
 	braw	.Lffc087d6
 
-	.short	0x61B6
-	.int	0x0C680001,0x00046600
-	.int	0xFF1E4EFA,0xF66C61A6,0x21C90D10
-	.short	0x7000
+sub_ffc088f6:
+	bsrs	sub_ffc088ae
+	cmpiw	#1,%a0@(4)
+	bnew	.Lffc0881e
+	jmp	%pc@(sub_ffc07f70)
+
+.Lffc08906:
+	bsrs	sub_ffc088ae
+	movel	%a1,0xd10
+	moveq	#0,%d0
 	rts
 
 	.int	0x619C52A9,0x000AB3F8,0x0D10660E,0x203808EE
