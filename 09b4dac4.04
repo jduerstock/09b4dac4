@@ -2869,13 +2869,48 @@
 	.int	0xB22EFFF5,0x660C226E,0xFFFA42A9,0x00182344
 	.int	0x00145342,0x6EE0281F,0x4E5E4E75
 
-sub_ffc4b35c:
-	.int	0xA0773600
-	.int	0x67000048,0x78014E56,0xFFF441EE,0xFFF43004
-	.int	0xA0781D40,0xFFFE6B2A,0x598F2F3C,0x41444253
-	.int	0x42671F6E,0xFFF50001,0xA9A02217,0x6604584F
-	.int	0x6010A992,0x20412050,0x102EFFFE,0x122EFFF4
-	.int	0x4E905244,0xB6446CC2,0x4E5E4E75,0x203C0000
+INITADBDRVR:
+	.short	0xa077
+	movew	%d0,%d3
+	beqw	.Lffc4b3aa
+	moveq	#1,%d4
+	linkw	%fp,#-12
+
+.Lffc4b36a:
+	lea	%fp@(-12),%a0
+	movew	%d4,%d0
+	.short	0xa078
+	moveb	%d0,%fp@(-2)
+	bmis	.Lffc4b3a2
+	subql	#4,%sp
+	movel	#1094992467,%sp@-
+	clrw	%sp@-
+	moveb	%fp@(-11),%sp@(1)
+	.short	0xa9a0
+	movel	%sp@,%d1
+	bnes	.Lffc4b392
+	addqw	#4,%sp
+	bras	.Lffc4b3a2
+
+.Lffc4b392:
+	.short	0xa992
+	moveal	%d1,%a0
+	moveal	%a0@,%a0
+	moveb	%fp@(-2),%d0
+	moveb	%fp@(-12),%d1
+	jsr	%a0@
+
+.Lffc4b3a2:
+	addqw	#1,%d4
+	cmpw	%d4,%d3
+	bges	.Lffc4b36a
+	unlk	%fp
+
+.Lffc4b3aa:
+	rts
+
+sub_ffc4b3ac:
+	.int	0x203C0000
 	.int	0x01B8A71E,0x264821CB,0x0CF841FA,0xFF2421C8
 	.int	0x06B84238,0x021E6100,0x01AC41FA,0x01A621C8
 	.int	0x021A2078,0x0DD8D1E8,0x00482010,0x6704D1C0
