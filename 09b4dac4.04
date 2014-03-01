@@ -163,38 +163,179 @@
 	.align	16
 
 sub_ffc40190:
-	.int	0x60FFFFFF,0x530E0000,0x00000000,0x00000000
+	bral	sub_ffc354a0
+	.align	16
 
 sub_ffc401a0:
-	.int	0x60FF0000,0xA7FE0000,0x00000000,0x00000000
+	bral	sub_ffc4a9a0
+	.align	16
 
 sub_ffc401b0:
-	.int	0x4E56F7D2,0x48E70308,0x286E0008,0x4AAC001C
-	.int	0x67064AAC,0x00386608,0x303CFA87,0x60000176
-	.int	0x206C001C,0x226C0038,0x3010B051,0x6708303C
-	.int	0xFAE96000,0x0160486E,0xFFF2486E,0xF7D2486E
-	.int	0xF9DC486E,0xF7D62F2C,0x001C4EBA,0x06C43E00
-	.int	0x4FEF0014,0x67063007,0x6000013A,0x2F2EF7D2
-	.int	0x4EBAA4FE,0x3E00584F,0x67063007,0x60000126
-	.int	0x486EFFF6,0x486EF7D2,0x486EFDEA,0x486EFBE4
-	.int	0x2F2C0038,0x4EBA068A,0x3E004FEF,0x00146706
-	.int	0x30076000,0x0100206E,0xF7D24A68,0x004C6660
-	.int	0x70003028,0x00B27202,0xC2406754,0x70002F00
-	.int	0x2F082F0C,0x4EBA254A,0x3E004FEF,0x000C6706
-	.int	0x30076000,0x00D0206C,0x001C2C28,0x0004426E
-	.int	0xFFFA600E,0x206C0038,0x226EFFFC,0x23680004
-	.int	0x003A558F,0x2F2EF7D2,0x2F06486E,0xFFFA486E
-	.int	0xFFFC4EBA,0x206C4A5F,0x67DA7000,0x60000096
-	.int	0x486EFFF2,0x2F2EFFF6,0x486EFDEA,0x486EFBE4
-	.int	0x2F2EFFF2,0x486EF9DC,0x486EF7D6,0x2F2EF7D2
-	.int	0x4EBA007E,0x3E000C47,0x00314FEF,0x00206602
-	.int	0x7ED00C47,0x00386604,0x3E3CFA81,0x4A476704
-	.int	0x30076050,0x4AAC003C,0x67182F2C,0x003C486E
-	.int	0xF9DC486E,0xF7D62F2E,0xF7D24EBA,0xEBD44FEF
-	.int	0x0010206C,0x001C2C28,0x0004426E,0xFFFA600A
-	.int	0x206EFFFC,0x216EF7D8,0x003A558F,0x2F2EF7D2
-	.int	0x2F06486E,0xFFFA486E,0xFFFC4EBA,0x1FD44A5F
-	.int	0x67DE7000,0x4CEE10C0,0xF7C64E5E,0x4E750000
+	linkw	%fp,#-2094
+	moveml	%d6-%d7/%a4,%sp@-
+	moveal	%fp@(8),%a4
+	tstl	%a4@(28)
+	beqs	.Lffc401c8
+	tstl	%a4@(56)
+	bnes	.Lffc401d0
+
+.Lffc401c8:
+	movew	#-1401,%d0
+	braw	.Lffc40344
+
+.Lffc401d0:
+	moveal	%a4@(28),%a0
+	moveal	%a4@(56),%a1
+	movew	%a0@,%d0
+	cmpw	%a1@,%d0
+	beqs	.Lffc401e6
+	movew	#-1303,%d0
+	braw	.Lffc40344
+
+.Lffc401e6:
+	pea	%fp@(-14)
+	pea	%fp@(-2094)
+	pea	%fp@(-1572)
+	pea	%fp@(-2090)
+	movel	%a4@(28),%sp@-
+	jsr	%pc@(sub_ffc408c0)
+	movew	%d0,%d7
+	lea	%sp@(20),%sp
+	beqs	.Lffc4020c
+	movew	%d7,%d0
+	braw	.Lffc40344
+
+.Lffc4020c:
+	movel	%fp@(-2094),%sp@-
+	jsr	%pc@(sub_ffc3a710)
+	movew	%d0,%d7
+	addqw	#4,%sp
+	beqs	.Lffc40220
+	movew	%d7,%d0
+	braw	.Lffc40344
+
+.Lffc40220:
+	pea	%fp@(-10)
+	pea	%fp@(-2094)
+	pea	%fp@(-534)
+	pea	%fp@(-1052)
+	movel	%a4@(56),%sp@-
+	jsr	%pc@(sub_ffc408c0)
+	movew	%d0,%d7
+	lea	%sp@(20),%sp
+	beqs	.Lffc40246
+	movew	%d7,%d0
+	braw	.Lffc40344
+
+.Lffc40246:
+	moveal	%fp@(-2094),%a0
+	tstw	%a0@(76)
+	bnes	.Lffc402b0
+	moveq	#0,%d0
+	movew	%a0@(178),%d0
+	moveq	#2,%d1
+	andw	%d0,%d1
+	beqs	.Lffc402b0
+	moveq	#0,%d0
+	movel	%d0,%sp@-
+	movel	%a0,%sp@-
+	movel	%a4,%sp@-
+	jsr	%pc@(sub_ffc427b0)
+	movew	%d0,%d7
+	lea	%sp@(12),%sp
+	beqs	.Lffc40276
+	movew	%d7,%d0
+	braw	.Lffc40344
+
+.Lffc40276:
+	moveal	%a4@(28),%a0
+	movel	%a0@(4),%d6
+	clrw	%fp@(-6)
+	bras	.Lffc40292
+
+.Lffc40284:
+	moveal	%a4@(56),%a0
+	moveal	%fp@(-4),%a1
+	movel	%a0@(4),%a1@(58)
+
+.Lffc40292:
+	subql	#2,%sp
+	movel	%fp@(-2094),%sp@-
+	movel	%d6,%sp@-
+	pea	%fp@(-6)
+	pea	%fp@(-4)
+	jsr	%pc@(sub_ffc42310)
+	tstw	%sp@+
+	beqs	.Lffc40284
+	moveq	#0,%d0
+	braw	.Lffc40344
+
+.Lffc402b0:
+	pea	%fp@(-14)
+	movel	%fp@(-10),%sp@-
+	pea	%fp@(-534)
+	pea	%fp@(-1052)
+	movel	%fp@(-14),%sp@-
+	pea	%fp@(-1572)
+	pea	%fp@(-2090)
+	movel	%fp@(-2094),%sp@-
+	jsr	%pc@(sub_ffc40350)
+	movew	%d0,%d7
+	cmpiw	#49,%d7
+	lea	%sp@(32),%sp
+	bnes	.Lffc402e2
+	moveq	#-48,%d7
+
+.Lffc402e2:
+	cmpiw	#56,%d7
+	bnes	.Lffc402ec
+	movew	#-1407,%d7
+
+.Lffc402ec:
+	tstw	%d7
+	beqs	.Lffc402f4
+	movew	%d7,%d0
+	bras	.Lffc40344
+
+.Lffc402f4:
+	tstl	%a4@(60)
+	beqs	.Lffc40312
+	movel	%a4@(60),%sp@-
+	pea	%fp@(-1572)
+	pea	%fp@(-2090)
+	movel	%fp@(-2094),%sp@-
+	jsr	%pc@(sub_ffc3eee0)
+	lea	%sp@(16),%sp
+
+.Lffc40312:
+	moveal	%a4@(28),%a0
+	movel	%a0@(4),%d6
+	clrw	%fp@(-6)
+	bras	.Lffc4032a
+
+.Lffc40320:
+	moveal	%fp@(-4),%a0
+	movel	%fp@(-2088),%a0@(58)
+
+.Lffc4032a:
+	subql	#2,%sp
+	movel	%fp@(-2094),%sp@-
+	movel	%d6,%sp@-
+	pea	%fp@(-6)
+	pea	%fp@(-4)
+	jsr	%pc@(sub_ffc42310)
+	tstw	%sp@+
+	beqs	.Lffc40320
+	moveq	#0,%d0
+
+.Lffc40344:
+	moveml	%fp@(-2106),%d6-%d7/%a4
+	unlk	%fp
+	rts
+
+	.align	16
+
+sub_ffc40350:
 	.int	0x60FF0000,0xA0BE0000,0x00000000,0x00000000
 	.int	0x4E56F6DC,0x48E71F38,0x246E0008,0x47EEFFC0
 	.int	0x49EEFFE0,0x42474AAA,0x001C6706,0x4AAA0038
@@ -501,6 +642,7 @@ sub_ffc410e0:
 	.int	0x7000102E,0x001F2F00,0x2F2E0018,0x2F0B2F05
 	.int	0x4EBAA79E,0x3E00102C,0x00065C00,0x18804FEF
 	.int	0x00143007,0x4CEE18E8,0xFFE84E5E,0x4E750000
+
 	.int	0x4E56FBE6,0x48E71718,0x266E0008,0x70002D40
 	.int	0xFFFC2840,0x223CFFFF,0x0000C2AB,0x001C6708
 	.int	0x303CFA83,0x600002D8,0x486EFFFC,0x2F2B0018
@@ -2879,6 +3021,8 @@ sub_ffc427b0:
 	.int	0x00303E00,0x4FEF0028,0x4CEE18F8,0xF5A84E5E
 	.int	0x4E750000,0x00000000,0x00000000,0x00000000
 	.int	0x60FFFFFD,0x9C2E0000,0x00000000,0x00000000
+
+sub_ffc4a9a0:
 	.int	0x4E56FBE6,0x48E71F18,0x266E0010,0x286E0008
 	.int	0x7000302C,0x00080C80,0x0000482B,0x57C34403
 	.int	0x1C032F0B,0x4EBAFDAA,0x72003200,0x2D41FFF8
