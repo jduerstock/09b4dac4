@@ -2524,48 +2524,254 @@ sub_ffc41860:
 	.align	16
 
 sub_ffc41990:
-	.int	0x60FFFFFE,0x717E0000,0x00000000,0x00000000
+	bral	sub_ffc28b10
+
+	.align	16
 
 sub_ffc419a0:
-	.int	0x4E560000,0x48E70238,0x246E0010,0x3C2E000E
-	.int	0x342E000A,0x367C0356,0x4A466C08,0x70002480
-	.int	0x70CE604E,0x4A46661C,0x286B0002,0x7200600E
-	.int	0xB46C004E,0x6726B46C,0x00486720,0x2854B28C
-	.int	0x66EE6018,0x286B0002,0x74016006,0x20025282
-	.int	0x2854200C,0x670648C6,0xBC8262F0,0x248C200C
-	.int	0x660470DD,0x600C4A6C,0x004C6704,0x70C66002
-	.int	0x70004CEE,0x1C40FFF0,0x4E5E4E75,0x00000000
-	.int	0x4E56FEBA,0x48E70118,0x286E0008,0x70002940
-	.int	0x001872FC,0xC2AC0014,0x6708303C,0xFA726000
-	.int	0x01BA2678,0x0BB8486E,0xFF66486E,0xFF62486B
-	.int	0x095A486B,0x07542F2C,0x001C4EBA,0xEE643E00
-	.int	0x4FEF0014,0x67063007,0x60000190,0x4EBAD762
-	.int	0x206EFF62,0x4A68004C,0x66000096,0x70003028
-	.int	0x00B27202,0xC2406700,0x0088700F,0x2D40FEBA
-	.int	0x41EEFEC2,0x2D48FEBE,0x2D6EFF62,0xFEC22D6C
-	.int	0x001CFEC6,0x41EB0754,0x2D48FECA,0x41EEFED2
-	.int	0x2D48FECE,0x70002F00,0x486EFEBA,0x2F004EBA
-	.int	0x0CF03E00,0x4FEF000C,0x67063007,0x6000012C
-	.int	0x486B095A,0x486EFED2,0x2F2C001C,0x4EBAD9B2
-	.int	0x206EFF62,0x70003028,0x00080C80,0x0000482B
-	.int	0x4FEF000C,0x66147044,0x2D40FF66,0x7218242B
-	.int	0x09AAE3AA,0xD5AEFF66,0x60067000,0x2D40FF66
-	.int	0x486EFF6A,0x48782012,0x486B095A,0x2F2EFF62
-	.int	0x4EBAF06E,0x7000302E,0xFF6A7210,0xC2404FEF
-	.int	0x00106608,0x303CFA81,0x600000C0,0x7001C0AC
-	.int	0x00146710,0x7002B0AE,0xFF726708,0x303CFA72
-	.int	0x600000A8,0x558F486E,0xFFFE486E,0xFFFA4EBA
-	.int	0x89E03E1F,0x67063007,0x60000090,0x206EFFFA
-	.int	0x216EFF62,0x0014206E,0xFFFA217C,0x666F6C64
-	.int	0x0032206E,0xFFFA317C,0x0001005E,0x206EFFFA
-	.int	0x20AEFF72,0x7002C0AC,0x0014670C,0x206EFFFA
-	.int	0x216EFFF2,0x0010600A,0x206EFFFA,0x70012140
-	.int	0x0010558F,0x2F2EFFFA,0x4EBA0C06,0x206EFFFA
-	.int	0x216C0014,0x0078396E,0xFFFE0018,0x206EFF62
-	.int	0x4A68004C,0x544F6620,0x70003028,0x00B27202
-	.int	0xC2406714,0x70002F00,0x2F082F0C,0x4EBA0BC2
-	.int	0x3E004FEF,0x000C6002,0x70004CEE,0x1880FEAE
-	.int	0x4E5E4E75,0x00000000,0x00000000,0x00000000
+	linkw	%fp,#0
+	moveml	%d6/%a2-%a4,%sp@-
+	moveal	%fp@(16),%a2
+	movew	%fp@(14),%d6
+	movew	%fp@(10),%d2
+	moveaw	#854,%a3
+	tstw	%d6
+	bges	.Lffc419c4
+	moveq	#0,%d0
+	movel	%d0,%a2@
+	moveq	#-50,%d0
+	bras	.Lffc41a12
+
+.Lffc419c4:
+	tstw	%d6
+	bnes	.Lffc419e4
+	moveal	%a3@(2),%a4
+	moveq	#0,%d1
+	bras	.Lffc419de
+
+.Lffc419d0:
+	cmpw	%a4@(78),%d2
+	beqs	.Lffc419fc
+	cmpw	%a4@(72),%d2
+	beqs	.Lffc419fc
+	moveal	%a4@,%a4
+
+.Lffc419de:
+	cmpl	%a4,%d1
+	bnes	.Lffc419d0
+	bras	.Lffc419fc
+
+.Lffc419e4:
+	moveal	%a3@(2),%a4
+	moveq	#1,%d2
+	bras	.Lffc419f2
+
+.Lffc419ec:
+	movel	%d2,%d0
+	addql	#1,%d2
+	moveal	%a4@,%a4
+
+.Lffc419f2:
+	movel	%a4,%d0
+	beqs	.Lffc419fc
+	extl	%d6
+	cmpl	%d2,%d6
+	bhis	.Lffc419ec
+
+.Lffc419fc:
+	movel	%a4,%a2@
+	movel	%a4,%d0
+	bnes	.Lffc41a06
+	moveq	#-35,%d0
+	bras	.Lffc41a12
+
+.Lffc41a06:
+	tstw	%a4@(76)
+	beqs	.Lffc41a10
+	moveq	#-58,%d0
+	bras	.Lffc41a12
+
+.Lffc41a10:
+	moveq	#0,%d0
+
+.Lffc41a12:
+	moveml	%fp@(-16),%d6/%a2-%a4
+	unlk	%fp
+	rts
+
+	.align	16
+
+sub_ffc41a20:
+	linkw	%fp,#-326
+	moveml	%d7/%a3-%a4,%sp@-
+	moveal	%fp@(8),%a4
+	moveq	#0,%d0
+	movel	%d0,%a4@(24)
+	moveq	#-4,%d1
+	andl	%a4@(20),%d1
+	beqs	.Lffc41a42
+	movew	#-1422,%d0
+	braw	.Lffc41bfa
+
+.Lffc41a42:
+	moveal	0xbb8,%a3
+	pea	%fp@(-154)
+	pea	%fp@(-158)
+	pea	%a3@(2394)
+	pea	%a3@(1876)
+	movel	%a4@(28),%sp@-
+	jsr	%pc@(sub_ffc408c0)
+	movew	%d0,%d7
+	lea	%sp@(20),%sp
+	beqs	.Lffc41a6c
+	movew	%d7,%d0
+	braw	.Lffc41bfa
+
+.Lffc41a6c:
+	jsr	%pc@(sub_ffc3f1d0)
+	moveal	%fp@(-158),%a0
+	tstw	%a0@(76)
+	bnew	.Lffc41b10
+	moveq	#0,%d0
+	movew	%a0@(178),%d0
+	moveq	#2,%d1
+	andw	%d0,%d1
+	beqw	.Lffc41b10
+	moveq	#15,%d0
+	movel	%d0,%fp@(-326)
+	lea	%fp@(-318),%a0
+	movel	%a0,%fp@(-322)
+	movel	%fp@(-158),%fp@(-318)
+	movel	%a4@(28),%fp@(-314)
+	lea	%a3@(1876),%a0
+	movel	%a0,%fp@(-310)
+	lea	%fp@(-302),%a0
+	movel	%a0,%fp@(-306)
+	moveq	#0,%d0
+	movel	%d0,%sp@-
+	pea	%fp@(-326)
+	movel	%d0,%sp@-
+	jsr	%pc@(sub_ffc427b0)
+	movew	%d0,%d7
+	lea	%sp@(12),%sp
+	beqs	.Lffc41ad0
+	movew	%d7,%d0
+	braw	.Lffc41bfa
+
+.Lffc41ad0:
+	pea	%a3@(2394)
+	pea	%fp@(-302)
+	movel	%a4@(28),%sp@-
+	jsr	%pc@(sub_ffc3f490)
+	moveal	%fp@(-158),%a0
+	moveq	#0,%d0
+	movew	%a0@(8),%d0
+	cmpil	#18475,%d0
+	lea	%sp@(12),%sp
+	bnes	.Lffc41b0a
+	moveq	#68,%d0
+	movel	%d0,%fp@(-154)
+	moveq	#24,%d1
+	movel	%a3@(2474),%d2
+	lsll	%d1,%d2
+	addl	%d2,%fp@(-154)
+	bras	.Lffc41b10
+
+.Lffc41b0a:
+	moveq	#0,%d0
+	movel	%d0,%fp@(-154)
+
+.Lffc41b10:
+	pea	%fp@(-150)
+	pea	0x2012
+	pea	%a3@(2394)
+	movel	%fp@(-158),%sp@-
+	jsr	%pc@(sub_ffc40b90)
+	moveq	#0,%d0
+	movew	%fp@(-150),%d0
+	moveq	#16,%d1
+	andw	%d0,%d1
+	lea	%sp@(16),%sp
+	bnes	.Lffc41b3c
+	movew	#-1407,%d0
+	braw	.Lffc41bfa
+
+.Lffc41b3c:
+	moveq	#1,%d0
+	andl	%a4@(20),%d0
+	beqs	.Lffc41b54
+	moveq	#2,%d0
+	cmpl	%fp@(-142),%d0
+	beqs	.Lffc41b54
+	movew	#-1422,%d0
+	braw	.Lffc41bfa
+
+.Lffc41b54:
+	subql	#2,%sp
+	pea	%fp@(-2)
+	pea	%fp@(-6)
+	jsr	%pc@(sub_ffc3a540)
+	movew	%sp@+,%d7
+	beqs	.Lffc41b6c
+	movew	%d7,%d0
+	braw	.Lffc41bfa
+
+.Lffc41b6c:
+	moveal	%fp@(-6),%a0
+	movel	%fp@(-158),%a0@(20)
+	moveal	%fp@(-6),%a0
+	movel	#1718578276,%a0@(50)
+	moveal	%fp@(-6),%a0
+	movew	#1,%a0@(94)
+	moveal	%fp@(-6),%a0
+	movel	%fp@(-142),%a0@
+	moveq	#2,%d0
+	andl	%a4@(20),%d0
+	beqs	.Lffc41ba8
+	moveal	%fp@(-6),%a0
+	movel	%fp@(-14),%a0@(16)
+	bras	.Lffc41bb2
+
+.Lffc41ba8:
+	moveal	%fp@(-6),%a0
+	moveq	#1,%d0
+	movel	%d0,%a0@(16)
+
+.Lffc41bb2:
+	subql	#2,%sp
+	movel	%fp@(-6),%sp@-
+	jsr	%pc@(sub_ffc427c0)
+	moveal	%fp@(-6),%a0
+	movel	%a4@(20),%a0@(120)
+	movew	%fp@(-2),%a4@(24)
+	moveal	%fp@(-158),%a0
+	tstw	%a0@(76)
+	addqw	#2,%sp
+	bnes	.Lffc41bf8
+	moveq	#0,%d0
+	movew	%a0@(178),%d0
+	moveq	#2,%d1
+	andw	%d0,%d1
+	beqs	.Lffc41bf8
+	moveq	#0,%d0
+	movel	%d0,%sp@-
+	movel	%a0,%sp@-
+	movel	%a4,%sp@-
+	jsr	%pc@(sub_ffc427b0)
+	movew	%d0,%d7
+	lea	%sp@(12),%sp
+	bras	.Lffc41bfa
+
+.Lffc41bf8:
+	moveq	#0,%d0
+
+.Lffc41bfa:
+	moveml	%fp@(-338),%d7/%a3-%a4
+	unlk	%fp
+	rts
+
+	.align	16
+
 	.int	0x4E560000,0x48E70318,0x266E0010,0x286E000C
 	.int	0x70102C2E,0x0008E0AE,0x558F3F06,0x2F0C4EBA
 	.int	0x9CF03E1F,0x0C47FFCD,0x66043E3C,0xFA714A47
