@@ -2181,12 +2181,41 @@ sub_ffc07a16:
 	rts
 
 sub_ffc07cee:
-	.short	0x40E7
-	.int	0x2F003F08,0x20780146,0x5C887016,0x72FF90C0
-	.int	0x34380154,0x007C0700,0xD0C0B250,0x57CAFFFA
-	.int	0x43F8014A,0x670A2069,0x00022350,0x00025C88
-	.int	0x309F215F,0x00026112,0x5D88317C,0x00040004
-	.int	0x4EBA020E,0x46DF7000,0x4E752178,0x016A0006
+	movew	%sr,%sp@-
+	movel	%d0,%sp@-
+	movew	%a0,%sp@-
+	moveal	0x146,%a0
+	addql	#6,%a0
+	moveq	#22,%d0
+	moveq	#-1,%d1
+	subaw	%d0,%a0
+	movew	0x154,%d2
+	oriw	#1792,%sr
+
+.Lffc07d08:
+	addaw	%d0,%a0
+	cmpw	%a0@,%d1
+	dbeq	%d2,.Lffc07d08
+	lea	0x14a,%a1
+	beqs	.Lffc07d20
+	moveal	%a1@(2),%a0
+	movel	%a0@,%a1@(2)
+	addql	#6,%a0
+
+.Lffc07d20:
+	movew	%sp@+,%a0@
+	movel	%sp@+,%a0@(2)
+	bsrs	sub_ffc07d3a
+	subql	#6,%a0
+	movew	#4,%a0@(4)
+	jsr	%pc@(sub_ffc07f40)
+	movew	%sp@+,%sr
+	moveq	#0,%d0
+	rts
+
+sub_ffc07d3a:
+	.short	0x2178
+	.int	0x016A0006
 	.int	0x21780830,0x000A3238,0x017AE359,0x1141000E
 	.int	0x11780172,0x000F4E75,0x02800000
 	.short	0xFFFF

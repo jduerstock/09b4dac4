@@ -4094,7 +4094,7 @@ sub_ffc0ffd0:
 .Lffc10016:
 	pea	%a4@(16)
 	movel	%a4,%sp@-
-	.int	0x4eba0072	/* jsr	%pc@(sub_ffc10090) */
+	jsr	%pc@(sub_ffc10090)
 	movew	%d0,%d6
 	addqw	#8,%sp
 	bnes	.Lffc10032
