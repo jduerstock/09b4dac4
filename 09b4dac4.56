@@ -70,10 +70,30 @@
 	mr	%r3,%r1		/* 0017 */
 	b	.Lfff66ec0
 
-	.int	0x63C56EC0,0x4BFE073C,0x63C56EC0,0x4BFE07B4
-	.int	0x63C56EC0,0x4BFE082C,0x63C56EC0,0x4BFE08A4
-	.int	0x63C56EC0,0x4BFE091C,0x63C56EC0,0x4BFE0994
-	.int	0x63C56EC0,0x4BFE0A0C,0x63C56EC0,0x4BFE0A84
+	ori	%r5,%r30,28352	/* 0018 */
+	b	.Lfff60800
+
+	ori	%r5,%r30,28352	/* 0019 */
+	b	.Lfff60880
+
+	ori	%r5,%r30,28352	/* 001a */
+	b	.Lfff60900
+
+	ori	%r5,%r30,28352	/* 001b */
+	b	.Lfff60980
+
+	ori	%r5,%r30,28352	/* 001c */
+	b	.Lfff60a00
+
+	ori	%r5,%r30,28352	/* 001d */
+	b	.Lfff60a80
+
+	ori	%r5,%r30,28352	/* 001e */
+	b	.Lfff60b00
+
+	ori	%r5,%r30,28352	/* 001f */
+	b	.Lfff60b80
+
 	.int	0x3A10FFFF,0x4BFFFF7C,0x3A31FFFF,0x4BFFFF7C
 	.int	0x3A52FFFF,0x4BFFFF7C,0x3A73FFFF,0x4BFFFF7C
 	.int	0x3A94FFFF,0x4BFFFF7C,0x3AB5FFFF,0x4BFFFF7C
