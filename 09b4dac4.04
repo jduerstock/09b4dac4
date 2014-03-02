@@ -1648,7 +1648,9 @@ sub_ffc40b90:
 	.align	16
 
 sub_ffc410d0:
-	.int	0x60FFFFFE,0x327E0000,0x00000000,0x00000000
+	bral	sub_ffc24350
+
+	.align	16
 
 sub_ffc410e0:
 	.int	0x4E560000,0x48E71308,0x286E0008,0x2E2E000C
