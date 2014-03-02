@@ -4093,25 +4093,25 @@
 	.int	0x80BF0808,0x4BF6D7CC,0x80BF0808,0x4BF6D7C4
 
 	lwz	%r5,0x808(%r31)
-	b	loc_fff6d780
+	b	.Lfff6d780
 
 	lwz	%r5,0x808(%r31)
-	b	loc_fff6d780
+	b	.Lfff6d780
 
 	lwz	%r5,0x808(%r31)
-	b	loc_fff6d780
+	b	.Lfff6d780
 
 	lwz	%r5,0x808(%r31)
-	b	loc_fff6d780
+	b	.Lfff6d780
 
 	lwz	%r5,0x808(%r31)
-	b	loc_fff6d780
+	b	.Lfff6d780
 
 	lwz	%r5,0x808(%r31)
-	b	loc_fff6d780
+	b	.Lfff6d780
 
 	lwz	%r5,0x808(%r31)
-	b	loc_fff6d780
+	b	.Lfff6d780
 
 	lwz	%r5,0x808(%r31)
-	b	loc_fff6d780
+	b	.Lfff6d780
