@@ -199,10 +199,30 @@
 	lwz	%r5,2048(%r31)	/* 003f */
 	b	.Lfff6d770
 
-	.int	0x7D04DB78,0x4BFE2818,0x7D24DB78,0x4BFE2850
-	.int	0x7D44DB78,0x4BFE2888,0x7D64DB78,0x4BFE28C0
-	.int	0x7D84DB78,0x4BFE28F8,0x7DA4DB78,0x4BFE2930
-	.int	0x7DC4DB78,0x4BFE2968,0x7DE4DB78,0x4BFE29A0
+	or	%r4,%r8,%r27	/* 0040 */
+	b	.Lfff62a1c
+
+	or	%r4,%r9,%r27	/* 0041 */
+	b	.Lfff62a5c
+
+	or	%r4,%r10,%r27	/* 0042 */
+	b	.Lfff62a9c
+
+	or	%r4,%r11,%r27	/* 0043 */
+	b	.Lfff62adc
+
+	or	%r4,%r12,%r27	/* 0044 */
+	b	.Lfff62b1c
+
+	or	%r4,%r13,%r27	/* 0045 */
+	b	.Lfff62b5c
+
+	or	%r4,%r14,%r27	/* 0046 */
+	b	.Lfff62b9c
+
+	or	%r4,%r15,%r27	/* 0047 */
+	b	.Lfff62bdc
+
 	.int	0x80BF0800,0x4BFED52C,0x80BF0800,0x4BFED524
 	.int	0x80BF0800,0x4BFED51C,0x80BF0800,0x4BFED514
 	.int	0x80BF0800,0x4BFED50C,0x80BF0800,0x4BFED504
