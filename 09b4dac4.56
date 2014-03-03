@@ -175,10 +175,30 @@
 	ori	%r5,%r30,28368	/* 0037 */
 	b	.Lfff65c34
 
-	.int	0xAC780002,0x4BFE6CFC,0x63C56ED0,0x4BFE5C58
-	.int	0x80BF0800,0x4BFED59C,0x80BF0800,0x4BFED594
-	.int	0xACB80002,0x4BFEC468,0x80BF0800,0x4BFED584
-	.int	0x80BF0800,0x4BFED57C,0x80BF0800,0x4BFED574
+	lhau	%r3,2(%r24)	/* 0038 */
+	b	.Lfff66ec0
+
+	ori	%r5,%r30,28368	/* 0039 */
+	b	.Lfff65e24
+
+	lwz	%r5,2048(%r31)	/* 003a */
+	b	.Lfff6d770
+
+	lwz	%r5,2048(%r31)	/* 003b */
+	b	.Lfff6d770
+
+	lhau	%r5,2(%r24)	/* 003c */
+	b	.Lfff6c64c
+
+	lwz	%r5,2048(%r31)	/* 003d */
+	b	.Lfff6d770
+
+	lwz	%r5,2048(%r31)	/* 003e */
+	b	.Lfff6d770
+
+	lwz	%r5,2048(%r31)	/* 003f */
+	b	.Lfff6d770
+
 	.int	0x7D04DB78,0x4BFE2818,0x7D24DB78,0x4BFE2850
 	.int	0x7D44DB78,0x4BFE2888,0x7D64DB78,0x4BFE28C0
 	.int	0x7D84DB78,0x4BFE28F8,0x7DA4DB78,0x4BFE2930
