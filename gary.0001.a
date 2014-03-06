@@ -3,19 +3,73 @@
 	jsr	%pc@(sub_ffcf567e)
 	rts
 
-	.short	0x40C1
-	.int	0x007C0700
-	.int	0x2278002C,0x41FA000E,0x21C8002C,0x204F70FF
-	.int	0xFC007000,0x2E4821C9,0x002C46C1,0x4A804E75
+	movew	%sr,%d1
+	oriw	#1792,%sr
+	moveal	0x2c,%a1
+	lea	%pc@(.Lffcf3fa4),%a0
+	movel	%a0,0x2c
+	moveal	%sp,%a0
+	moveq	#-1,%d0
+	.short	0xfc00
+	moveq	#0,%d0
+
+.Lffcf3fa4:
+	moveal	%a0,%sp
+	movel	%a1,0x2c
+	movew	%d1,%sr
+	tstl	%d0
+	rts
 
 sub_ffcf3fb0:
-	.int	0x40C00800,0x000D672E,0x4E7A9801,0x22690028
-	.int	0x207802AE,0xB1C9621E,0xD1E80040,0xB1C96316
-	.int	0x41FA0016,0x7007FE05,0x41FA0010,0x7008FE05
-	.int	0x20497006,0xFE054E75,0xFC10FC11,0x31D00A4A
-	.int	0xFC0230B8,0x0A4AFC02,0x21D00A4C,0xFC0220B8
-	.int	0x0A4CFC02,0x48473C38,0x0A4A3A10,0x50450BC7
-	.int	0x8C4731C6,0x0A4A4847,0xFC026000,0x052A30B8
+	movew	%sr,%d0
+	btst	#13,%d0
+	beqs	.Lffcf3fe6
+	movec	%vbr,%a1
+	moveal	%a1@(40),%a1
+	moveal	0x2ae,%a0
+	cmpal	%a1,%a0
+	bhis	.Lffcf3fe6
+	addal	%a0@(64),%a0
+	cmpal	%a1,%a0
+	blss	.Lffcf3fe6
+	lea	%pc@(byte_ffcf3fe8),%a0
+	moveq	#7,%d0
+	.short	0xfe05
+	lea	%pc@(byte_ffcf3fea),%a0
+	moveq	#8,%d0
+	.short	0xfe05
+	moveal	%a1,%a0
+	moveq	#6,%d0
+	.short	0xfe05
+
+.Lffcf3fe6:
+	rts
+
+byte_ffcf3fe8:
+	.short	0xFC10
+
+byte_ffcf3fea:
+	.short	0xFC11
+
+	movew	%a0@,0xa4a
+	.short	0xfc02
+	movew	0xa4a,%a0@
+	.short	0xfc02
+	movel	%a0@,0xa4c
+	.short	0xfc02
+	movel	0xa4c,%a0@
+	.short	0xfc02
+	swap	%d7
+	movew	0xa4a,%d6
+	movew	%a0@,%d5
+	addqw	#8,%d5
+	bset	%d5,%d7
+	orw	%d7,%d6
+	movew	%d6,0xa4a
+	swap	%d7
+	.short	0xfc02
+	.short	0x6000
+	.int	0x052A30B8
 	.int	0x0A4A4278,0x0A4AFC02,0x48473E3C,0x1F00CE78
 	.int	0x0A4A3C10,0x8C4731C6,0x0A4A4847,0xFC026000
 	.int	0x05063A10,0x0B380A4A,0x56C54405,0x1085FC02
