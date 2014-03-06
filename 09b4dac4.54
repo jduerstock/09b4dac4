@@ -1,6 +1,4 @@
 
-/* fff60000 */
-
 	extsh	%r5,%r8
 	b	.Lfff65f44
 
@@ -43,7 +41,7 @@
 	rlwinm	%r5,%r8,2,0,29
 	b	.Lfff65f84
 
-	rlwinm	%r5,%r8,3,0,28	/* fff60070 */
+	rlwinm	%r5,%r8,3,0,28
 	b	.Lfff65f44
 
 	rlwinm	%r5,%r8,3,0,28
