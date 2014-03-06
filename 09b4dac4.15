@@ -1450,4 +1450,4 @@ res_ffcf5710:
 	.int	0x4B757274,0xC0A00000,0x0000C4F8,0x0000035C
 
 res_ffcf5740:
-	.include "MPLibrary.a"
+	.incbin "MPLibrary.bin"
