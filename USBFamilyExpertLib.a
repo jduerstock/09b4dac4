@@ -3518,17 +3518,12 @@
 	.string	"Expert - Closecall "
 	.string	"Expert - Bus Enumeration using ROM-based drivers (mSec): "
 	.string	"Expert - Bus Enumeration using disk-based drivers (mSec): "
+	.string	"Expert - Initializing ROM based USB Expert 1.5.9"
+	.string	"Expert - Initializing disk based USB Expert 1.5.9"
+	.string	"Expert - USBServices already initialized"
 	.ascii	"Ex"
 
-	.int	0x70657274,0x202D2049,0x6E697469,0x616C697A
-	.int	0x696E6720,0x524F4D20,0x62617365,0x64205553
-	.int	0x42204578,0x70657274,0x20312E35,0x2E390045
-	.int	0x78706572,0x74202D20,0x496E6974,0x69616C69
-	.int	0x7A696E67,0x20646973,0x6B206261,0x73656420
-	.int	0x55534220,0x45787065,0x72742031,0x2E352E39
-	.int	0x00457870,0x65727420,0x2D205553,0x42536572
-	.int	0x76696365,0x7320616C,0x72656164,0x7920696E
-	.int	0x69746961,0x6C697A65,0x64004578,0x70657274
+	.int	0x70657274
 	.int	0x202D2043,0x6F756C64,0x6E277420,0x66696E64
 	.int	0x20616E79,0x20555342,0x20436F6E,0x74726F6C
 	.int	0x6C657273,0x2F55494D,0x53212121,0x00457870
