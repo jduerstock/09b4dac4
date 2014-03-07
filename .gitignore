@@ -1,0 +1,7 @@
+*.o
+*.bin
+bork
+dis.m68k.txt
+dis.ppc.txt
+t1
+t2
