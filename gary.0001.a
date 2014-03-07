@@ -68,8 +68,9 @@ byte_ffcf3fea:
 	movew	%d6,0xa4a
 	swap	%d7
 	.short	0xfc02
-	.short	0x6000
-	.int	0x052A30B8
+	braw	.Lffcf4546
+
+	.short	0x30B8
 	.int	0x0A4A4278,0x0A4AFC02,0x48473E3C,0x1F00CE78
 	.int	0x0A4A3C10,0x8C4731C6,0x0A4A4847,0xFC026000
 	.int	0x05063A10,0x0B380A4A,0x56C54405,0x1085FC02
@@ -152,10 +153,32 @@ byte_ffcf3fea:
 	.int	0xFC03FC04,0x3C380A4A,0xFC0E0245,0x007F4A84
 	.int	0x6A024445,0x3F450002,0x31C60A4A,0xFC07FC02
 	.int	0x6014FC03,0x3C380A4A,0xFC0F31C6,0x0A4AFC07
-	.int	0xFC026002,0x4E71206F,0x002841E8,0x000E3F3C
-	.int	0x00022407,0xE19AC446,0x0242001F,0x3F022F0F
-	.int	0x2F102F20,0x2F203F20,0x20780A4C,0x4E904246
-	.int	0x548F44DF,0xFC0260CE,0x08860017,0x67023098
+	.int	0xFC026002
+	nop
+
+.Lffcf4546:
+	moveal	%sp@(40),%a0
+	lea	%a0@(14),%a0
+	movew	#2,%sp@-
+	movel	%d7,%d2
+	roll	#8,%d2
+	andw	%d6,%d2
+	andiw	#31,%d2
+	movew	%d2,%sp@-
+	movel	%sp,%sp@-
+	movel	%a0@,%sp@-
+	movel	%a0@-,%sp@-
+	movel	%a0@-,%sp@-
+	movew	%a0@-,%sp@-
+	moveal	0xa4c,%a0
+	jsr	%a0@
+	clrw	%d6
+	addql	#2,%sp
+	movew	%sp@+,%ccr
+	.short	0xfc02
+	bras	.Lffcf4546
+
+	.int	0x08860017,0x67023098
 	.int	0x2F48002C,0x4846FC03,0x0C470400,0x646641EF
 	.int	0x0032FC07,0x43FA0D98,0xFC04FC0A,0x0C470080
 	.int	0x643E327C,0x3FFF0C81,0xB504F333,0x650C6608
