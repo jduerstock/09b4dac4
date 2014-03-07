@@ -3818,11 +3818,22 @@
 	.int	0x7C84D838,0xACB80002,0x4E800421
 
 .Lfff6c5ac:
-	.int	0x7F701120
-	.int	0x7C8102A6,0x5766E844,0x4C42EA02,0x50BD1B78
-	.int	0x7C843038,0x4C00E202,0x7FA803A6,0x5766C884
-	.int	0xAF780002,0x7C8103A6,0x7F5A3038,0x4CA80020
-	.int	0x48000B34,0x5724442E,0x7CE903A6,0x408B0469
+	mtocrf  1,%r27
+	mfxer	%r4
+	rlwinm	%r6,%r27,29,1,2
+	crand   eq,eq,4*cr7+gt
+	rlwimi	%r29,%r5,3,13,28
+	and	%r4,%r4,%r6
+	crand   lt,lt,4*cr7+lt
+	mtlr	%r29
+	rlwinm	%r6,%r27,25,2,2
+	lhau	%r27,2(%r24)
+	mtxer	%r4
+	and	%r26,%r26,%r6
+	bclr+   4,4*cr2+lt
+	b	.Lfff6d114
+
+	.int	0x5724442E,0x7CE903A6,0x408B0469
 	.int	0x7C84DA78,0xACB80002,0x4E800421,0x7F701120
 	.int	0x7C8102A6,0x5766E844,0x4C42E982,0x50BD1B78
 	.int	0x7C843278,0x4C00E182,0x7FA803A6,0x5766C884
