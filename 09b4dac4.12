@@ -1,23 +1,130 @@
-	.int	0x00182850,0x266EFFE8,0xD7CC2F2E,0x000C4EBA
-	.int	0xDF504A05,0x584F6714,0x41EB001C,0x226E0010
-	.int	0x2348002C,0x342B0002,0x3613604A,0x4A2EFFF3
-	.int	0x664441EB,0x001C226A,0x00582348,0x00382F02
-	.int	0x598F2F2A,0x00582F2A,0x005C4EBA,0xD00E201F
-	.int	0x241F2E00,0x6718200C,0xD0862040,0x001000C0
-	.int	0x2F024EBA,0xD58C241F,0x20076000,0x00BC202E
-	.int	0xFFF4D1AC,0x00444A2E,0xFFEF6746,0x4A2EFFF3
-	.int	0x66044A05,0x663C2F02,0x2F2EFFFC,0x48C42F04
-	.int	0x486EFFE8,0x486EFFF3,0x2F2E0010,0x2F2E000C
-	.int	0x2F2E0008,0x4EBAFB82,0x4FEF001C,0x241F2E00
-	.int	0x67042007,0x6072206E,0x00103628,0x000E3428
-	.int	0x00104A2E,0xFFEF660A,0x4A056742,0x4A2EFFF3
-	.int	0x663C2F02,0x2F062F2E,0xFFE87000,0x102EFFF3
-	.int	0x2F007000,0x10052F00,0x48C32F03,0x48C22F02
-	.int	0x2F2E0010,0x2F2E000C,0x2F2E0008,0x4EBAFC70
-	.int	0x4FEF0024,0x241F2E00,0x67042007,0x601A206E
-	.int	0x0010216E,0xFFE80022,0x4A2EFFEF,0x6608203C
-	.int	0x000000A3,0x60027000,0x4CEE1CF8,0xFFC04E5E
-	.int	0x4E750000,0x00000000,0x00000000,0x00000000
+	.short	0x0018
+	moveal	%a0@,%a4
+	moveal	%fp@(-24),%a3
+	addal	%a4,%a3
+	movel	%fp@(12),%sp@-
+	jsr	%pc@(sub_ffcbdf60)
+	tstb	%d5
+	addqw	#4,%sp
+	beqs	.Lffcc002c
+	lea	%a3@(28),%a0
+	moveal	%fp@(16),%a1
+	movel	%a0,%a1@(44)
+	movew	%a3@(2),%d2
+	movew	%a3@,%d3
+	bras	.Lffcc0076
+
+.Lffcc002c:
+	tstb	%fp@(-13)
+	bnes	.Lffcc0076
+	lea	%a3@(28),%a0
+	moveal	%a2@(88),%a1
+	movel	%a0,%a1@(56)
+	movel	%d2,%sp@-
+	subql	#4,%sp
+	movel	%a2@(88),%sp@-
+	movel	%a2@(92),%sp@-
+	jsr	%pc@(sub_ffcbd05a)
+	movel	%sp@+,%d0
+	movel	%sp@+,%d2
+	movel	%d0,%d7
+	beqs	.Lffcc006e
+	movel	%a4,%d0
+	addl	%d6,%d0
+	moveal	%d0,%a0
+	orib	#0xc0,%a0@
+	movel	%d2,%sp@-
+	jsr	%pc@(sub_ffcbd5f0)
+	movel	%sp@+,%d2
+	movel	%d7,%d0
+	braw	.Lffcc0128
+
+.Lffcc006e:
+	movel	%fp@(-12),%d0
+	addl	%d0,%a4@(68)
+
+.Lffcc0076:
+	tstb	%fp@(-17)
+	beqs	.Lffcc00c2
+	tstb	%fp@(-13)
+	bnes	.Lffcc0086
+	tstb	%d5
+	bnes	.Lffcc00c2
+
+.Lffcc0086:
+	movel	%d2,%sp@-
+	movel	%fp@(-4),%sp@-
+	extl	%d4
+	movel	%d4,%sp@-
+	pea	%fp@(-24)
+	pea	%fp@(-13)
+	movel	%fp@(16),%sp@-
+	movel	%fp@(12),%sp@-
+	movel	%fp@(8),%sp@-
+	jsr	%pc@(sub_ffcbfc28)
+	lea	%sp@(28),%sp
+	movel	%sp@+,%d2
+	movel	%d0,%d7
+	beqs	.Lffcc00b6
+	movel	%d7,%d0
+	bras	.Lffcc0128
+
+.Lffcc00b6:
+	moveal	%fp@(16),%a0
+	movew	%a0@(14),%d3
+	movew	%a0@(16),%d2
+
+.Lffcc00c2:
+	tstb	%fp@(-17)
+	bnes	.Lffcc00d2
+	tstb	%d5
+	beqs	.Lffcc010e
+	tstb	%fp@(-13)
+	bnes	.Lffcc010e
+
+.Lffcc00d2:
+	movel	%d2,%sp@-
+	movel	%d6,%sp@-
+	movel	%fp@(-24),%sp@-
+	moveq	#0,%d0
+	moveb	%fp@(-13),%d0
+	movel	%d0,%sp@-
+	moveq	#0,%d0
+	moveb	%d5,%d0
+	movel	%d0,%sp@-
+	extl	%d3
+	movel	%d3,%sp@-
+	extl	%d2
+	movel	%d2,%sp@-
+	movel	%fp@(16),%sp@-
+	movel	%fp@(12),%sp@-
+	movel	%fp@(8),%sp@-
+	jsr	%pc@(sub_ffcbfd6e)
+	lea	%sp@(36),%sp
+	movel	%sp@+,%d2
+	movel	%d0,%d7
+	beqs	.Lffcc010e
+	movel	%d7,%d0
+	bras	.Lffcc0128
+
+.Lffcc010e:
+	moveal	%fp@(16),%a0
+	movel	%fp@(-24),%a0@(34)
+	tstb	%fp@(-17)
+	bnes	.Lffcc0126
+	movel	#163,%d0
+	bras	.Lffcc0128
+
+.Lffcc0126:
+	moveq	#0,%d0
+
+.Lffcc0128:
+	moveml	%fp@(-64),%d3-%d7/%a2-%a4
+	unlk	%fp
+	rts
+
+	.align	16
+
 	.int	0x4E56FFEA,0x48E70F18,0x286E0008,0x206E000C
 	.int	0x2D50FFEE,0x422EFFFF,0x4A2C0020,0x66000260
 	.int	0x206E000C,0x2D50FFEE,0x206E0010,0x2650206B
@@ -2800,10 +2907,10 @@ off_ffcca000:
 	.int	0x000A8DBA,0x000A3670,0x000A7C50,0x000A4AE8
 	.int	0x000A3D0E,0x000A4764,0x0009E3F0,0x000AA006
 	.int	0x00095A70,0x00095C50,0x000A1A9A,0x00000000
-	.int	0x00096790,0x000967B4,0x000967D8,0x000A8F34
-	.int	0x000A8F4C,0x000A8F64,0x000A5ABC,0x000A5AE0
-	.int	0x000A41E0,0x000A4200,0x000A4220,0x000A6C00
-	.int	0x000A8D44,0x000A8D54,0x000A8D64,0x000A8D74
+	.int	0x00096790,0x000967B4,0x000967D8,0x000A8F34	/* ABA0 */
+	.int	0x000A8F4C,0x000A8F64,0x000A5ABC,0x000A5AE0	/* ABA4 */
+	.int	0x000A41E0,0x000A4200,0x000A4220,0x000A6C00	/* ABA8 */
+	.int	0x000A8D44,0x000A8D54,0x000A8D64,0x000A8D74	/* ABAC */
 	.int	0x000A8D84,0x000A8D94,0x000A8C84,0x000A8CA4	/* ABB0 */
 	.int	0x000A8CC4,0x000A8CE4,0x000A8D04,0x000A8D24	/* ABB4 */
 	.int	0x000993F0,0x000993F0,0x000993F0,0x00099D6A	/* ABB8 */
