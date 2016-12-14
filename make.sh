@@ -1,8 +1,8 @@
 #!/bin/bash
-PPCAS=ppc-unknown-linux-as
-PPCLD=ppc-unknown-linux-ld
-M68KAS=m68k-unknown-linux-as
-M68KLD=m68k-unknown-linux-ld
+PPCAS=powerpc-linux-gnu-as
+PPCLD=powerpc-linux-gnu-ld
+M68KAS=m68k-linux-gnu-as
+M68KLD=m68k-linux-gnu-ld
 $PPCAS -g -o PrivateInterfaceLib.o PrivateInterfaceLib.a || exit
 $PPCLD --oformat=binary -Ttext=0xffd5b970 -e 0xffd5b970 -o PrivateInterfaceLib.bin PrivateInterfaceLib.o || exit
 $PPCAS -g -o MixedMode.o MixedMode.a || exit
