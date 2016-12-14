@@ -5006,8 +5006,8 @@ j_GetVInfo:
 	.string	"LMGetCurApRefNum"
 	.string	"CallOSTrapUniversalProc"
 	.string	"LoadResource"
-	.ascii	"LM"
-	.int	0x47657443,0x75724170,0x4E616D65,0x00484F70
+	.string	"LMGetCurApName"
+	.ascii	"HOp"
 	.int	0x656E5265,0x7346696C,0x65004765,0x74507472
 	.int	0x53697A65,0x00476574,0x56496E66,0x6F004861
 	.int	0x6E646C65,0x5A6F6E65,0x00476574,0x5A6F6E65
