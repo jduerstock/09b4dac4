@@ -5013,10 +5013,12 @@ j_GetVInfo:
 	.string	"HandleZone"
 	.string	"GetZone"
 	.string	"CountResources"
-	.int	0x54656D70,0x484C6F63,0x6B005042,0x52656164
-	.int	0x53796E63,0x00526573,0x4572726F,0x72004E65
-	.int	0x77507472,0x53797343,0x6C656172,0x0054656D
-	.int	0x70446973,0x706F7365,0x48616E64,0x6C650054
+	.string	"TempHLock"
+	.string	"PBReadSync"
+	.string	"ResError"
+	.string	"NewPtrSysClear"
+	.string	"TempDisposeHandle"
+	.ascii	"T"
 	.int	0x656D704E,0x65774861,0x6E646C65,0x0052656C
 	.int	0x65617365,0x5265736F,0x75726365,0x004E6577
 	.int	0x48616E64,0x6C650055,0x73655265,0x7346696C
