@@ -26,9 +26,15 @@
 	addis	%r4,%r4,14
 	li	%r5,2350
 	bl      sub_ffd6188c
-	.int	0x80410014
-	.int	0x7C631B78,0x7C630734,0x38210040,0x80010008
-	.int	0x7C0803A6,0x4E800020,0x7C0802A6,0x90010008
+	lwz	%r2,20(%r1)
+	mr	%r3,%r3
+	extsh	%r3,%r3
+	addi	%r1,%r1,64
+	lwz	%r0,8(%r1)
+	mtlr	%r0
+	blr
+
+	.int	0x7C0802A6,0x90010008
 	stwu	%r1,-64(%r1)
 	mr	%r6,%r3
 	.int	0x80600E58,0x7C872378
