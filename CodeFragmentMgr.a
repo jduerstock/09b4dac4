@@ -5003,8 +5003,8 @@ j_GetVInfo:
 	.string	"FindFolder"
 	.string	"ReplaceGestalt"
 	.string	"DisposeHandle"
-	.ascii	"LMGetCur"
-	.int	0x41705265,0x664E756D,0x0043616C,0x6C4F5354
+	.string	"LMGetCurApRefNum"
+	.ascii	"CallOST"
 	.int	0x72617055,0x6E697665,0x7273616C,0x50726F63
 	.int	0x004C6F61,0x64526573,0x6F757263,0x65004C4D
 	.int	0x47657443,0x75724170,0x4E616D65,0x00484F70
