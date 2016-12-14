@@ -5007,11 +5007,12 @@ j_GetVInfo:
 	.string	"CallOSTrapUniversalProc"
 	.string	"LoadResource"
 	.string	"LMGetCurApName"
-	.ascii	"HOp"
-	.int	0x656E5265,0x7346696C,0x65004765,0x74507472
-	.int	0x53697A65,0x00476574,0x56496E66,0x6F004861
-	.int	0x6E646C65,0x5A6F6E65,0x00476574,0x5A6F6E65
-	.int	0x00436F75,0x6E745265,0x736F7572,0x63657300
+	.string	"HOpenResFile"
+	.string	"GetPtrSize"
+	.string	"GetVInfo"
+	.string	"HandleZone"
+	.string	"GetZone"
+	.string	"CountResources"
 	.int	0x54656D70,0x484C6F63,0x6B005042,0x52656164
 	.int	0x53796E63,0x00526573,0x4572726F,0x72004E65
 	.int	0x77507472,0x53797343,0x6C656172,0x0054656D
