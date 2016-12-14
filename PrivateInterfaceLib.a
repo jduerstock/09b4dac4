@@ -34,7 +34,8 @@
 	mtlr	%r0
 	blr
 
-	.int	0x7C0802A6,0x90010008
+	mflr	%r0
+	stw	%r0,8(%r1)
 	stwu	%r1,-64(%r1)
 	mr	%r6,%r3
 	.int	0x80600E58,0x7C872378
