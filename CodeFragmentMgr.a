@@ -5092,8 +5092,9 @@ j_GetVInfo:
 	.int	0x6E6E6563,0x74696F6E,0x46696E64,0x53796D62
 	.int	0x6F6C436F,0x756E7453,0x796D626F,0x6C734765
 	.int	0x74496E64,0x53796D62,0x6F6C4346,0x4C4F7065
-	.int	0x6E436F6E,0x7461696E,0x65724346,0x4C416464
-	.ascii	"Loader"
+	.int	0x6E436F6E,0x7461696E
+	.ascii	"er"
+	.ascii	"CFLAddLoader"
 	.ascii	"CFLRemoveLoader"
 	.ascii	"CFLHash"
 	.ascii	"CFLHashSlot"
