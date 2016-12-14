@@ -5079,21 +5079,18 @@ j_GetVInfo:
 	.ascii	"FragGetSectionInfo"
 	.ascii	"FragFindOwnerOfPC"
 	.ascii	"FragGetAppLocator"
-	.int	0x43467261
-	.int	0x67496465,0x6E746966,0x79417070,0x6C696361
-	.int	0x74696F6E,0x46726167,0x52656769,0x73746572
-	.int	0x53706563,0x69616C4C,0x69627346,0x72616747
-	.int	0x65744669,0x6C655265,0x67697374,0x7279496E
-	.int	0x666F4672,0x61675265,0x67697374,0x65724C6F
-	.int	0x63616C41,0x6C6C6F63,0x61746F72,0x47657453
-	.int	0x68617265,0x644C6962,0x72617279,0x47657444
-	.int	0x69736B46,0x7261676D,0x656E7447,0x65744D65
-	.int	0x6D467261,0x676D656E,0x74436C6F,0x7365436F
-	.int	0x6E6E6563,0x74696F6E,0x46696E64,0x53796D62
-	.int	0x6F6C436F,0x756E7453,0x796D626F,0x6C734765
-	.int	0x74496E64,0x53796D62,0x6F6C4346,0x4C4F7065
-	.int	0x6E436F6E,0x7461696E
-	.ascii	"er"
+	.ascii	"CFragIdentifyApplication"
+	.ascii	"FragRegisterSpecialLibs"
+	.ascii	"FragGetFileRegistryInfo"
+	.ascii	"FragRegisterLocalAllocator"
+	.ascii	"GetSharedLibrary"
+	.ascii	"GetDiskFragment"
+	.ascii	"GetMemFragment"
+	.ascii	"CloseConnection"
+	.ascii	"FindSymbol"
+	.ascii	"CountSymbols"
+	.ascii	"GetIndSymbol"
+	.ascii	"CFLOpenContainer"
 	.ascii	"CFLAddLoader"
 	.ascii	"CFLRemoveLoader"
 	.ascii	"CFLHash"
