@@ -5018,12 +5018,14 @@ j_GetVInfo:
 	.string	"ResError"
 	.string	"NewPtrSysClear"
 	.string	"TempDisposeHandle"
-	.ascii	"T"
-	.int	0x656D704E,0x65774861,0x6E646C65,0x0052656C
-	.int	0x65617365,0x5265736F,0x75726365,0x004E6577
-	.int	0x48616E64,0x6C650055,0x73655265,0x7346696C
-	.int	0x6500456D,0x70747948,0x616E646C,0x6500486F
-	.int	0x6C644D65,0x6D6F7279,0x004D656D,0x4572726F
+	.string	"TempNewHandle"
+	.string	"ReleaseResource"
+	.string	"NewHandle"
+	.string	"UseResFile"
+	.string	"EmptyHandle"
+	.string	"HoldMemory"
+	.ascii	"MemErro"
+
 	.int	0x72004765,0x74446174,0x6554696D,0x65004E65
 	.int	0x77507472,0x53797300,0x4E657750,0x74720042
 	.int	0x6C6F636B,0x4D6F7665,0x004C4D47,0x65745265

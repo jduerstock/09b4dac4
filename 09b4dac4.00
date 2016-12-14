@@ -3,15 +3,18 @@ ROMBase:
 	.int	0x09B4DAC4
 	.int	sub_ffc0002a-ROMBase
 	.short	0x077D
-	.long	0x4EFA00AA
-	.long	0x4EFA00A6
+	jmp	%pc@(sub_ffc000b6)
+
+	jmp	%pc@(sub_ffc000b6)
+
 	.short	0x45F6
 	.long	0x00000000
 	.short	0x004E
 	.long	off_ffccb400-ROMBase
-	.long	0x4EFA004A
+	jmp	%pc@(sub_ffc0006a)
+
 	.long	off_ffcca000-ROMBase
-	.long	0x4EFA2D18
+	jmp	%pc@(sub_ffc02d40)
 
 sub_ffc0002a:
 	jmp	%pc@(sub_ffc000b6)
@@ -20,7 +23,12 @@ sub_ffc0002a:
 	.int	0x046A2493,0x0450E335,0x039728D6,0x0414A6C6
 	.int	0x00300000,0x00002514,0x00002D2A,0x00010000
 	.int	0xAC460000,0xAB100000,0xACAA0001,0x4BA00005
-	.int	0x87AC0000,0x5A3C0000,0x53F060FF,0x0001DAF4
+	.int	0x87AC0000,0x5A3C0000
+	.short	0x53F0
+
+sub_ffc0006a:
+	.short	0x60FF
+	.int	0x0001DAF4
 	.int	0x436F7079,0x72696768,0x74202863,0x29203139
 	.int	0x38332D32,0x30303220,0x4170706C,0x6520436F
 	.int	0x6D707574,0x65722C20,0x496E632E,0x2020416C
@@ -760,6 +768,7 @@ sub_ffc010f0:
 
 	.align	16
 
+sub_ffc02d40:
 	.int	0x48F8FFFF,0x0C300CB8,0x5A932BC7,0x0DB06600
 	.int	0x015E554F,0x204FA080,0x10189EFC,0x0036204F
 	.int	0x11400031,0x42680032,0x317C0003,0x0028317C
