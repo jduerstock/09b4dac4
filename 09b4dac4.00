@@ -2309,9 +2309,17 @@ sub_ffc07e8a:
 	andw	0x25e,%d4
 	lea	0x14a,%a1
 	oriw	#1792,%sr
-	.int	0x26290002,0x671C2043,0x26103428
+	movel	%a1@(2),%d3
+	beqs	.Lffc07ed6
+	moveal	%d3,%a0
+	.int	0x26103428
 	.int	0x00060501,0x66120504,0x67080C42,0x00116702
-	.int	0x61B84A83,0x66E47400,0x4CDF0018,0x300248C0
+	.int	0x61B84A83
+	.short	0x66E4
+
+.Lffc07ed6:
+	.short	0x7400
+	.int	0x4CDF0018,0x300248C0
 	.int	0x46DF4E75
 
 sub_ffc07ee4:
