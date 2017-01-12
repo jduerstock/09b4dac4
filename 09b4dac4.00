@@ -8,7 +8,9 @@ ROMBase:
 	jmp	%pc@(sub_ffc000b6)
 
 	.short	0x45F6
+
 	.long	0x00000000
+
 	.short	0x004E
 	.long	off_ffccb400-ROMBase
 	jmp	%pc@(sub_ffc0006a)
@@ -1422,7 +1424,9 @@ sub_ffc05070:
 	.int	0xFFC83660,0xFFC83680,0xFFC81BB0,0xFFC83740
 	.int	0xFFC81BF0,0xFFC81EB0,0xFFC81F10,0xFFC83080
 	.int	0xFFC83200,0xFFC83420,0xFFC835A0,0xFFC83900
-	.int	0xFFC838C0,0xFFC83880,0x00000000,0x00000000
+	.int	0xFFC838C0,sub_ffc83880
+
+	.align	16
 
 dword_ffc05240:
 	.int	0x00000001,0x00000001,0x00000047,0x00000000
