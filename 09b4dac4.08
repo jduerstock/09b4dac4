@@ -159,11 +159,27 @@ sub_ffc80790:
 
 	.align	16
 
-	.int	0x4E56FFFC,0x48E70318,0x2E2E0010,0x286E000C
-	.int	0x206E0008,0x2668001E,0x20075F80,0x65320C80
-	.int	0x00000003,0x622AD080,0x303B0806,0x4EFB0000
+sub_ffc807e0:
+	linkw	%fp,#-4
+	moveml	%d6-%d7/%a3-%a4,%sp@-
+	movel	%fp@(16),%d7
+	moveal	%fp@(12),%a4
+	moveal	%fp@(8),%a0
+	moveal	%a0@(30),%a3
+	movel	%d7,%d0
+	subql	#7,%d0
+	bcss	.Lffc80830
+	cmpil	#3,%d0
+	bhis	.Lffc80830
+	addl	%d0,%d0
+	movew	%pc@(word_ffc80810,%d0:l),%d0
+	jmp	%pc@(%d0:w)
+
+word_ffc80810:
 	.int	0x000A0016,0x0010001C,0x2D4CFFFC,0x60162D4C
 	.int	0xFFFC6010,0x2D4CFFFC,0x600A2D4C,0xFFFC6004
+
+.Lffc80830:
 	.int	0x700EA9C9,0x70042F00,0x2F072F2E,0xFFFC7200
 	.int	0x2F0170FF,0x2F00204B,0x4E903C00,0x4FEF0014
 	.int	0x4CEE18C0,0xFFEC4E5E,0x4E750000,0x00000000
