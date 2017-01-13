@@ -198,12 +198,28 @@ word_ffc80810:
 	bras	.Lffc80834
 
 .Lffc80830:
-	.int	0x700EA9C9
+	moveq	#14,%d0
+	.short	0xa9c9
 
 .Lffc80834:
-	.int	0x70042F00,0x2F072F2E,0xFFFC7200
-	.int	0x2F0170FF,0x2F00204B,0x4E903C00,0x4FEF0014
-	.int	0x4CEE18C0,0xFFEC4E5E,0x4E750000,0x00000000
+	moveq	#4,%d0
+	movel	%d0,%sp@-
+	movel	%d7,%sp@-
+	movel	%fp@(-4),%sp@-
+	moveq	#0,%d1
+	movel	%d1,%sp@-
+	moveq	#-1,%d0
+	movel	%d0,%sp@-
+	moveal	%a3,%a0
+	jsr	%a0@
+	movew	%d0,%d6
+	lea	%sp@(20),%sp
+	moveml	%fp@(-20),%d6-%d7/%a3-%a4
+	unlk	%fp
+	rts
+
+	.align	16
+
 	.int	0x4E560000,0x40C0007C,0x07004E5E,0x4E750000
 	.int	0x4E560000,0x302E000A,0x46C04E5E,0x4E750000
 	.int	0x4E560000,0x48E70F18,0x4EBAFFD6,0x3A007000
