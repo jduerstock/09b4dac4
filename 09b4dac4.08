@@ -220,7 +220,16 @@ word_ffc80810:
 
 	.align	16
 
-	.int	0x4E560000,0x40C0007C,0x07004E5E,0x4E750000
+sub_ffc80860:
+	linkw	%fp,#0
+	movew	%sr,%d0
+	oriw	#1792,%sr
+	unlk	%fp
+	rts
+
+	.align	16
+
+sub_ffc80870:
 	.int	0x4E560000,0x302E000A,0x46C04E5E,0x4E750000
 	.int	0x4E560000,0x48E70F18,0x4EBAFFD6,0x3A007000
 	.int	0x303801D2,0x0C400400,0x65047EE3,0x605E7000
