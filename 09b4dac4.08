@@ -176,11 +176,32 @@ sub_ffc807e0:
 	jmp	%pc@(%d0:w)
 
 word_ffc80810:
-	.int	0x000A0016,0x0010001C,0x2D4CFFFC,0x60162D4C
-	.int	0xFFFC6010,0x2D4CFFFC,0x600A2D4C,0xFFFC6004
+	.short	.Lffc80818-word_ffc80810+2
+	.short	.Lffc80824-word_ffc80810+2
+	.short	.Lffc8081e-word_ffc80810+2
+	.short	.Lffc8082a-word_ffc80810+2
+
+.Lffc80818:
+	movel	%a4,%fp@(-4)
+	bras	.Lffc80834
+
+.Lffc8081e:
+	movel	%a4,%fp@(-4)
+	bras	.Lffc80834
+
+.Lffc80824:
+	movel	%a4,%fp@(-4)
+	bras	.Lffc80834
+
+.Lffc8082a:
+	movel	%a4,%fp@(-4)
+	bras	.Lffc80834
 
 .Lffc80830:
-	.int	0x700EA9C9,0x70042F00,0x2F072F2E,0xFFFC7200
+	.int	0x700EA9C9
+
+.Lffc80834:
+	.int	0x70042F00,0x2F072F2E,0xFFFC7200
 	.int	0x2F0170FF,0x2F00204B,0x4E903C00,0x4FEF0014
 	.int	0x4CEE18C0,0xFFEC4E5E,0x4E750000,0x00000000
 	.int	0x4E560000,0x40C0007C,0x07004E5E,0x4E750000
