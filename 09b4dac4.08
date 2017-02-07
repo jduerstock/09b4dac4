@@ -3,6 +3,8 @@
 	movel	%d7,%sp@-
 	jsr	%pc@(sub_ffc8364a)
 	addqw	#8,%sp
+
+.Lffc8000c:
 	tstb	%d5
 	bnes	.Lffc80018
 	moveq	#2,%d0
@@ -25,6 +27,8 @@
 
 .Lffc80038:
 	movew	%fp@(-2),%d0
+
+.Lffc8003c:
 	moveml	%fp@(-158),%d5-%d7/%a2-%a4
 	unlk	%fp
 	rts
@@ -1021,7 +1025,10 @@ sub_ffc80880:
 	.int	0x00144AAE,0x0028670C,0x266C001E,0x206E0028
 	.int	0x20AB0014,0x4AAE002C,0x6712266C,0x002E204B
 	.int	0x226E002C,0x203C0000,0x0080A22E,0x30074CEE
-	.int	0x1CE0FF54,0x4E5E4E75,0x2F3081E2,0x208C01A0
+	.int	0x1CE0FF54,0x4E5E4E75
+
+sub_ffc83408:
+	.int	0x2F3081E2,0x208C01A0
 	.int	0x4E750000,0x00000000,0x00000000,0x00000000
 	.int	0x4E56FFFC,0x48E70738,0x246E000C,0x3A2E000A
 	.int	0x486EFFFC,0x48C52F05,0x4EBAD356,0x3E00504F
