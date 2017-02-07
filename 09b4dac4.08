@@ -280,10 +280,39 @@ sub_ffc80160:
 	.align	16
 
 sub_ffc80310:
-	.int	0x4E560000,0x2F0B222E,0x0010226E,0x0008266E
-	.int	0x000C7000,0x1019B081,0x670C7000,0x6012B30B
-	.int	0x67047000,0x600A2001,0x53814A80,0x66F07001
-	.int	0x266EFFFC,0x4E5E4E75,0x00000000,0x00000000
+	linkw	%fp,#0
+	movel	%a3,%sp@-
+	movel	%fp@(16),%d1
+	moveal	%fp@(8),%a1
+	moveal	%fp@(12),%a3
+	moveq	#0,%d0
+	moveb	%a1@+,%d0
+	cmpl	%d1,%d0
+	beqs	.Lffc80336
+	moveq	#0,%d0
+	bras	.Lffc80340
+
+.Lffc8032e:
+	cmpmb	%a3@+,%a1@+
+	beqs	.Lffc80336
+	moveq	#0,%d0
+	bras	.Lffc80340
+
+.Lffc80336:
+	movel	%d1,%d0
+	subql	#1,%d1
+	tstl	%d0
+	bnes	.Lffc8032e
+	moveq	#1,%d0
+
+.Lffc80340:
+	moveal	%fp@(-4),%a3
+	unlk	%fp
+	rts
+
+	.align	16
+
+sub_ffc80350:
 	.int	0x4E560000,0x2F0C286E,0x000C2014,0x53802880
 	.int	0x206E0008,0x22505290,0x1011286E,0xFFFC4E5E
 	.int	0x4E750000,0x00000000,0x00000000,0x00000000
