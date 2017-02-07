@@ -451,8 +451,23 @@ sub_ffc80380:
 
 	.align	16
 
-	.int	0x4E560000,0x242E0010,0x222E000C,0x226E0008
-	.int	0x600212C1,0x20025382,0x4A806EF6,0x4E5E4E75
+sub_ffc80490:
+	linkw	%fp,#0
+	movel	%fp@(16),%d2
+	movel	%fp@(12),%d1
+	moveal	%fp@(8),%a1
+	bras	.Lffc804a4
+
+.Lffc804a2:
+	moveb	%d1,%a1@+
+
+.Lffc804a4:
+	movel	%d2,%d0
+	subql	#1,%d2
+	tstl	%d0
+	bgts	.Lffc804a2
+	unlk	%fp
+	rts
 
 sub_ffc804b0:
 	.int	0x4E56FFE6,0x48E71F38,0x206E000C,0x70001028
