@@ -313,9 +313,23 @@ sub_ffc80310:
 	.align	16
 
 sub_ffc80350:
-	.int	0x4E560000,0x2F0C286E,0x000C2014,0x53802880
-	.int	0x206E0008,0x22505290,0x1011286E,0xFFFC4E5E
-	.int	0x4E750000,0x00000000,0x00000000,0x00000000
+	linkw	%fp,#0
+	movel	%a4,%sp@-
+	moveal	%fp@(12),%a4
+	movel	%a4@,%d0
+	subql	#1,%d0
+	movel	%d0,%a4@
+	moveal	%fp@(8),%a0
+	moveal	%a0@,%a1
+	addql	#1,%a0@
+	moveb	%a1@,%d0
+	moveal	%fp@(-4),%a4
+	unlk	%fp
+	rts
+
+	.align	16
+
+sub_ffc80380:
 	.int	0x4E560000,0x48E70318,0x266E000C,0x286E0008
 	.int	0x7C002F0B,0x2F0C4EBA,0xFFB81E00,0x70001007
 	.int	0x323C0080,0xC2007000,0x10014A80,0x504F6700
