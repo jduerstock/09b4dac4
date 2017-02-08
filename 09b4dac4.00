@@ -1,4 +1,13 @@
 
+	.macro	_KernelVMDispatch
+		.short	0xfe0a
+	.endm
+
+	.macro	_MMUGetPhysicalPage
+		moveq	#10,%d0
+		_KernelVMDispatch
+	.endm
+
 ROMBase:
 	.int	0x09B4DAC4
 	.int	sub_ffc0002a-ROMBase
@@ -1622,12 +1631,44 @@ sub_ffc053f0:
 	.int	0x003A003A,0x003A003A,0x003A003A,0x003A003A
 	.int	0x003A003A,0x003A003A,0x003E003A,0x003E003E
 	.int	0x003E003E,0x003A003E,0x003E003A,0x003E003A
-	.int	0x003E0000,0x6000FF68,0x4CDF047C,0x4E750000
-	.int	0x48E76020,0x24781FF4,0x222A0008,0x20082408
-	.int	0xE2A82040,0x700AFE0A,0x0C80FFFF,0xFFFF6716
-	.int	0xE3A8222A,0x00045381,0xC4818082,0x20407000
-	.int	0x4CDF0406,0x4E752040,0x70CE60F4,0x42AEFFEC
-	.int	0x4E750000,0x00000000,0x00000000,0x00000000
+	.int	0x003E0000,0x6000FF68,0x4CDF047C
+	rts
+
+	.align	16
+
+sub_ffc05cb0:
+	moveml	%d1-%d2/%a2,%sp@-
+	moveal	0x1ff4,%a2
+	movel	%a2@(8),%d1
+	movel	%a0,%d0
+	movel	%a0,%d2
+	lsrl	%d1,%d0
+	moveal	%d0,%a0
+	_MMUGetPhysicalPage
+	cmpil	#-1,%d0
+	beqs	.Lffc05ce6
+	lsll	%d1,%d0
+	movel	%a2@(4),%d1
+	subql	#1,%d1
+	andl	%d1,%d2
+	orl	%d2,%d0
+	moveal	%d0,%a0
+	moveq	#0,%d0
+
+.Lffc05ce0:
+	moveml	%sp@+,%d1-%d2/%a2
+	rts
+
+.Lffc05ce6:
+	moveal	%d0,%a0
+	moveq	#-50,%d0
+	bras	.Lffc05ce0
+	clrl	%fp@(-20)
+	rts
+
+	.align	16
+
+sub_ffc05d00:
 	.int	0x48E73800,0x780C2409,0xE8AA5282,0x2208E8A9
 	.int	0x26000283,0x00010000,0x780EE8AB,0x20417013
 	.int	0xFE0A0880,0x00028083,0x20402241,0x7014FE0A
