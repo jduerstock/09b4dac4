@@ -1,15 +1,102 @@
-	.int	0x41FA00B0,0x7200D0C2,0x121843F1,0x10001210
-	.int	0x55416B06,0x67082011,0x60061011,0x60023011
-	.int	0x2D40000E,0x303C0006,0x6000F208,0x207802B6
-	.int	0x2028000E,0x60EA2078,0x02B62068,0x01782208
-	.int	0x67DE5281,0x67DA2050,0x10280020,0x60D24E56
-	.int	0x00003D7C,0xFFFF0012,0x22780BA0,0x342E0010
-	.int	0x0C42002A,0x62385269,0x00020C42,0x00266736
-	.int	0x0C42002A,0x672841FA,0x003A7200,0xD0C21218
-	.int	0x43F11000,0x1210202E,0x000C5541,0x6B066708
-	.int	0x22806006,0x12806002,0x3280426E,0x0012303C
-	.int	0x000A6000,0xF18E2078,0x02B6216E,0x000C000E
-	.int	0x60E80002,0x02020401,0x05010601,0x07010801
+
+sub_ffc8ffe0:
+	linkw	%fp,#0
+	moveq	#0,%d0
+	moveal	0xba0,%a1
+	movew	%fp@(12),%d2
+	cmpiw	#42,%d2
+	bhis	.Lffc90020
+	cmpiw	#38,%d2
+	beqs	.Lffc9002c
+	cmpiw	#42,%d2
+	beqs	.Lffc90036
+	lea	%pc@(byte_ffc900b2),%a0
+	moveq	#0,%d1
+	addaw	%d2,%a0
+	moveb	%a0@+,%d1
+	lea	%a1@(%d1:w),%a1
+	moveb	%a0@,%d1
+	subqw	#2,%d1
+	bmis	.Lffc9001a
+	beqs	.Lffc9001e
+	movel	%a1@,%d0
+	bras	.Lffc90020
+
+.Lffc9001a:
+	moveb	%a1@,%d0
+	bras	.Lffc90020
+
+.Lffc9001e:
+	movew	%a1@,%d0
+
+.Lffc90020:
+	movel	%d0,%fp@(14)
+	movew	#6,%d0
+	braw	sub_ffc8f232
+
+.Lffc9002c:
+	moveal	0x2b6,%a0
+	movel	%a0@(14),%d0
+	bras	.Lffc90020
+
+.Lffc90036:
+	moveal	0x2b6,%a0
+	moveal	%a0@(376),%a0
+	movel	%a0,%d1
+	beqs	.Lffc90020
+	addql	#1,%d1
+	beqs	.Lffc90020
+	moveal	%a0@,%a0
+	moveb	%a0@(32),%d0
+	bras	.Lffc90020
+
+.Lffc9004e:
+	linkw	%fp,#0
+	movew	#-1,%fp@(18)
+	moveal	0xba0,%a1
+	movew	%fp@(16),%d2
+	cmpiw	#42,%d2
+	bhis	.Lffc9009e
+	addqw	#1,%a1@(2)
+	cmpiw	#38,%d2
+	beqs	.Lffc900a6
+	cmpiw	#42,%d2
+	beqs	.Lffc9009e
+	lea	%pc@(byte_ffc900b2),%a0
+	moveq	#0,%d1
+	addaw	%d2,%a0
+	moveb	%a0@+,%d1
+	lea	%a1@(%d1:w),%a1
+	moveb	%a0@,%d1
+	movel	%fp@(12),%d0
+	subqw	#2,%d1
+	bmis	.Lffc90094
+	beqs	.Lffc90098
+	movel	%d0,%a1@
+	bras	.Lffc9009a
+
+.Lffc90094:
+	moveb	%d0,%a1@
+	bras	.Lffc9009a
+
+.Lffc90098:
+	movew	%d0,%a1@
+
+.Lffc9009a:
+	clrw	%fp@(18)
+
+.Lffc9009e:
+	movew	#10,%d0
+	braw	sub_ffc8f232
+
+.Lffc900a6:
+	moveal	0x2b6,%a0
+	movel	%fp@(12),%a0@(14)
+	bras	.Lffc9009a
+
+byte_ffc900b2:
+	.short	0x0002
+	.int	0x02020401,0x05010601,0x07010801
 	.int	0x09011604,0x26022802,0x2A023402,0x3C043604
 	.int	0x0A040E04,0x3A025A01,0x6E045C02,0x5B012F30
 	.int	0x81E22060,0x01204E75,0x2F3081E2,0x2060011C
