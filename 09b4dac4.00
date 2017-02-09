@@ -1669,10 +1669,36 @@ sub_ffc05cb0:
 	.align	16
 
 sub_ffc05d00:
-	.int	0x48E73800,0x780C2409,0xE8AA5282,0x2208E8A9
-	.int	0x26000283,0x00010000,0x780EE8AB,0x20417013
-	.int	0xFE0A0880,0x00028083,0x20402241,0x7014FE0A
-	.int	0x528151CA,0xFFE87000,0x4CDF001C,0x4E750000
+	moveml	%d2-%d4,%sp@-
+	moveq	#12,%d4
+	movel	%a1,%d2
+	lsrl	%d4,%d2
+	addql	#1,%d2
+	movel	%a0,%d1
+	lsrl	%d4,%d1
+	movel	%d0,%d3
+	andil	#65536,%d3
+	moveq	#14,%d4
+	lsrl	%d4,%d3
+
+.Lffc05d1c:
+	moveal	%d1,%a0
+	moveq	#19,%d0
+	.short	0xfe0a
+	bclr	#2,%d0
+	orl	%d3,%d0
+	moveal	%d0,%a0
+	moveal	%d1,%a1
+	moveq	#20,%d0
+	.short	0xfe0a
+	addql	#1,%d1
+	dbf	%d2,.Lffc05d1c
+	moveq	#0,%d0
+	moveml	%sp@+,%d2-%d4
+	rts
+
+	.align	16
+
 	.int	0x08380003,0x0DD46708,0x43FA009A,0x21C90D84
 	.int	0x4E750838,0x00030DD4,0x67000072,0x9EFC0032
 	.int	0x204F4228,0x001B42A8,0x000C43FA,0x00622149
