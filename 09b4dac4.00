@@ -2025,9 +2025,25 @@ sub_ffc06fc0:
 	rts
 
 sub_ffc06fc2:
-	.short	0x2038
-	.int	0x08A8670E,0x2040B1C1,0x660A2050
-	.int	0x2028001E,0x60F091C8,0x22084E75,0x2F3081E2
+	movel	0x8a8,%d0
+
+.Lffc06fc6:
+	beqs	.Lffc06fd6
+	moveal	%d0,%a0
+	cmpal	%d1,%a0
+	bnes	.Lffc06fd8
+	moveal	%a0@,%a0
+	movel	%a0@(30),%d0
+	bras	.Lffc06fc6
+
+.Lffc06fd6:
+	subal	%a0,%a0
+
+.Lffc06fd8:
+	movel	%a0,%d1
+	rts
+
+	.int	0x2F3081E2
 	.int	0x20100014,0x4E752F30,0x81E22010,0x00104E75
 	.int	0x60FF000A,0xB1BE0000,0x00000000,0x00000000
 	.int	0x60FF000A,0xB2FE0000,0x00000000,0x00000000
