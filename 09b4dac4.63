@@ -2624,26 +2624,127 @@
 	.int	0x80BF0808,0x4BF727AC,0x80BF0808,0x4BF727A4
 	.int	0x80BF0808,0x4BF7279C,0x80BF0808,0x4BF72794
 	.int	0x80BF0808,0x4BF7278C,0x80BF0808,0x4BF72784
-	.int	0x63C30860,0x4BF734FC,0x63C308E0,0x4BF734F4
-	.int	0x63C30960,0x4BF734EC,0x63C309E0,0x4BF734E4
-	.int	0x63C30A60,0x4BF734DC,0x63C30AE0,0x4BF734D4
-	.int	0x63C30B60,0x4BF734CC,0x63C30BE0,0x4BF734C4
-	.int	0x63C30860,0x4BF7350C,0x63C308E0,0x4BF73504
-	.int	0x63C30960,0x4BF734FC,0x63C309E0,0x4BF734F4
-	.int	0x63C30A60,0x4BF734EC,0x63C30AE0,0x4BF734E4
-	.int	0x63C30B60,0x4BF734DC,0x63C30BE0,0x4BF734D4
-	.int	0x38700010,0x4BF7348C,0x38710010,0x4BF73484
-	.int	0x38720010,0x4BF7347C,0x38730010,0x4BF73474
-	.int	0x38740010,0x4BF7346C,0x38750010,0x4BF73464
-	.int	0x38760010,0x4BF7345C,0x38610010,0x4BF73454
-	.int	0x38700010,0x4BF7349C,0x38710010,0x4BF73494
-	.int	0x38720010,0x4BF7348C,0x38730010,0x4BF73484
-	.int	0x38740010,0x4BF7347C,0x38750010,0x4BF73474
-	.int	0x38760010,0x4BF7346C,0x38610010,0x4BF73464
-	.int	0x63C30860,0x4BF7349C,0x63C308E0,0x4BF73494
-	.int	0x63C30960,0x4BF7348C,0x63C309E0,0x4BF73484
-	.int	0x63C30A60,0x4BF7347C,0x63C30AE0,0x4BF73474
-	.int	0x63C30B60,0x4BF7346C,0x63C30BE0,0x4BF73464
+
+	ori     %r3,%r30,2144			/* f600 */
+	b       .Lfff6e500
+
+	ori     %r3,%r30,2272			/* f601 */
+	b       .Lfff6e500
+
+	ori     %r3,%r30,2400			/* f602 */
+	b       .Lfff6e500
+
+	ori     %r3,%r30,2528			/* f603 */
+	b       .Lfff6e500
+
+	ori     %r3,%r30,2656			/* f604 */
+	b       .Lfff6e500
+
+	ori     %r3,%r30,2784			/* f605 */
+	b       .Lfff6e500
+
+	ori     %r3,%r30,2912			/* f606 */
+	b       .Lfff6e500
+
+	ori     %r3,%r30,3040			/* f607 */
+	b       .Lfff6e500
+
+	ori     %r3,%r30,2144			/* f608 */
+	b       .Lfff6e550
+
+	ori     %r3,%r30,2272			/* f609 */
+	b       .Lfff6e550
+
+	ori     %r3,%r30,2400			/* f60a */
+	b       .Lfff6e550
+
+	ori     %r3,%r30,2528			/* f60b */
+	b       .Lfff6e550
+
+	ori     %r3,%r30,2656			/* f60c */
+	b       .Lfff6e550
+
+	ori     %r3,%r30,2784			/* f60d */
+	b       .Lfff6e550
+
+	ori     %r3,%r30,2912			/* f60e */
+	b       .Lfff6e550
+
+	ori     %r3,%r30,3040			/* f60f */
+	b       .Lfff6e550
+
+	addi    %r3,%r16,16			/* f610 */
+	b       .Lfff6e510
+
+	addi    %r3,%r17,16			/* f611 */
+	b       .Lfff6e510
+
+	addi    %r3,%r18,16			/* f612 */
+	b       .Lfff6e510
+
+	addi    %r3,%r19,16			/* f613 */
+	b       .Lfff6e510
+
+	addi    %r3,%r20,16			/* f614 */
+	b       .Lfff6e510
+
+	addi    %r3,%r21,16			/* f615 */
+	b       .Lfff6e510
+
+	addi    %r3,%r22,16			/* f616 */
+	b       .Lfff6e510
+
+	addi    %r3,%r1,16			/* f617 */
+	b       .Lfff6e510
+
+	addi    %r3,%r16,16			/* f618 */
+	b       .Lfff6e560
+
+	addi    %r3,%r17,16			/* f619 */
+	b       .Lfff6e560
+
+	addi    %r3,%r18,16			/* f61a */
+	b       .Lfff6e560
+
+	addi    %r3,%r19,16			/* f61b */
+	b       .Lfff6e560
+
+	addi    %r3,%r20,16			/* f61c */
+	b       .Lfff6e560
+
+	addi    %r3,%r21,16			/* f61d */
+	b       .Lfff6e560
+
+	addi    %r3,%r22,16			/* f61e */
+	b       .Lfff6e560
+
+	addi    %r3,%r1,16			/* f61f */
+	b       .Lfff6e560
+
+	ori     %r3,%r30,2144			/* f620 */
+	b       .Lfff6e5a0
+
+	ori     %r3,%r30,2272			/* f621 */
+	b       .Lfff6e5a0
+
+	ori     %r3,%r30,2400			/* f622 */
+	b       .Lfff6e5a0
+
+	ori     %r3,%r30,2528			/* f623 */
+	b       .Lfff6e5a0
+
+	ori     %r3,%r30,2656			/* f624 */
+	b       .Lfff6e5a0
+
+	ori     %r3,%r30,2784			/* f625 */
+	b       .Lfff6e5a0
+
+	ori     %r3,%r30,2912			/* f626 */
+	b       .Lfff6e5a0
+
+	ori     %r3,%r30,3040			/* f627 */
+	b       .Lfff6e5a0
+
 
 	.rept	216				/* f628-f6ff */
 		lwz	%r5,0x808(%r31)
