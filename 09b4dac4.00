@@ -8,6 +8,16 @@
 		_KernelVMDispatch
 	.endm
 
+	.macro	_GetPTEntryGivenPage
+		moveq	#19,%d0
+		_KernelVMDispatch
+	.endm
+
+	.macro	_SetPTEntryGivenPage
+		moveq	#20,%d0
+		_KernelVMDispatch
+	.endm
+
 ROMBase:
 	.int	0x09B4DAC4
 	.int	sub_ffc0002a-ROMBase
@@ -1683,14 +1693,12 @@ sub_ffc05d00:
 
 .Lffc05d1c:
 	moveal	%d1,%a0
-	moveq	#19,%d0
-	.short	0xfe0a
+	_GetPTEntryGivenPage
 	bclr	#2,%d0
 	orl	%d3,%d0
 	moveal	%d0,%a0
 	moveal	%d1,%a1
-	moveq	#20,%d0
-	.short	0xfe0a
+	_SetPTEntryGivenPage
 	addql	#1,%d1
 	dbf	%d2,.Lffc05d1c
 	moveq	#0,%d0
@@ -1699,6 +1707,7 @@ sub_ffc05d00:
 
 	.align	16
 
+sub_ffc05d40:
 	.int	0x08380003,0x0DD46708,0x43FA009A,0x21C90D84
 	.int	0x4E750838,0x00030DD4,0x67000072,0x9EFC0032
 	.int	0x204F4228,0x001B42A8,0x000C43FA,0x00622149
