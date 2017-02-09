@@ -2009,10 +2009,24 @@ sub_ffc06d18:
 	rts
 
 sub_ffc06fa6:
-	.short	0x2078
-	.int	0x02B6B0FC,0xFFFF670E
-	.int	0x206801E0,0x20280008,0x67042040,0x4E904E75
-	.int	0x4E752038,0x08A8670E,0x2040B1C1,0x660A2050
+	moveal	0x2b6,%a0
+	cmpaw	#-1,%a0
+	beqs	.Lffc06fbe
+	moveal	%a0@(480),%a0
+	movel	%a0@(8),%d0
+	beqs	.Lffc06fbe
+	moveal	%d0,%a0
+	jsr	%a0@
+
+.Lffc06fbe:
+	rts
+
+sub_ffc06fc0:
+	rts
+
+sub_ffc06fc2:
+	.short	0x2038
+	.int	0x08A8670E,0x2040B1C1,0x660A2050
 	.int	0x2028001E,0x60F091C8,0x22084E75,0x2F3081E2
 	.int	0x20100014,0x4E752F30,0x81E22010,0x00104E75
 	.int	0x60FF000A,0xB1BE0000,0x00000000,0x00000000
