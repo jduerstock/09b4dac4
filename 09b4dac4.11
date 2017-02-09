@@ -1816,21 +1816,109 @@ sub_ffcb2010:
 	.align	16
 
 sub_ffcb20c0:
-	.int	0x4E56FFEC,0x48E71F38,0x207802B6,0x286801E0
-	.int	0x266C0012,0x45EB0008,0x4AAA0C00,0x660C4AAA
-	.int	0x0C0C6606,0x70006000,0x00BC206E,0x00082668
-	.int	0x00042D78,0x0830FFF0,0x206B000C,0x2D680010
-	.int	0xFFF4302E,0xFFF048C0,0x322EFFF4,0x48C12A00
-	.int	0x9A81302E,0xFFF248C0,0x322EFFF6,0x48C12C00
-	.int	0x9C812605,0x7010D680,0x2806D880,0x47D2242A
-	.int	0x0C004207,0x602E49D3,0x302C0004,0x48C0B085
-	.int	0x6F1E302C,0x000648C0,0xB0866F14,0x301448C0
-	.int	0xB0836C0C,0x302C0002,0x48C0B084,0x6C027E01
-	.int	0x47EB000C,0x20025382,0x4A806704,0x4A0767C6
-	.int	0x4AAA0C0C,0x632C49EA,0x0C04302C,0x000448C0
-	.int	0xB0856F1E,0x302C0006,0x48C0B086,0x6F143014
-	.int	0x48C0B083,0x6C0C302C,0x000248C0,0xB0846C02
-	.int	0x7E011007,0x4CEE1CF8,0xFFCC4E5E,0x4E750000
+	linkw	%fp,#-20
+	moveml	%d3-%d7/%a2-%a4,%sp@-
+	moveal	0x2b6,%a0
+	moveal	%a0@(480),%a4
+	moveal	%a4@(18),%a3
+	lea	%a3@(8),%a2
+	tstl	%a2@(3072)
+	bnes	.Lffcb20ea
+	tstl	%a2@(3084)
+	bnes	.Lffcb20ea
+	moveq	#0,%d0
+	braw	.Lffcb21a4
+
+.Lffcb20ea:
+	moveal	%fp@(8),%a0
+	moveal	%a0@(4),%a3
+	movel	0x830,%fp@(-16)
+	moveal	%a3@(12),%a0
+	movel	%a0@(16),%fp@(-12)
+	movew	%fp@(-16),%d0
+	extl	%d0
+	movew	%fp@(-12),%d1
+	extl	%d1
+	movel	%d0,%d5
+	subl	%d1,%d5
+	movew	%fp@(-14),%d0
+	extl	%d0
+	movew	%fp@(-10),%d1
+	extl	%d1
+	movel	%d0,%d6
+	subl	%d1,%d6
+	movel	%d5,%d3
+	moveq	#16,%d0
+	addl	%d0,%d3
+	movel	%d6,%d4
+	addl	%d0,%d4
+	lea	%a2@,%a3
+	movel	%a2@(3072),%d2
+	clrb	%d7
+	bras	.Lffcb2164
+
+.Lffcb2136:
+	lea	%a3@,%a4
+	movew	%a4@(4),%d0
+	extl	%d0
+	cmpl	%d5,%d0
+	bles	.Lffcb2160
+	movew	%a4@(6),%d0
+	extl	%d0
+	cmpl	%d6,%d0
+	bles	.Lffcb2160
+	movew	%a4@,%d0
+	extl	%d0
+	cmpl	%d3,%d0
+	bges	.Lffcb2160
+	movew	%a4@(2),%d0
+	extl	%d0
+	cmpl	%d4,%d0
+	bges	.Lffcb2160
+	moveq	#1,%d7
+
+.Lffcb2160:
+	lea	%a3@(12),%a3
+
+.Lffcb2164:
+	movel	%d2,%d0
+	subql	#1,%d2
+	tstl	%d0
+	beqs	.Lffcb2170
+	tstb	%d7
+	beqs	.Lffcb2136
+
+.Lffcb2170:
+	tstl	%a2@(3084)
+	blss	.Lffcb21a2
+	lea	%a2@(3076),%a4
+	movew	%a4@(4),%d0
+	extl	%d0
+	cmpl	%d5,%d0
+	bles	.Lffcb21a2
+	movew	%a4@(6),%d0
+	extl	%d0
+	cmpl	%d6,%d0
+	bles	.Lffcb21a2
+	movew	%a4@,%d0
+	extl	%d0
+	cmpl	%d3,%d0
+	bges	.Lffcb21a2
+	movew	%a4@(2),%d0
+	extl	%d0
+	cmpl	%d4,%d0
+	bges	.Lffcb21a2
+	moveq	#1,%d7
+
+.Lffcb21a2:
+	moveb	%d7,%d0
+
+.Lffcb21a4:
+	moveml	%fp@(-52),%d3-%d7/%a2-%a4
+	unlk	%fp
+	rts
+
+	.align	16
 
 sub_ffcb21b0:
 	linkw	%fp,#-8
