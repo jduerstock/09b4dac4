@@ -1,7 +1,28 @@
-	.int	0x38600008,0x4BF7B2E8,0x38600008,0x4BF7B3A0
-	.int	0x38600008,0x4BF7B458,0x38600008,0x4BF7B510
-	.int	0x38600008,0x4BF7B5C8,0x38600008,0x4BF7B680
-	.int	0x38600008,0x4BF7B738,0x38600008,0x4BF7B7F0
+
+	li      %r3,8
+	b       .Lfff6b2ec
+
+	li      %r3,8
+	b       .Lfff6b3ac
+
+	li      %r3,8
+	b       .Lfff6b46c
+
+	li      %r3,8
+	b       .Lfff6b52c
+
+	li      %r3,8
+	b       .Lfff6b5ec
+
+	li      %r3,8
+	b       .Lfff6b6ac
+
+	li      %r3,8
+	b       .Lfff6b76c
+
+	li      %r3,8
+	b       .Lfff6b82c
+
 	.int	0x5504CFFE,0x4BF7B288,0x5524CFFE,0x4BF7B340
 	.int	0x5544CFFE,0x4BF7B3F8,0x5564CFFE,0x4BF7B4B0
 	.int	0x5584CFFE,0x4BF7B568,0x55A4CFFE,0x4BF7B620
