@@ -2888,7 +2888,9 @@ sub_ffc12820:
 off_ffc19cb0:
 	.short	sub_ffc19ce4-off_ffc19cb0
 	.short	sub_ffc19d1a-off_ffc19cb0
-	.int	0x01120156,0x01DA022C,0x024A0272
+	.short	sub_ffc19dc2-off_ffc19cb0
+	.short	0x0156
+	.int	0x01DA022C,0x024A0272
 
 sub_ffc19cc0:
 	addqw	#1,%d0
@@ -3014,12 +3016,41 @@ sub_ffc19d1a:
 	rts
 
 sub_ffc19dc2:
-	.short	0x3208
-	.int	0x66100C85,0x6B656E79,0x66080C86
-	.int	0x74756E67,0x67066100,0x02986724,0x61000262
-	.int	0x6618082A,0x001E0084,0x6616082A,0x001E00AC
-	.int	0x660E2692,0x204AA01F,0x4E75303C,0xFE5160F8
-	.int	0x303CFE50,0x60F22848,0x4A446738,0x6A442478
+	movew	%a0,%d1
+	bnes	.Lffc19dd6
+	cmpil	#1801809529,%d5
+	bnes	.Lffc19dd6
+	cmpil	#1953853031,%d6
+	beqs	.Lffc19ddc
+
+.Lffc19dd6:
+	bsrw	sub_ffc1a070
+	beqs	.Lffc19e00
+
+.Lffc19ddc:
+	bsrw	sub_ffc1a040
+	bnes	.Lffc19dfa
+	btst	#30,%a2@(132)
+	bnes	.Lffc19e00
+	btst	#30,%a2@(172)
+	bnes	.Lffc19e00
+	movel	%a2@,%a3@
+	moveal	%a2,%a0
+	.short	0xa01f
+
+.Lffc19df8:
+	rts
+
+.Lffc19dfa:
+	movew	#-431,%d0
+	bras	.Lffc19df8
+
+.Lffc19e00:
+	movew	#-432,%d0
+	bras	.Lffc19df8
+
+	.short	0x2848
+	.int	0x4A446738,0x6A442478
 	.int	0x0BB8246A,0x001245EA,0x0006264A,0x2452B4FC
 	.int	0x00006728,0x51CBFFF4,0x7000302C,0x0004B06A
 	.int	0x00046F04,0x302A0004,0x3800204A,0x224CA22E
