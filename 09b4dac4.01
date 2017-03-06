@@ -2889,7 +2889,7 @@ off_ffc19cb0:
 	.short	sub_ffc19ce4-off_ffc19cb0
 	.short	sub_ffc19d1a-off_ffc19cb0
 	.short	sub_ffc19dc2-off_ffc19cb0
-	.short	0x0156
+	.short	sub_ffc19e06-off_ffc19cb0
 	.int	0x01DA022C,0x024A0272
 
 sub_ffc19cc0:
@@ -3049,7 +3049,8 @@ sub_ffc19dc2:
 	movew	#-432,%d0
 	bras	.Lffc19df8
 
-	.short	0x2848
+sub_ffc19e06:
+	moveal	%a0,%a4
 	.int	0x4A446738,0x6A442478
 	.int	0x0BB8246A,0x001245EA,0x0006264A,0x2452B4FC
 	.int	0x00006728,0x51CBFFF4,0x7000302C,0x0004B06A
