@@ -2890,7 +2890,10 @@ off_ffc19cb0:
 	.short	sub_ffc19d1a-off_ffc19cb0
 	.short	sub_ffc19dc2-off_ffc19cb0
 	.short	sub_ffc19e06-off_ffc19cb0
-	.int	0x01DA022C,0x024A0272
+	.short	sub_ffc19e8a-off_ffc19cb0
+	.short	sub_ffc19edc-off_ffc19cb0
+	.short	0x024a
+	.short	0x0272
 
 sub_ffc19cc0:
 	addqw	#1,%d0
@@ -3121,16 +3124,61 @@ sub_ffc19e06:
 	beqs	.Lffc19e28
 	bras	.Lffc19e58
 
-.Lffc19e8a:
-	.short	0x3228
-	.int	0x00086100
-	.int	0x01B06636,0x082A001E,0x0084663A,0x082A001E
-	.int	0x00AC6632,0x7000303C,0x00C4B068,0x00046520
-	.int	0x67043028,0x00040440,0x00706F0A,0x43EA0070
-	.int	0x41E80070,0xA22E7000,0x4E75303C,0xFE514E75
-	.int	0x303CFE4E,0x4E75303C,0xFE504E75,0x30086712
-	.int	0x0C400001,0x660E4EBA,0x01187000,0x30014840
-	.int	0x4A404E75,0x303CFE4A,0x60F848E7,0x06003A28
+sub_ffc19e8a:
+	movew	%a0@(8),%d1
+	bsrw	sub_ffc1a040
+	bnes	.Lffc19eca
+	btst	#30,%a2@(132)
+	bnes	.Lffc19ed6
+	btst	#30,%a2@(172)
+	bnes	.Lffc19ed6
+	moveq	#0,%d0
+	movew	#196,%d0
+	cmpw	%a0@(4),%d0
+	bcss	.Lffc19ed0
+	beqs	.Lffc19eb6
+	movew	%a0@(4),%d0
+
+.Lffc19eb6:
+	subiw	#112,%d0
+	bles	.Lffc19ec6
+	lea	%a2@(112),%a1
+	lea	%a0@(112),%a0
+	.short	0xa22e
+
+.Lffc19ec6:
+	moveq	#0,%d0
+	rts
+
+.Lffc19eca:
+	movew	#-431,%d0
+	rts
+
+.Lffc19ed0:
+	movew	#-434,%d0
+	rts
+
+.Lffc19ed6:
+	movew	#-432,%d0
+	rts
+
+sub_ffc19edc:
+	movew	%a0,%d0
+	beqs	.Lffc19ef2
+	cmpiw	#1,%d0
+	bnes	.Lffc19ef4
+	jsr	%pc@(sub_ffc1a000)
+	moveq	#0,%d0
+	movew	%d1,%d0
+	swap	%d0
+	tstw	%d0
+
+.Lffc19ef2:
+	rts
+
+.Lffc19ef4:
+	movew	#-438,%d0
+	.int	0x60F848E7,0x06003A28
 	.int	0x00043C28,0x00083143,0x00043144,0x00086100
 	.int	0xFF7A3145,0x00043146,0x00084CDF,0x00604A40
 	.int	0x4E753003,0x670000C6,0x0C400001,0x670000B2
@@ -3147,6 +3195,8 @@ sub_ffc19e06:
 	.int	0x2F004E91,0x301F6004,0x303CFE51,0x5C8F600A
 	.int	0x4EBA001E,0x70003001,0x48404A40,0x4E75303C
 	.int	0xFE4A60F8,0x00000000,0x00000000,0x00000000
+
+sub_ffc1a000:
 	.int	0x41F80308,0x22280002,0x67322841,0x322C000A
 	.int	0x67260C41,0xFFFE6720,0x302C0006,0x6100F792
 	.int	0x67160C41,0xFFFF6704,0x6116660C,0x7000302C
