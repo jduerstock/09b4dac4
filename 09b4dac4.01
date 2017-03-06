@@ -2887,7 +2887,7 @@ sub_ffc12820:
 
 off_ffc19cb0:
 	.short	sub_ffc19ce4-off_ffc19cb0
-	.short	0x006A
+	.short	sub_ffc19d1a-off_ffc19cb0
 	.int	0x01120156,0x01DA022C,0x024A0272
 
 sub_ffc19cc0:
@@ -2931,19 +2931,91 @@ sub_ffc19ce4:
 	moveq	#0,%d0
 	rts
 
-	.short	0x2F08
-	.int	0x0C680001
-	.int	0x00066200,0x00961028,0x000A0C00,0x001F6E78
-	.int	0x32280008,0x6100030A,0x677A4A68,0x00086706
-	.int	0x6100032E,0x676E303C,0x00C4B068,0x0004655E
-	.int	0xA51E3038,0x02206666,0x24482257,0x706130D9
-	.int	0x51C8FFFC,0x422A0084,0x422A00AC,0x43EA002A
-	.int	0x6100031E,0x66282078,0x0BB82068,0x001241E8
-	.int	0x00064A6A,0x00086606,0x20102480,0x600A2010
-	.int	0x67042040,0x60F84292,0x208A7000,0x6020204A
-	.int	0xA01F303C,0xFF946016,0x303CFE4F,0x6010303C
-	.int	0xFE4E600A,0x303CFE4D,0x6004303C,0xFE4C584F
-	.int	0x4E753208,0x66100C85,0x6B656E79,0x66080C86
+sub_ffc19d1a:
+	movel	%a0,%sp@-
+	cmpiw	#1,%a0@(6)
+	bhiw	.Lffc19dba
+	moveb	%a0@(10),%d0
+	cmpib	#31,%d0
+	bgts	.Lffc19da8
+	movew	%a0@(8),%d1
+	bsrw	sub_ffc1a040
+	beqs	.Lffc19db4
+	tstw	%a0@(8)
+	beqs	.Lffc19d46
+	bsrw	sub_ffc1a070
+	beqs	.Lffc19db4
+
+.Lffc19d46:
+	movew	#196,%d0
+	cmpw	%a0@(4),%d0
+	bcss	.Lffc19dae
+	.short	0xa51e
+	movew	0x220,%d0
+	bnes	.Lffc19dbe
+	moveal	%a0,%a2
+	moveal	%sp@,%a1
+	moveq	#97,%d0
+
+.Lffc19d5e:
+	movew	%a1@+,%a0@+
+	dbf	%d0,.Lffc19d5e
+	clrb	%a2@(132)
+	clrb	%a2@(172)
+	lea	%a2@(42),%a1
+	bsrw	sub_ffc1a090
+	bnes	.Lffc19d9e
+	moveal	0xbb8,%a0
+	moveal	%a0@(18),%a0
+	lea	%a0@(6),%a0
+	tstw	%a2@(8)
+	bnes	.Lffc19d8e
+	movel	%a0@,%d0
+	movel	%d0,%a2@
+	bras	.Lffc19d98
+
+.Lffc19d8e:
+	movel	%a0@,%d0
+	beqs	.Lffc19d96
+	moveal	%d0,%a0
+	bras	.Lffc19d8e
+
+.Lffc19d96:
+	clrl	%a2@
+
+.Lffc19d98:
+	movel	%a2,%a0@
+	moveq	#0,%d0
+	bras	.Lffc19dbe
+
+.Lffc19d9e:
+	moveal	%a2,%a0
+	.short	0xa01f
+	movew	#-108,%d0
+	bras	.Lffc19dbe
+
+.Lffc19da8:
+	movew	#-433,%d0
+	bras	.Lffc19dbe
+
+.Lffc19dae:
+	movew	#-434,%d0
+	bras	.Lffc19dbe
+
+.Lffc19db4:
+	movew	#-435,%d0
+	bras	.Lffc19dbe
+
+.Lffc19dba:
+	movew	#-436,%d0
+
+.Lffc19dbe:
+	addqw	#4,%sp
+	rts
+
+sub_ffc19dc2:
+	.short	0x3208
+	.int	0x66100C85,0x6B656E79,0x66080C86
 	.int	0x74756E67,0x67066100,0x02986724,0x61000262
 	.int	0x6618082A,0x001E0084,0x6616082A,0x001E00AC
 	.int	0x660E2692,0x204AA01F,0x4E75303C,0xFE5160F8
@@ -3004,8 +3076,11 @@ sub_ffc1a040:
 
 	.align	16
 
+sub_ffc1a070:
 	.int	0x2F0841F8,0x03582050,0xB0FC0000,0x670AB268
 	.int	0x004C66F2,0x205F4E75,0x0A3C0004,0x60F60000
+
+sub_ffc1a090:
 	.int	0x48E72018,0x28499EFC,0x0020264F,0x4267A994
 	.int	0x341F0C42,0x00016706,0x0C420003,0x66027402
 	.int	0x9EFC0040,0x204F42A8,0x000C214B,0x00123142
