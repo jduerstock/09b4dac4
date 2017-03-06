@@ -2804,6 +2804,8 @@ sub_ffc12820:
 	.int	0x600E3029,0x00086100,0x015E6604,0x4269000A
 	.int	0xB5F80352,0x660842B8,0x03524278,0x0384B5F8
 	.int	0x03EE6604,0x42B803EE,0x204AA01F,0x4E7560E0
+
+sub_ffc197b0:
 	.int	0x9EFC0018,0x204F3140,0x001608F8,0x00050376
 	.int	0x22780778,0x4E91DEFC,0x00184E75,0x48E70E08
 	.int	0x4A826722,0x28427400,0x141C671A,0x76001834
@@ -2888,14 +2890,14 @@ sub_ffc12820:
 	.align	16
 
 off_ffc19cb0:
-	.short	sub_ffc19ce4-off_ffc19cb0
-	.short	sub_ffc19d1a-off_ffc19cb0
-	.short	sub_ffc19dc2-off_ffc19cb0
-	.short	sub_ffc19e06-off_ffc19cb0
-	.short	sub_ffc19e8a-off_ffc19cb0
-	.short	sub_ffc19edc-off_ffc19cb0
-	.short	sub_ffc19efa-off_ffc19cb0
-	.short	sub_ffc19f22-off_ffc19cb0
+	.short	sub_ffc19ce4-off_ffc19cb0	/* -1 */
+	.short	InstallFS-off_ffc19cb0		/* 0 InstallFS */
+	.short	RemoveFS-off_ffc19cb0		/* 1 RemoveFS */
+	.short	sub_ffc19e06-off_ffc19cb0	/* 2 GetFSInfo */
+	.short	sub_ffc19e8a-off_ffc19cb0	/* 3 */
+	.short	sub_ffc19edc-off_ffc19cb0	/* 4 */
+	.short	sub_ffc19efa-off_ffc19cb0	/* 5 SetFSInfo */
+	.short	sub_ffc19f22-off_ffc19cb0	/* 6 InformFSM */
 
 sub_ffc19cc0:
 	addqw	#1,%d0
@@ -2938,7 +2940,7 @@ sub_ffc19ce4:
 	moveq	#0,%d0
 	rts
 
-sub_ffc19d1a:
+InstallFS:
 	movel	%a0,%sp@-
 	cmpiw	#1,%a0@(6)
 	bhiw	.Lffc19dba
@@ -3020,7 +3022,7 @@ sub_ffc19d1a:
 	addqw	#4,%sp
 	rts
 
-sub_ffc19dc2:
+RemoveFS:
 	movew	%a0,%d1
 	bnes	.Lffc19dd6
 	cmpil	#1801809529,%d5
@@ -3301,10 +3303,38 @@ sub_ffc19f22:
 	.align	16
 
 sub_ffc1a000:
-	.int	0x41F80308,0x22280002,0x67322841,0x322C000A
-	.int	0x67260C41,0xFFFE6720,0x302C0006,0x6100F792
-	.int	0x67160C41,0xFFFF6704,0x6116660C,0x7000302C
-	.int	0x0006307C,0x0007A02F,0x221460CC,0x4E750000
+	lea	0x308,%a0
+	movel	%a0@(2),%d1
+
+.Lffc1a008:
+	beqs	.Lffc1a03c
+	moveal	%d1,%a4
+	movew	%a4@(10),%d1
+	beqs	.Lffc1a038
+	cmpiw	#-2,%d1
+	beqs	.Lffc1a038
+	movew	%a4@(6),%d0
+	bsrw	sub_ffc197b0
+	beqs	.Lffc1a038
+	cmpiw	#-1,%d1
+	beqs	.Lffc1a02c
+	bsrs	sub_ffc1a040
+	bnes	.Lffc1a038
+
+.Lffc1a02c:
+	moveq	#0,%d0
+	movew	%a4@(6),%d0
+	moveaw	#7,%a0
+	.short	0xa02f
+
+.Lffc1a038:
+	movel	%a4@,%d1
+	bras	.Lffc1a008
+
+.Lffc1a03c:
+	rts
+
+	.align	16
 
 sub_ffc1a040:
 	moveal	0xbb8,%a2
