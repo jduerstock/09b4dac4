@@ -4327,12 +4327,30 @@
 	.int	0x4BFF85C8
 
 .Lfff6dac4:
-	.int	0xA0DF0BBC,0x7C704214,0x2C080000
-	.int	0x7CA803A6,0x3863FFFF,0x3886FFFF,0x7C632078
-	.int	0x408185A4,0xA0BF0BBE,0x7E102078,0x7C901850
-	.int	0x7C842C30,0x38840001,0x7C8903A6,0x4E800021
-	.int	0x7C8902A6,0x7C882831,0x4182857C,0x7FA803A6
-	.int	0x5739062C,0x4BFFF600,0x7C0087AC,0x7E103214
+	lhz     %r6,3004(%r31)
+	add     %r3,%r16,%r8
+	cmpwi   %r8,0
+	mtlr    %r5
+	addi    %r3,%r3,-1
+	addi    %r4,%r6,-1
+	andc    %r3,%r3,%r4
+	ble     .Lfff66084
+	lhz     %r5,3006(%r31)
+	andc    %r16,%r16,%r4
+	subf    %r4,%r16,%r3
+	srw     %r4,%r4,%r5
+	addi    %r4,%r4,1
+	mtctr   %r4
+	blrl
+	mfctr   %r4
+	slw.    %r8,%r4,%r5
+	beq     .Lfff66084
+	mtlr    %r29
+	rlwinm  %r25,%r25,0,24,22
+	b       .Lfff6d114
+
+.Lfff6db18:
+	.int	0x7C0087AC,0x7E103214
 	.int	0x400AFFF8,0x4E800020,0x7C0080AC,0x7E103214
 	.int	0x400AFFF8,0x4E800020,0x7C00806C,0x7E103214
 	.int	0x400AFFF8,0x4E800020,0x7C2087EC,0x7E103214
