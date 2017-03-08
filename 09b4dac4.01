@@ -2804,8 +2804,19 @@ sub_ffc12820:
 	.int	0x600E3029,0x00086100,0x015E6604,0x4269000A
 	.int	0xB5F80352,0x660842B8,0x03524278,0x0384B5F8
 	.int	0x03EE6604,0x42B803EE,0x204AA01F,0x4E7560E0
-	.int	0x9EFC0018,0x204F3140,0x001608F8,0x00050376
-	.int	0x22780778,0x4E91DEFC,0x00184E75,0x48E70E08
+
+sub_ffc197b0:
+	subaw	#24,%sp
+	moveal	%sp,%a0
+	movew	%d0,%a0@(22)
+	bset	#5,0x376
+	moveal	0x778,%a1
+	jsr	%a1@
+	addaw	#24,%sp
+	rts
+
+sub_ffc197cc:
+	.int	0x48E70E08
 	.int	0x4A826722,0x28427400,0x141C671A,0x76001834
 	.int	0x30000C04,0x003A6708,0x5243B443,0x66F06706
 	.int	0x224C4A43,0x6E0C70DB,0x76004CDF,0x10704A40
@@ -2883,17 +2894,19 @@ sub_ffc12820:
 	.int	0x700FA824,0x321F4CDF,0x03016706,0x0C41FFC6
 	.int	0x660C2251,0x0C69FFFF,0x000A6602,0x70C8588F
 	.int	0x22780BB8,0x22690012,0x4229002A,0x22690058
-	.int	0x48C04ED1,0x00000000,0x00000000,0x00000000
+	.int	0x48C04ED1
+
+	.align	16
 
 off_ffc19cb0:
-	.short	sub_ffc19ce4-off_ffc19cb0
-	.short	sub_ffc19d1a-off_ffc19cb0
-	.short	sub_ffc19dc2-off_ffc19cb0
-	.short	sub_ffc19e06-off_ffc19cb0
-	.short	sub_ffc19e8a-off_ffc19cb0
-	.short	sub_ffc19edc-off_ffc19cb0
-	.short	0x024a
-	.short	0x0272
+	.short	sub_ffc19ce4-off_ffc19cb0	/* -1 */
+	.short	InstallFS-off_ffc19cb0		/* 0 InstallFS */
+	.short	RemoveFS-off_ffc19cb0		/* 1 RemoveFS */
+	.short	sub_ffc19e06-off_ffc19cb0	/* 2 GetFSInfo */
+	.short	sub_ffc19e8a-off_ffc19cb0	/* 3 */
+	.short	sub_ffc19edc-off_ffc19cb0	/* 4 */
+	.short	sub_ffc19efa-off_ffc19cb0	/* 5 SetFSInfo */
+	.short	sub_ffc19f22-off_ffc19cb0	/* 6 InformFSM */
 
 sub_ffc19cc0:
 	addqw	#1,%d0
@@ -2936,7 +2949,7 @@ sub_ffc19ce4:
 	moveq	#0,%d0
 	rts
 
-sub_ffc19d1a:
+InstallFS:
 	movel	%a0,%sp@-
 	cmpiw	#1,%a0@(6)
 	bhiw	.Lffc19dba
@@ -3018,7 +3031,7 @@ sub_ffc19d1a:
 	addqw	#4,%sp
 	rts
 
-sub_ffc19dc2:
+RemoveFS:
 	movew	%a0,%d1
 	bnes	.Lffc19dd6
 	cmpil	#1801809529,%d5
@@ -3178,29 +3191,159 @@ sub_ffc19edc:
 
 .Lffc19ef4:
 	movew	#-438,%d0
-	.int	0x60F848E7,0x06003A28
-	.int	0x00043C28,0x00083143,0x00043144,0x00086100
-	.int	0xFF7A3145,0x00043146,0x00084CDF,0x00604A40
-	.int	0x4E753003,0x670000C6,0x0C400001,0x670000B2
-	.int	0x0C400002,0x660000B8,0x5D8F264F,0x28483210
-	.int	0x67000096,0x6B2843D3,0x558F3F01,0x2F09700F
-	.int	0xA824301F,0x67080C40,0xFFC66600,0x00802253
-	.int	0x3229000A,0x6F720C41,0x01006B6C,0x602A558F
-	.int	0x3F0143EB,0x00042F09,0x43D32F09,0x7009A824
-	.int	0x301F6600,0x00582253,0x32290048,0x66083229
-	.int	0x004A6A02,0x444160AE,0x610000A6,0x663A422C
-	.int	0x000F2949,0x00103229,0xFFFC0C01,0x00086C04
-	.int	0x50EC000F,0x43EA002A,0x29490014,0x202A0074
-	.int	0x67162240,0x558F3F3C,0x00012F0C,0x202A0070
-	.int	0x2F004E91,0x301F6004,0x303CFE51,0x5C8F600A
-	.int	0x4EBA001E,0x70003001,0x48404A40,0x4E75303C
-	.int	0xFE4A60F8,0x00000000,0x00000000,0x00000000
+	bras	.Lffc19ef2
+
+sub_ffc19efa:
+	moveml	%d5-%d6,%sp@-
+	movew	%a0@(4),%d5
+	movew	%a0@(8),%d6
+	movew	%d3,%a0@(4)
+	movew	%d4,%a0@(8)
+	bsrw	sub_ffc19e8a
+	movew	%d5,%a0@(4)
+	movew	%d6,%a0@(8)
+	moveml	%sp@+,%d5-%d6
+	tstw	%d0
+	rts
+
+sub_ffc19f22:
+	movew	%d3,%d0
+	beqw	.Lffc19fec
+	cmpiw	#1,%d0
+	beqw	.Lffc19fe0
+	cmpiw	#2,%d0
+	bnew	.Lffc19fee
+	subql	#6,%sp
+	moveal	%sp,%a3
+	moveal	%a0,%a4
+	movew	%a0@,%d1
+	beqw	.Lffc19fd8
+	bmis	.Lffc19f6e
+
+.Lffc19f46:
+	lea	%a3@,%a1
+	subql	#2,%sp
+	movew	%d1,%sp@-
+	movel	%a1,%sp@-
+	moveq	#15,%d0
+	.short	0xa824
+	movew	%sp@+,%d0
+	beqs	.Lffc19f5e
+	cmpiw	#-58,%d0
+	bnew	.Lffc19fdc
+
+.Lffc19f5e:
+	moveal	%a3@,%a1
+	movew	%a1@(10),%d1
+	bles	.Lffc19fd8
+	cmpiw	#256,%d1
+	bmis	.Lffc19fd8
+	bras	.Lffc19f98
+
+.Lffc19f6e:
+	subql	#2,%sp
+	movew	%d1,%sp@-
+	lea	%a3@(4),%a1
+	movel	%a1,%sp@-
+	lea	%a3@,%a1
+	movel	%a1,%sp@-
+	moveq	#9,%d0
+	.short	0xa824
+	movew	%sp@+,%d0
+	bnew	.Lffc19fdc
+	moveal	%a3@,%a1
+	movew	%a1@(72),%d1
+	bnes	.Lffc19f96
+	movew	%a1@(74),%d1
+	bpls	.Lffc19f96
+	negw	%d1
+
+.Lffc19f96:
+	bras	.Lffc19f46
+
+.Lffc19f98:
+	bsrw	sub_ffc1a040
+	bnes	.Lffc19fd8
+	clrb	%a4@(15)
+	movel	%a1,%a4@(16)
+	movew	%a1@(-4),%d1
+	cmpib	#8,%d1
+	bges	.Lffc19fb4
+	st	%a4@(15)
+
+.Lffc19fb4:
+	lea	%a2@(42),%a1
+	movel	%a1,%a4@(20)
+	movel	%a2@(116),%d0
+	beqs	.Lffc19fd8
+	moveal	%d0,%a1
+	subql	#2,%sp
+	movew	#1,%sp@-
+	movel	%a4,%sp@-
+	movel	%a2@(112),%d0
+	movel	%d0,%sp@-
+	jsr	%a1@
+	movew	%sp@+,%d0
+	bras	.Lffc19fdc
+
+.Lffc19fd8:
+	movew	#-431,%d0
+
+.Lffc19fdc:
+	addql	#6,%sp
+	bras	.Lffc19fea
+
+.Lffc19fe0:
+	jsr	%pc@(sub_ffc1a000)
+	moveq	#0,%d0
+	movew	%d1,%d0
+	swap	%d0
+
+.Lffc19fea:
+	tstw	%d0
+
+.Lffc19fec:
+	rts
+
+.Lffc19fee:
+	movew	#-438,%d0
+	bras	.Lffc19fec
+
+	.align	16
 
 sub_ffc1a000:
-	.int	0x41F80308,0x22280002,0x67322841,0x322C000A
-	.int	0x67260C41,0xFFFE6720,0x302C0006,0x6100F792
-	.int	0x67160C41,0xFFFF6704,0x6116660C,0x7000302C
-	.int	0x0006307C,0x0007A02F,0x221460CC,0x4E750000
+	lea	0x308,%a0
+	movel	%a0@(2),%d1
+
+.Lffc1a008:
+	beqs	.Lffc1a03c
+	moveal	%d1,%a4
+	movew	%a4@(10),%d1
+	beqs	.Lffc1a038
+	cmpiw	#-2,%d1
+	beqs	.Lffc1a038
+	movew	%a4@(6),%d0
+	bsrw	sub_ffc197b0
+	beqs	.Lffc1a038
+	cmpiw	#-1,%d1
+	beqs	.Lffc1a02c
+	bsrs	sub_ffc1a040
+	bnes	.Lffc1a038
+
+.Lffc1a02c:
+	moveq	#0,%d0
+	movew	%a4@(6),%d0
+	moveaw	#7,%a0
+	.short	0xa02f
+
+.Lffc1a038:
+	movel	%a4@,%d1
+	bras	.Lffc1a008
+
+.Lffc1a03c:
+	rts
+
+	.align	16
 
 sub_ffc1a040:
 	moveal	0xbb8,%a2
