@@ -43,6 +43,8 @@ $PPCAS -g -o USBMassStorageClassDriver.o USBMassStorageClassDriver.a || exit
 $PPCLD --oformat=binary -Ttext=0xffe2aab0 -e 0xffe2aab0 -o USBMassStorageClassDriver.bin USBMassStorageClassDriver.o || exit
 $PPCAS -g -o drvr.BlueBoxShared.o drvr.BlueBoxShared.a || exit
 $PPCLD --oformat=binary -Ttext=0xffcdd530 -e 0xffcdd530 -o drvr.BlueBoxShared.bin drvr.BlueBoxShared.o || exit
+$PPCAS -g -o NameRegistryLib.o NameRegistryLib.a || exit
+$PPCLD --oformat=binary -Ttext=0xffda9fa0 -e 0xffda9fa0 -o NameRegistryLib.bin NameRegistryLib.o || exit
 $PPCAS -g -o DriverServicesLib.o DriverServicesLib.a || exit
 $PPCLD --oformat=binary -Ttext=0xffda9fa0 -e 0xffda9fa0 -o DriverServicesLib.bin DriverServicesLib.o || exit
 $PPCAS -g -o StdCLib.o StdCLib.a || exit
