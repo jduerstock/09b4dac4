@@ -165,7 +165,7 @@ res_ffda5490:
 	.int	0x4B757274,0xC0A00000,0x0000080E,0x000003CC
 
 res_ffda54d0:
-	.include "NameRegistryTraps.a"
+	.incbin "NameRegistryTraps.bin"
 
 res_ffda5ce0:
 	.int	0x78000000,0x00000000
