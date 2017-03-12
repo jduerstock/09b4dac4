@@ -4310,31 +4310,176 @@ sub_ffcb2990:
 	rtd	#4
 
 sub_ffcb29c0:
-	.int	0x4E56FFE4,0x48E70F38,0x2A2E0008,0x660A3D7C
-	.int	0xFFCE000C,0x60000168,0xA11A2D48,0xFFFC598F
-	.int	0x2EB802A6,0x205FA01B,0x183808CD,0x11FC0001
-	.int	0x08CD2078,0x02B62068,0x01E02D48,0xFFE82468
-	.int	0x0012286A,0x0C1C2C2A,0x0C202654,0x7E006056
-	.int	0xBA93664C,0x20065380,0xB0876312,0x200B5880
-	.int	0x2040224B,0x20065380,0x9087E580,0xA22E53AA
-	.int	0x0C20598F,0x2F0C4EBA,0x01182006,0x721FD081
-	.int	0xE580B09F,0x62242D4C,0xFFE4598F,0x2F0C4EBA
-	.int	0x0100201F,0x72409081,0x206EFFE4,0xA024600A
-	.int	0x584B2007,0x5287BC87,0x62A6206E,0xFFE82068
-	.int	0x00042068,0x00042D48,0xFFF42868,0x00087000
-	.int	0x2640600A,0xBAAC003C,0x6708264C,0x2854200C
-	.int	0x66F2200C,0x6614558F,0x2F05486E,0xFFF07000
-	.int	0x1F00303C,0x0520ABEB,0x544F200C,0x66000082
-	.int	0x4AAEFFF0,0x677A206E,0xFFF02050,0x30280014
-	.int	0x48C0323C,0x8010C240,0x6766206E,0xFFF42468
-	.int	0x000C203C,0x00000092,0xA31E2848,0x200C6612
-	.int	0x206EFFFC,0xA01B11C4,0x08CD3D7C,0xFF94000C
-	.int	0x604C2945,0x003C296E,0xFFF00038,0x2F0C2F0A
-	.int	0x4EBAF26E,0x4A40504F,0x6716204C,0xA01F206E
-	.int	0xFFFCA01B,0x11C408CD,0x3D7CFF94,0x000C601E
-	.int	0x200B6704,0x268C6008,0x206EFFF4,0x214C0008
-	.int	0x206EFFFC,0xA01B11C4,0x08CD426E,0x000C4CEE
-	.int	0x1CF0FFC8,0x4E5E4E74,0x00040000,0x00000000
+	linkw	%fp,#-28
+	moveml	%d4-%d7/%a2-%a4,%sp@-
+	movel	%fp@(8),%d5
+	bnes	.Lffcb29d8
+	movew	#-50,%fp@(12)
+	braw	.Lffcb2b3e
+
+.Lffcb29d8:
+	.short	0xa11a
+	movel	%a0,%fp@(-4)
+	subql	#4,%sp
+	movel	0x2a6,%sp@
+	moveal	%sp@+,%a0
+	.short	0xa01b
+	moveb	0x8cd,%d4
+	moveb	#1,0x8cd
+	moveal	0x2b6,%a0
+	moveal	%a0@(480),%a0
+	movel	%a0,%fp@(-24)
+	moveal	%a0@(18),%a2
+	moveal	%a2@(3100),%a4
+	movel	%a2@(3104),%d6
+	moveal	%a4@,%a3
+	moveq	#0,%d7
+	bras	.Lffcb2a66
+
+.Lffcb2a10:
+	cmpl	%a3@,%d5
+	bnes	.Lffcb2a60
+	movel	%d6,%d0
+	subql	#1,%d0
+	cmpl	%d7,%d0
+	blss	.Lffcb2a2e
+	movel	%a3,%d0
+	addql	#4,%d0
+	moveal	%d0,%a0
+	moveal	%a3,%a1
+	movel	%d6,%d0
+	subql	#1,%d0
+	subl	%d7,%d0
+	asll	#2,%d0
+	.short	0xa22e
+
+.Lffcb2a2e:
+	subql	#1,%a2@(3104)
+	subql	#4,%sp
+	movel	%a4,%sp@-
+	jsr	%pc@(sub_ffcb2b50)
+	movel	%d6,%d0
+	moveq	#31,%d1
+	addl	%d1,%d0
+	asll	#2,%d0
+	cmpl	%sp@+,%d0
+	bhis	.Lffcb2a6a
+	movel	%a4,%fp@(-28)
+	subql	#4,%sp
+	movel	%a4,%sp@-
+	jsr	%pc@(sub_ffcb2b50)
+	movel	%sp@+,%d0
+	moveq	#64,%d1
+	subl	%d1,%d0
+	moveal	%fp@(-28),%a0
+	.short	0xa024
+	bras	.Lffcb2a6a
+
+.Lffcb2a60:
+	addqw	#4,%a3
+	movel	%d7,%d0
+	addql	#1,%d7
+
+.Lffcb2a66:
+	cmpl	%d7,%d6
+	bhis	.Lffcb2a10
+
+.Lffcb2a6a:
+	moveal	%fp@(-24),%a0
+	moveal	%a0@(4),%a0
+	moveal	%a0@(4),%a0
+	movel	%a0,%fp@(-12)
+	moveal	%a0@(8),%a4
+	moveq	#0,%d0
+	moveal	%d0,%a3
+	bras	.Lffcb2a8e
+
+.Lffcb2a84:
+	cmpl	%a4@(60),%d5
+	beqs	.Lffcb2a92
+	moveal	%a4,%a3
+	moveal	%a4@,%a4
+
+.Lffcb2a8e:
+	movel	%a4,%d0
+	bnes	.Lffcb2a84
+
+.Lffcb2a92:
+	movel	%a4,%d0
+	bnes	.Lffcb2aaa
+	subql	#2,%sp
+	movel	%d5,%sp@-
+	pea	%fp@(-16)
+	moveq	#0,%d0
+	moveb	%d0,%sp@-
+	movew	#1312,%d0
+	.short	0xabeb
+	addqw	#2,%sp
+
+.Lffcb2aaa:
+	movel	%a4,%d0
+	bnew	.Lffcb2b30
+	tstl	%fp@(-16)
+	beqs	.Lffcb2b30
+	moveal	%fp@(-16),%a0
+	moveal	%a0@,%a0
+	movew	%a0@(20),%d0
+	extl	%d0
+	movew	#-32752,%d1
+	andw	%d0,%d1
+	beqs	.Lffcb2b30
+	moveal	%fp@(-12),%a0
+	moveal	%a0@(12),%a2
+	movel	#146,%d0
+	.short	0xa31e
+	moveal	%a0,%a4
+	movel	%a4,%d0
+	bnes	.Lffcb2af2
+	moveal	%fp@(-4),%a0
+	.short	0xa01b
+	moveb	%d4,0x8cd
+	movew	#-108,%fp@(12)
+	bras	.Lffcb2b3e
+
+.Lffcb2af2:
+	movel	%d5,%a4@(60)
+	movel	%fp@(-16),%a4@(56)
+	movel	%a4,%sp@-
+	movel	%a2,%sp@-
+	jsr	%pc@(sub_ffcb1d70)
+	tstw	%d0
+	addqw	#8,%sp
+	beqs	.Lffcb2b20
+	moveal	%a4,%a0
+	.short	0xa01f
+	moveal	%fp@(-4),%a0
+	.short	0xa01b
+	moveb	%d4,0x8cd
+	movew	#-108,%fp@(12)
+	bras	.Lffcb2b3e
+
+.Lffcb2b20:
+	movel	%a3,%d0
+	beqs	.Lffcb2b28
+	movel	%a4,%a3@
+	bras	.Lffcb2b30
+
+.Lffcb2b28:
+	moveal	%fp@(-12),%a0
+	movel	%a4,%a0@(8)
+
+.Lffcb2b30:
+	moveal	%fp@(-4),%a0
+	.short	0xa01b
+	moveb	%d4,0x8cd
+	clrw	%fp@(12)
+
+.Lffcb2b3e:
+	moveml	%fp@(-56),%d4-%d7/%a2-%a4
+	unlk	%fp
+	rtd	#4
+
+	.align	16
 
 sub_ffcb2b50:
 	bral	sub_ffcc9290
