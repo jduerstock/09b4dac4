@@ -4288,9 +4288,26 @@ sub_ffcb2940:
 	.align	16
 
 sub_ffcb2990:
-	.int	0x4E56FFFC,0x558F2F2E,0x0008486E,0xFFFC7000
-	.int	0x1F00303C,0x051FABEB,0x4A5F6608,0x2D6EFFFC
-	.int	0x000C6006,0x70002D40,0x000C4E5E,0x4E740004
+	linkw	%fp,#-4
+	subql	#2,%sp
+	movel	%fp@(8),%sp@-
+	pea	%fp@(-4)
+	moveq	#0,%d0
+	moveb	%d0,%sp@-
+	movew	#1311,%d0
+	.short	0xabeb
+	tstw	%sp@+
+	bnes	.Lffcb29b4
+	movel	%fp@(-4),%fp@(12)
+	bras	.Lffcb29ba
+
+.Lffcb29b4:
+	moveq	#0,%d0
+	movel	%d0,%fp@(12)
+
+.Lffcb29ba:
+	unlk	%fp
+	rtd	#4
 
 sub_ffcb29c0:
 	.int	0x4E56FFE4,0x48E70F38,0x2A2E0008,0x660A3D7C
