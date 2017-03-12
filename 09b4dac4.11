@@ -3857,9 +3857,22 @@ sub_ffcb2520:
 	.align	16
 
 sub_ffcb2550:
-	.int	0x4E560000,0x2F071E38,0x08CD11FC,0x000108CD
-	.int	0x303808D0,0x534031C0,0x08D04EBA,0xFD9411C7
-	.int	0x08CD2E2E,0xFFFC4E5E,0x4E750000,0x00000000
+	linkw	%fp,#0
+	movel	%d7,%sp@-
+	moveb	0x8cd,%d7
+	moveb	#1,0x8cd
+	movew	0x8d0,%d0
+	subqw	#1,%d0
+	movew	%d0,0x8d0
+	jsr	%pc@(sub_ffcb2300)
+	moveb	%d7,0x8cd
+	movel	%fp@(-4),%d7
+	unlk	%fp
+	rts
+
+	.align	16
+
+sub_ffcb2580:
 	.int	0x4E560000,0x48E70118,0x207802B6,0x266801E0
 	.int	0x286B0012,0x4A2C0C29,0x663C1E38,0x08CD11FC
 	.int	0x000108CD,0x4A780D4C,0x670C3038,0x0D4C5340
