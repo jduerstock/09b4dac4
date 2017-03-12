@@ -4253,11 +4253,39 @@ sub_ffcb2880:
 	.align	16
 
 sub_ffcb2940:
-	.int	0x4E560000,0x48E70718,0x2A2E0008,0x207802B6
-	.int	0x286801E0,0x266C0012,0x206B0C1C,0x28502C2B
-	.int	0x0C207E00,0x600CBA9C,0x66047001,0x600A2007
-	.int	0x5287BC87,0x62F07000,0x4CEE18E0,0xFFEC4E5E
-	.int	0x4E750000,0x00000000,0x00000000,0x00000000
+	linkw	%fp,#0
+	moveml	%d5-%d7/%a3-%a4,%sp@-
+	movel	%fp@(8),%d5
+	moveal	0x2b6,%a0
+	moveal	%a0@(480),%a4
+	moveal	%a4@(18),%a3
+	moveal	%a3@(3100),%a0
+	moveal	%a0@,%a4
+	movel	%a3@(3104),%d6
+	moveq	#0,%d7
+	bras	.Lffcb2972
+
+.Lffcb2966:
+	cmpl	%a4@+,%d5
+	bnes	.Lffcb296e
+	moveq	#1,%d0
+	bras	.Lffcb2978
+
+.Lffcb296e:
+	movel	%d7,%d0
+	addql	#1,%d7
+
+.Lffcb2972:
+	cmpl	%d7,%d6
+	bhis	.Lffcb2966
+	moveq	#0,%d0
+
+.Lffcb2978:
+	moveml	%fp@(-20),%d5-%d7/%a3-%a4
+	unlk	%fp
+	rts
+
+	.align	16
 
 sub_ffcb2990:
 	.int	0x4E56FFFC,0x558F2F2E,0x0008486E,0xFFFC7000
