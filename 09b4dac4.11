@@ -4615,8 +4615,17 @@ sub_ffcb2c60:
 	rts
 
 sub_ffcb2c80:
-	.int	0x4E560000,0x2F0C2078,0x02B62868,0x01E04EBA
-	.int	0xF670022C,0x00FD0010,0x286EFFFC,0x4E5E4E75
+	linkw	%fp,#0
+	movel	%a4,%sp@-
+	moveal	0x2b6,%a0
+	moveal	%a0@(480),%a4
+	jsr	%pc@(sub_ffcb2300)
+	andib	#0xfd,%a4@(16)
+	moveal	%fp@(-4),%a4
+	unlk	%fp
+	rts
+
+sub_ffcb2ca0:
 	.int	0x4E560000,0x48E70318,0x2C2E0008,0x207802B6
 	.int	0x266801E0,0x286B0012,0x4A2C0C28,0x67047E01
 	.int	0x60024207,0x4A866704,0x4A076708,0x4A866616
