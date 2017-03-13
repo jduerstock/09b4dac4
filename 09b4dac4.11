@@ -4672,20 +4672,94 @@ sub_ffcb2ca0:
 	.align	16
 
 sub_ffcb2d00:
-	.int	0x4E560000,0x48E70018,0x207802B6,0x266801E0
-	.int	0x286B0012,0x4A2C0C28,0x67087001,0x2D400008
-	.int	0x60067000,0x2D400008,0x4CEE1800,0xFFF84E5E
-	.int	0x4E750000,0x00000000,0x00000000,0x00000000
-	.int	0x4E560000,0x48E70300,0x2C2E0010,0x4247202E
-	.int	0x000C5380,0x661E4AAE,0x0008670C,0x558F2F06
-	.int	0x4EBAFC5E,0x3E1F600E,0x558F2F06,0x4EBAFDF2
-	.int	0x3E1F6002,0x7ECE3D47,0x00144CEE,0x00C0FFF8
-	.int	0x4E5E4E74,0x000C0000,0x00000000,0x00000000
-	.int	0x4E560000,0x48E70108,0x286E0008,0x4247202E
-	.int	0x000C5380,0x661A2F2E,0x00104EBA,0xFB944A00
-	.int	0x584F6706,0x70002880,0x60087001,0x28806002
-	.int	0x7ECE3D47,0x00144CEE,0x1080FFF8,0x4E5E4E74
-	.int	0x000C0000,0x00000000,0x00000000,0x00000000
+	linkw	%fp,#0
+	moveml	%a3-%a4,%sp@-
+	moveal	0x2b6,%a0
+	moveal	%a0@(480),%a3
+	moveal	%a3@(18),%a4
+	tstb	%a4@(3112)
+	beqs	.Lffcb2d22
+	moveq	#1,%d0
+	movel	%d0,%fp@(8)
+	bras	.Lffcb2d28
+
+.Lffcb2d22:
+	moveq	#0,%d0
+	movel	%d0,%fp@(8)
+
+.Lffcb2d28:
+	moveml	%fp@(-8),%a3-%a4
+	unlk	%fp
+	rts
+
+	.align	16
+
+sub_ffcb2d40:
+	linkw	%fp,#0
+	moveml	%d6-%d7,%sp@-
+	movel	%fp@(16),%d6
+	clrw	%d7
+	movel	%fp@(12),%d0
+	subql	#1,%d0
+	bnes	.Lffcb2d74
+	tstl	%fp@(8)
+	beqs	.Lffcb2d68
+	subql	#2,%sp
+	movel	%d6,%sp@-
+	jsr	%pc@(sub_ffcb29c0)
+	movew	%sp@+,%d7
+	bras	.Lffcb2d76
+
+.Lffcb2d68:
+	subql	#2,%sp
+	movel	%d6,%sp@-
+	jsr	%pc@(sub_ffcb2b60)
+	movew	%sp@+,%d7
+	bras	.Lffcb2d76
+
+.Lffcb2d74:
+	moveq	#-50,%d7
+
+.Lffcb2d76:
+	movew	%d7,%fp@(20)
+	moveml	%fp@(-8),%d6-%d7
+	unlk	%fp
+	rtd	#12
+
+	.align	16
+
+sub_ffcb2d90:
+	linkw	%fp,#0
+	moveml	%d7/%a4,%sp@-
+	moveal	%fp@(8),%a4
+	clrw	%d7
+	movel	%fp@(12),%d0
+	subql	#1,%d0
+	bnes	.Lffcb2dc0
+	movel	%fp@(16),%sp@-
+	jsr	%pc@(sub_ffcb2940)
+	tstb	%d0
+	addqw	#4,%sp
+	beqs	.Lffcb2dba
+	moveq	#0,%d0
+	movel	%d0,%a4@
+	bras	.Lffcb2dc2
+
+.Lffcb2dba:
+	moveq	#1,%d0
+	movel	%d0,%a4@
+	bras	.Lffcb2dc2
+
+.Lffcb2dc0:
+	moveq	#-50,%d7
+
+.Lffcb2dc2:
+	movew	%d7,%fp@(20)
+	moveml	%fp@(-8),%d7/%a4
+	unlk	%fp
+	rtd	#12
+
+	.align	16
 
 sub_ffcb2de0:
 	.int	0x4E56FFFC,0x48E70038,0x207802B6,0x286801E0
