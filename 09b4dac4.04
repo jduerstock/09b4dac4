@@ -5460,9 +5460,23 @@ sub_ffc4be52:
 	rts
 
 sub_ffc4be72:
-	.short	0x2278
-	.int	0x01622009,0x67102049,0x22502028
-	.int	0x000661CE,0x66F0A034,0x60EC4E75,0x20380108
+	moveal	0x162,%a1
+
+.Lffc4be76:
+	movel	%a1,%d0
+	beqs	.Lffc4be8a
+	moveal	%a1,%a0
+	moveal	%a0@,%a1
+	movel	%a0@(6),%d0
+	bsrs	sub_ffc4be52
+	bnes	.Lffc4be76
+	.short	0xa034
+	bras	.Lffc4be76
+
+.Lffc4be8a:
+	rts
+
+	.int	0x20380108
 	.int	0x04800000,0x5F006000,0x00F84278,0x09026040
 	.int	0x50F80902,0x48E7C0C0,0x9EFC0032,0x3F7CFFFF
 	.int	0x001A2278,0x011C3238,0x01D22019,0x67162040
