@@ -2263,37 +2263,49 @@
 	.int	0x4BFFFF18,0x38210070,0x80010008,0x7C0803A6
 	.int	0xBB61FFEC
 	blr
-	.int	0x38000000
+
+	li	%r0,0
 	sc
 	blr
-	.int	0x38000003
+
+	li	%r0,3
 	sc
 	blr
-	.int	0x38000002
+
+	li	%r0,2
 	sc
 	blr
-	.int	0x3800002E
+
+	li	%r0,0x2e
 	sc
 	blr
-	.int	0x90C10024,0x3800002A
+
+	.int	0x90C10024
+	li	%r0,0x2a
 	sc
 	.int	0x2C030000,0x4C820020,0x81610024
 	.int	0x280B0000,0x41820008,0x90CB0000
 	blr
-	.int	0x3800002B
+
+	li	%r0,0x2b
 	sc
 	blr
-	.int	0x3800002C
+
+	li	%r0,0x2c
 	sc
 	blr
-	.int	0x3800002D
+
+	li	%r0,0x2d
 	sc
 	blr
-	.int	0x90A10020,0x38000004
+
+	.int	0x90A10020
+	li	%r0,4
 	sc
 	.int	0x2C030000,0x4C820020,0x81610020,0x280B0000
 	.int	0x41820008,0x90AB0000
 	blr
+
 	.int	0x38000005
 	sc
 	blr
