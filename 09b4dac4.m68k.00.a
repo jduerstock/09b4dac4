@@ -2189,8 +2189,20 @@ sub_ffc0c750:
 
 	.align	16
 
-	.int	0x41FA0012,0xB0986208,0xD040D0F0,0x00004ED0
-	.int	0x70CE4E75,0x00000003,0x0008000E,0x00120016
+sub_ffc0c8a0:
+	lea	%pc@(byte_ffc0c8b4),%a0
+	cmpl	%a0@+,%d0
+	bhis	.Lffc0c8b0
+	addw	%d0,%d0
+	addaw	%a0@(%d0:w),%a0
+	jmp	%a0@
+
+.Lffc0c8b0:
+	moveq	#-50,%d0
+	rts
+
+byte_ffc0c8b4:
+	.int	0x00000003,0x0008000E,0x00120016
 	.int	0x203AFFF2,0x4E757008,0x6006700C,0x60027010
 	.int	0x48E770F0,0x20780DD8,0xD1E80048,0x20300000
 	.int	0x6704D1C0,0x4E904CDF,0x0F0E7000,0x4E752078
