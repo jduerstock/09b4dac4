@@ -1508,9 +1508,31 @@
 	.int	0x48E700C0,0x48E700C0,0x61000476,0x7000504F
 	.int	0x4CDF0300,0x4E750000,0x00000000,0x00000000
 	.int	0x48E71C38,0x48E70080,0x61000C06,0x4CDF0100
-	.int	0x4CDF1C38,0x4E750000,0x00000000,0x00000000
-	.int	0x4E560000,0x226E0008,0x72006006,0x20015281
-	.int	0x52494A11,0x66F62001,0x4E5E4E75,0x00000000
+	.int	0x4CDF1C38
+	rts
+
+	.align	16
+
+sub_ffcd5e70:
+	linkw	%fp,#0
+	moveal	%fp@(8),%a1
+	moveq	#0,%d1
+	bras	.Lffcd5e82
+
+.Lffcd5e7c:
+	movel	%d1,%d0
+	addql	#1,%d1
+	addqw	#1,%a1
+
+.Lffcd5e82:
+	tstb	%a1@
+	bnes	.Lffcd5e7c
+	movel	%d1,%d0
+	unlk	%fp
+	rts
+
+	.align	16
+
 	.int	0x4E56FF00,0x48E71718,0x47EEFF00,0x2C2E000C
 	.int	0x7A002F2E,0x00084EBA,0xFFC82A00,0x2E0B5287
 	.int	0x2847206E,0x00082247,0x20055280,0xA22E584F
