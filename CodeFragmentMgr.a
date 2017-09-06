@@ -475,14 +475,35 @@ sub_594:
 
 .L5a8:
 	mflr	%r0
-	.int	0xBF21FFE4
+	stmw    %r25,-28(%r1)
 	stw	%r0,8(%r1)
-	.int	0x9421FFA0,0x7CDC3378,0x54BA063E
-	.int	0x7F800734,0x2C000080,0x7C7E1B78,0x4180000C
-	.int	0x3860FFCE,0x48000170,0x2C1A0002,0x4180000C
-	.int	0x3860FFCE,0x48000160,0xA87E0016,0x4BFFFB9D
-	.int	0x7C7D1B78,0x2C1D0000,0x4082000C,0x3860FFCE
-	.int	0x48000144,0x38600050,0x4800D59D,0x60000000
+	stwu    %r1,-96(%r1)
+	mr      %r28,%r6
+	clrlwi  %r26,%r5,24
+	extsh   %r0,%r28
+	cmpwi   %r0,128
+	mr      %r30,%r3
+	blt     .L678
+	li      %r3,-50
+	b       .L7e4
+
+.L678:
+	cmpwi   %r26,2
+	blt     .L688
+	li      %r3,-50
+	b       .L7e4
+
+.L688:
+	lha     %r3,22(%r30)
+	bl      sub_188
+	mr      %r29,%r3
+	cmpwi   %r29,0
+	bne     .L6a4
+	li      %r3,-50
+	b       .L7e4
+
+.L6a4:
+	.int	0x38600050,0x4800D59D,0x60000000
 	.int	0x7C7F1B78,0x2C1F0000,0x4082000C,0x3860F507
 	.int	0x48000124,0xAB7E0016,0x389F000C,0x833E0064
 	.int	0xB37F000A,0x933F002C,0x807E0012,0x88A30000
@@ -502,7 +523,10 @@ sub_594:
 	.int	0x60000000,0x7C7E1B78,0x2C1E0000,0x41820024
 	.int	0x839D0030,0x7C1FE000,0x4082000C,0x80610038
 	.int	0x907D0030,0x7FE3FB78,0x4800D479,0x60000000
-	.int	0x7FC3F378,0x38210060,0x80010008,0x7C0803A6
+	.int	0x7FC3F378
+
+.L7e4:
+	.int	0x38210060,0x80010008,0x7C0803A6
 	.int	0xBB21FFE4
 	blr
 	mflr	%r0
