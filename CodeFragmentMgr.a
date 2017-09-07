@@ -4422,8 +4422,12 @@ sub_7ff0:
 	blr
 
 sub_da98:
-	.int	0x7D800026,0x7C0802A6
-	.int	0xBF41FFE8,0x91810004,0x90010008,0x9421FFB0
+	mfcr    %r12
+	mflr    %r0
+	stmw    %r26,-24(%r1)
+	stw     %r12,4(%r1)
+	stw     %r0,8(%r1)
+	stwu    %r1,-80(%r1)
 	.int	0x3BA3000F,0x8362FF4C,0x57BE0038,0x3BE00000
 	.int	0x549A063E,0x291E0040,0x3B800000,0x41890034
 	.int	0x80BB0000,0x57A8F87A,0x81250054,0x7C69402E
