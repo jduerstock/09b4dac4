@@ -435,13 +435,47 @@ str_ffc104ac:
 	.int	0x023E3E00
 
 sub_ffc104b0:
-	.int	0x4E560000,0x48E70118,0x286E0008,0x7E006032
-	.int	0x206C000C,0x2068006C,0x70001030,0x7800323C
-	.int	0x0080C200,0x671A206C,0x00382670,0x7C00200B
-	.int	0x670E7002,0xB06B003C,0x6F06303C,0xF504600E
-	.int	0x5287206C,0x000CBEA8,0x00786DC4,0x70004CEE
-	.int	0x1880FFF4,0x4E5E4E75,0x00000000,0x00000000
+	linkw	%fp,#0
+	moveml	%d7/%a3-%a4,%sp@-
+	moveal	%fp@(8),%a4
+	moveq	#0,%d7
+	bras	.Lffc104f2
 
+.Lffc104c0:
+	moveal	%a4@(12),%a0
+	moveal	%a0@(108),%a0
+	moveq	#0,%d0
+	moveb	%a0@(%d7:l),%d0
+	movew	#128,%d1
+	andb	%d0,%d1
+	beqs	.Lffc104f0
+	moveal	%a4@(56),%a0
+	moveal	%a0@(%d7:l:4),%a3
+	movel	%a3,%d0
+	beqs	.Lffc104f0
+	moveq	#2,%d0
+	cmpw	%a3@(60),%d0
+	bles	.Lffc104f0
+	movew	#-2812,%d0
+	bras	.Lffc104fe
+
+.Lffc104f0:
+	addql	#1,%d7
+
+.Lffc104f2:
+	moveal	%a4@(12),%a0
+	cmpl	%a0@(120),%d7
+	blts	.Lffc104c0
+	moveq	#0,%d0
+
+.Lffc104fe:
+	moveml	%fp@(-12),%d7/%a3-%a4
+	unlk	%fp
+	rts
+
+	.align	16
+
+sub_ffc10510:
 	.int	0x4E56FFF8,0x48E70F38,0xA11A2D48,0xFFFC7800
 	.int	0x6000009C,0x206E000C,0x24704C20,0x70FFB06A
 	.int	0x003C6600,0x00864AAA,0x002C6E7E,0x7001B0AA
