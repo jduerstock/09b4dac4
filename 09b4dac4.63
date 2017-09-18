@@ -2827,10 +2827,10 @@
 	lwz     %r3,2404(%r31)			/* fe03 */
 	b       .Lfff6d824
 
-	ori     %r5,%r30,55436			/* fe04 */
+	ori     %r5,%r30,55436			/* fe04 */ /* _MoveFromECR */
 	b       .Lfff6d844
 
-	ori     %r5,%r30,55460			/* fe05 */
+	ori     %r5,%r30,55460			/* fe05 */ /* _MoveToECR */
 	b       .Lfff6d844
 
 	crset   4*cr7+so			/* fe06 */
