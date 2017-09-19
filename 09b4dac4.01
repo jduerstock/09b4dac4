@@ -476,20 +476,94 @@ sub_ffc104b0:
 	.align	16
 
 sub_ffc10510:
-	.int	0x4E56FFF8,0x48E70F38,0xA11A2D48,0xFFFC7800
-	.int	0x6000009C,0x206E000C,0x24704C20,0x70FFB06A
-	.int	0x003C6600,0x00864AAA,0x002C6E7E,0x7001B0AA
-	.int	0x00306D76,0x357CFFFE,0x003C4206,0x206A000C
-	.int	0x2A280068,0x7E006038,0x206A000C,0x2007EB80
-	.int	0x41E80088,0x47F00800,0x4A2B0017,0x661E4A2B
-	.int	0x00146718,0x28727C48,0x70FEB06C,0x0018660C
-	.int	0x7001B0AC,0x000C6604,0x7C016008,0x20075287
-	.int	0xBA876EC4,0x4A066720,0x206E0008,0x20680028
-	.int	0xA01B7002,0x2F002F0A,0x2F2E000C,0x2F2E0008
-	.int	0x4EBA0DBE,0x4FEF0010,0x78FF2004,0x5284206E
-	.int	0x000CB8A8,0x00106D00,0xFF5C206E,0xFFFCA01B
-	.int	0x70004CEE,0x1CF0FFDC,0x4E5E4E75,0x00000000
+	linkw	%fp,#-8
+	moveml	%d4-%d7/%a2-%a4,%sp@-
+	.short	0xa11a
+	movel	%a0,%fp@(-4)
+	moveq	#0,%d4
+	braw	.Lffc105be
 
+.Lffc10524:
+	moveal	%fp@(12),%a0
+	moveal	%a0@(0x20,%d4:l:4),%a2
+	moveq	#-1,%d0
+	cmpw	%a2@(60),%d0
+	bnew	.Lffc105ba
+	tstl	%a2@(44)
+	bgts	.Lffc105ba
+	moveq	#1,%d0
+	cmpl	%a2@(48),%d0
+	blts	.Lffc105ba
+	movew	#-2,%a2@(60)
+	clrb	%d6
+	moveal	%a2@(12),%a0
+	movel	%a0@(104),%d5
+	moveq	#0,%d7
+	bras	.Lffc10590
+
+.Lffc10558:
+	moveal	%a2@(12),%a0
+	movel	%d7,%d0
+	asll	#5,%d0
+	lea	%a0@(136),%a0
+	lea	%a0@(%d0:l),%a3
+	tstb	%a3@(23)
+	bnes	.Lffc1058c
+	tstb	%a3@(20)
+	beqs	.Lffc1058c
+	moveal	%a2@(0x48,%d7:l:4),%a4
+	moveq	#-2,%d0
+	cmpw	%a4@(24),%d0
+	bnes	.Lffc1058c
+	moveq	#1,%d0
+	cmpl	%a4@(12),%d0
+	bnes	.Lffc1058c
+	moveq	#1,%d6
+	bras	.Lffc10594
+
+.Lffc1058c:
+	movel	%d7,%d0
+	addql	#1,%d7
+
+.Lffc10590:
+	cmpl	%d7,%d5
+	bgts	.Lffc10558
+
+.Lffc10594:
+	tstb	%d6
+	beqs	.Lffc105b8
+	moveal	%fp@(8),%a0
+	moveal	%a0@(40),%a0
+	.short	0xa01b
+	moveq	#2,%d0
+	movel	%d0,%sp@-
+	movel	%a2,%sp@-
+	movel	%fp@(12),%sp@-
+	movel	%fp@(8),%sp@-
+	jsr	%pc@(sub_ffc11370)
+	lea	%sp@(16),%sp
+
+.Lffc105b8:
+	moveq	#-1,%d4
+
+.Lffc105ba:
+	movel	%d4,%d0
+	addql	#1,%d4
+
+.Lffc105be:
+	moveal	%fp@(12),%a0
+	cmpl	%a0@(16),%d4
+	bltw	.Lffc10524
+	moveal	%fp@(-4),%a0
+	.short	0xa01b
+	moveq	#0,%d0
+	moveml	%fp@(-36),%d4-%d7/%a2-%a4
+	unlk	%fp
+	rts
+
+	.align	16
+
+sub_ffc105e0:
 	.int	0x4E56FFE6,0x48E70738,0x2E2E0018,0x70002640
 	.int	0x28407A00,0x206E0008,0x2080206E,0x00204210
 	.int	0x206E0014,0x72001228,0x00224A81,0x66427004
