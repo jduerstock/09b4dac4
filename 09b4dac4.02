@@ -2945,9 +2945,13 @@ sub_ffc28b10:
 	.int	0x584C5287,0x0C870000,0x010165F0,0x42476002
 	.int	0x7E942078,0x0BB8214B,0x0B923007,0x4CEE1880
 	.int	0xFFF44E5E,0x4E750000,0x00000000,0x00000000
+
+sub_ffc2b6d0:
 	.int	0x4E560000,0x2F0B242E,0x0010226E,0x0008202E
 	.int	0x000CD089,0x598072FC,0xC2802641,0x600222C2
 	.int	0xB7C964FA,0x266EFFFC,0x4E5E4E75,0x00000000
+
+sub_ffc2b700:
 	.int	0x4E56FFFC,0x48E70638,0x266E0008,0x342E000C
 	.int	0x28780BB8,0x48C2303C,0x8003C042,0x72003200
 	.int	0x7002B081,0x6606B46C,0x0B706F08,0x3D7CFFCD
@@ -3076,16 +3080,71 @@ sub_ffc2b8b0:
 	linkw	%fp,#0
 	moveml	%d5-%d7/%a2-%a4,%sp@-
 	moveal	%fp@(12),%a2
-	.int	0x26780BB8
-	.int	0x3A2B0B70,0x598F7002,0x3F004EBA,0xFEB4205F
-	.int	0x4A906608,0x3C055946,0x3E066006,0x3C2B0C5E
-	.int	0x3E063007,0x58403E00,0xBA476E02,0x7E02598F
-	.int	0x3F074EBA,0xFE8C285F,0x4A94662C,0x70002F00
-	.int	0x487800D0,0x2F0C4EBA,0xFDC870FF,0x28803487
-	.int	0x37470C5E,0x206E0008,0x208C426B,0x0C8C426E
-	.int	0x00104FEF,0x000C6014,0xBC4766B6,0x4252206E
-	.int	0x000820B8,0x00003D7C,0xFFD60010,0x4CEE1CE0
-	.int	0xFFE84E5E,0x4E740008,0x00000000,0x00000000
+	moveal	0xbb8,%a3
+	movew	%a3@(2928),%d5
+	subql	#4,%sp
+	moveq	#2,%d0
+	movew	%d0,%sp@-
+	jsr	%pc@(sub_ffc2b780)
+	moveal	%sp@+,%a0
+	tstl	%a0@
+	bnes	.Lffc2b8dc
+	movew	%d5,%d6
+	subqw	#4,%d6
+	movew	%d6,%d7
+	bras	.Lffc2b8e2
+
+.Lffc2b8dc:
+	movew	%a3@(3166),%d6
+	movew	%d6,%d7
+
+.Lffc2b8e2:
+	movew	%d7,%d0
+	addqw	#4,%d0
+	movew	%d0,%d7
+	cmpw	%d7,%d5
+	bgts	.Lffc2b8ee
+	moveq	#2,%d7
+
+.Lffc2b8ee:
+	subql	#4,%sp
+	movew	%d7,%sp@-
+	jsr	%pc@(sub_ffc2b780)
+	moveal	%sp@+,%a4
+	tstl	%a4@
+	bnes	.Lffc2b928
+	moveq	#0,%d0
+	movel	%d0,%sp@-
+	pea	0xd0
+	movel	%a4,%sp@-
+	jsr	%pc@(sub_ffc2b6d0)
+	moveq	#-1,%d0
+	movel	%d0,%a4@
+	movew	%d7,%a2@
+	movew	%d7,%a3@(3166)
+	moveal	%fp@(8),%a0
+	movel	%a4,%a0@
+	clrw	%a3@(3212)
+	clrw	%fp@(16)
+	lea	%sp@(12),%sp
+	bras	.Lffc2b93c
+
+.Lffc2b928:
+	cmpw	%d7,%d6
+	bnes	.Lffc2b8e2
+	clrw	%a2@
+	moveal	%fp@(8),%a0
+	movel	0x0,%a0@
+	movew	#-42,%fp@(16)
+
+.Lffc2b93c:
+	moveml	%fp@(-24),%d5-%d7/%a2-%a4
+	unlk	%fp
+	rtd	#8
+
+	.align	16
+
+sub_ffc2b950:
 	.int	0x4E56FFFC,0x48E70300,0x3C2E0008,0x558F3F06
 	.int	0x486EFFFC,0x4EBAFD9A,0x3E1F0C47,0xFFCD6746
 	.int	0x206EFFFC,0x4AA800C4,0x670C558F,0x2F2EFFFC
