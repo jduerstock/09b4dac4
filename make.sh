@@ -7,8 +7,8 @@ $PPCAS -g -o PrivateInterfaceLib.o PrivateInterfaceLib.a || exit
 $PPCLD --oformat=binary -Ttext=0xffd5b970 -e 0xffd5b970 -o PrivateInterfaceLib.bin PrivateInterfaceLib.o || exit
 $PPCAS -g -o MixedMode.o MixedMode.a || exit
 $PPCLD --oformat=binary -Ttext=0xffd12840 -e 0xffd12840 -o MixedMode.bin MixedMode.o || exit
-$PPCAS -g -o InterfaceLib.o InterfaceLib.a || exit
-$PPCLD --oformat=binary -Ttext=0xffd18790 -e 0xffd18790 -o InterfaceLib.bin InterfaceLib.o || exit
+$PPCAS -g -o InterfaceLib.ppc.o InterfaceLib.ppc.s || exit
+$PPCLD --oformat=binary -Ttext=0xffd18790 -e 0xffd18790 -o InterfaceLib.bin InterfaceLib.ppc.o || exit
 $PPCAS -g -o CodeFragmentMgr.o CodeFragmentMgr.a || exit
 $PPCLD --oformat=binary -Ttext=0xffd021b0 -e 0xffd021b0 -o CodeFragmentMgr.bin CodeFragmentMgr.o || exit
 $PPCAS -g -o BlueAbstractionLayerLib.o BlueAbstractionLayerLib.a || exit
